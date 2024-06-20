@@ -24,7 +24,6 @@ public class InvoiceDTO {
         this.amount = invoice.getAmount();
         this.paid = invoice.isPaid();
         this.accountId = invoice.getAccount().getId();
-
         this.serviceId = invoice.getServices().stream().map(Service::getId).toList();
     }
 

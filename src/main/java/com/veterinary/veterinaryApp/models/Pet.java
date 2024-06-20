@@ -1,21 +1,29 @@
 package com.veterinary.veterinaryApp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String petName;
+
     private int petAge;
+
     private String specie;
+
     private String breed;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Client owner;
 
+    @OneToMany(mappedBy = "pet")
+    private Appointment appointment;
+
+    // contructores
     public Pet(String petName, int petAge, String specie, String breed) {
         this.petName = petName;
         this.petAge = petAge;
@@ -25,6 +33,7 @@ public class Pet {
 
     public Pet() {}
 
+    // getters y setters
     public Long getId() {
         return id;
     }
@@ -71,5 +80,13 @@ public class Pet {
 
     public void setOwner(Client owner) {
         this.owner = owner;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 }

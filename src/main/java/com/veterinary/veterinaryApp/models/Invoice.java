@@ -20,15 +20,13 @@ public class Invoice {
 
     private boolean paid;
 
+    @ManyToOne
+    @JoinColumn(name = "account_id")
     private Account account;
 
     // Relación muchos a muchos con Services
-    @ManyToMany
-    @JoinTable(
-            name = "invoice_services",
-            joinColumns = @JoinColumn(name = "invoice_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id")
-    )
+    @ManyToMany(mappedBy = "invoices")
+    @JoinColumn(name = "service_id")
     private List<Service> services;
 
     //CONSTRUCTORES
@@ -45,6 +43,10 @@ public class Invoice {
     //GETTERS Y SETTERS
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public LocalDateTime getDate() {
@@ -86,5 +88,7 @@ public class Invoice {
     public void setServices(List<Service> services) {
         this.services = services;
     }
+
+
 }
 

@@ -2,6 +2,8 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Account {
 
@@ -11,11 +13,11 @@ public class Account {
 
   private double balance;
 
-  private String number;
-
-  @OneToOne
   @JoinColumn(name = "user_id")
   private Client client;
+
+  @OneToMany(mappedBy = "account")
+  private List<Invoice> invoices;
 
   // Constructores
   public Account() {
@@ -67,8 +69,19 @@ public class Account {
     this.client = client;
   }
 
-  @Override
-  public String toString() {
-    return "Account [id=" + id + ", balance=" + balance + ", user=" + client + "]";
+  public Client getClient() {
+    return client;
+  }
+
+  public void setClient(Client client) {
+    this.client = client;
+  }
+
+  public List<Invoice> getInvoices() {
+    return invoices;
+  }
+
+  public void setInvoices(List<Invoice> invoices) {
+    this.invoices = invoices;
   }
 }

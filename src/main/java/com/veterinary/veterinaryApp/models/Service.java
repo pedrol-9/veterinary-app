@@ -2,14 +2,13 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 public class Service {
-    //PROPIEDADES
-    //PK
+
     @Id
-    //ID AUTOMATICAMENTE
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -19,9 +18,19 @@ public class Service {
 
     private double price;
 
-    // Relación muchos a muchos con Invoice
-    @ManyToMany(mappedBy = "services")
+    @ElementCollection
+    @Column(name="DaysOfService")
+    private List<String> daysOfService; // los dias para determinado servicio.
+
+    @ElementCollection
+    @Column(name="HoursOfService")
+    private List<String> hoursOfService; // los horarios para determinado servicio
+
+    @ManyToMany
     private List<Invoice> invoices;
+
+    @OneToMany(mappedBy = "service")
+    private List<Appointment> appointments; // contiene los bloques horarios reservados
 
     //CONSTRUCTORES
     public Service() {
@@ -36,6 +45,10 @@ public class Service {
     //GETTERS Y SETTERS
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -68,7 +81,29 @@ public class Service {
 
     public void setPrice(double price) {
         this.price = price;
+    }
 
+    public List<String> getDaysOfService() {
+        return daysOfService;
+    }
 
+    public void setDaysOfService(List<String> daysOfService) {
+        this.daysOfService = daysOfService;
+    }
+
+    public List<String> getHoursOfService() {
+        return hoursOfService;
+    }
+
+    public void setHoursOfService(List<String> hoursOfService) {
+        this.hoursOfService = hoursOfService;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }
