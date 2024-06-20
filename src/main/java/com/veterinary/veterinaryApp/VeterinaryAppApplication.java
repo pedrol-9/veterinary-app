@@ -29,17 +29,17 @@ public class VeterinaryAppApplication {
 			clientRepository.save(client);
 
 			// creacion de cuentas
-			Account account1 = new Account(1000);
-			Account account2 = new Account(1000);
-			Account account3 = new Account(1000);
+//			Account account1 = new Account(1000);
+//			Account account2 = new Account(1000);
+//			Account account3 = new Account(1000);
 
-			accountRepository.save(account1);
-			accountRepository.save(account2);
-			accountRepository.save(account3);
-
-			account1.setUser(client);
-			account2.setUser(client);
-			account3.setUser(useradmin);
+//			accountRepository.save(account1);
+//			accountRepository.save(account2);
+//			accountRepository.save(account3);
+//
+//			account1.setUser(client);
+//			account2.setUser(client);
+//			account3.setUser(useradmin);
 
 			// para saber cuando inicia la app
 			System.out.println("****************************************************");
