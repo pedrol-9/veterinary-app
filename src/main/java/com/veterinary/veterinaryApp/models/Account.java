@@ -11,6 +11,8 @@ public class Account {
 
   private double balance;
 
+  private String number;
+
   @OneToOne
   @JoinColumn(name = "user_id")
   private Client client;
@@ -19,13 +21,30 @@ public class Account {
   public Account() {
   }
 
-  public Account(double balance) {
+  public Account(double balance, String number) {
     this.balance = balance;
+    this.number = number;
   }
 
   // Getters y Setters
   public Long getId() {
     return id;
+  }
+
+  public Client getClient() {
+    return client;
+  }
+
+  public void setClient(Client client) {
+    this.client = client;
+  }
+
+  public String getNumber() {
+    return number;
+  }
+
+  public void setNumber(String number) {
+    this.number = number;
   }
 
   public void setId(Long id) {
