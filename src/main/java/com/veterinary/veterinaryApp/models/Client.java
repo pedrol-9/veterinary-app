@@ -34,9 +34,8 @@ public class Client {
     this.email = email;
     this.password = password;
     this.phone = phone;
-    // setAdmin(email);
+    this.setAdmin(email);
   }
-
 
   // Métodos accesores
   public Long getId() {
