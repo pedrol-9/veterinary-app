@@ -1,5 +1,7 @@
 package com.veterinary.veterinaryApp.DTOs;
 
+import com.veterinary.veterinaryApp.models.Walker;
+
 public class WalkerDTO {
     private Long id;
     private String firstName;
@@ -7,12 +9,12 @@ public class WalkerDTO {
     private String phone;
     private String address;
 
-    public WalkerDTO(Long id, String firstName, String lastName, String phone, String address) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.address = address;
+    public WalkerDTO(Walker walker) {
+        this.id = walker.getId();
+        this.firstName = walker.getFirstName();
+        this.lastName = walker.getLastName();
+        this.phone = walker.getPhone();
+        this.address = walker.getAddress();
     }
 
     public WalkerDTO() {
