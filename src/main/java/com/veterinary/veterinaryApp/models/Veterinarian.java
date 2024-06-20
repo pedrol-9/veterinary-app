@@ -14,8 +14,7 @@ public class Veterinarian {
     private String specialty;
     private Client client;
 
-    public Veterinarian(Long id, String name, String specialty, Client client) {
-        this.id = id;
+    public Veterinarian(String name, String specialty, Client client) {
         this.name = name;
         this.specialty = specialty;
         this.client = client;

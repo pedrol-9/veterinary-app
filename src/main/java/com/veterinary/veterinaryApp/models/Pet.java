@@ -16,8 +16,7 @@ public class Pet {
     private String breed;
     private Client owner;
 
-    public Pet(Long id, String petName, int petAge, String specie, String breed) {
-        this.id = id;
+    public Pet(String petName, int petAge, String specie, String breed) {
         this.petName = petName;
         this.petAge = petAge;
         this.specie = specie;
