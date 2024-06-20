@@ -1,7 +1,7 @@
 package com.veterinary.veterinaryApp;
 
 import com.veterinary.veterinaryApp.Repositories.AccountRepository;
-import com.veterinary.veterinaryApp.Repositories.UserRepository;
+import com.veterinary.veterinaryApp.Repositories.ClientRepository;
 import com.veterinary.veterinaryApp.models.Account;
 import com.veterinary.veterinaryApp.models.Client;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +17,7 @@ public class VeterinaryAppApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initDatabase(UserRepository userRepository, AccountRepository accountRepository) {
+	public CommandLineRunner initDatabase(ClientRepository clientRepository, AccountRepository accountRepository) {
 		return (args) -> {
 
 			// creacion de usuarios
@@ -25,8 +25,8 @@ public class VeterinaryAppApplication {
 			Client client = new Client("Lucas", "Madrigal", "lucas@mail.com", "123", 51258927);
 
 			// Creación de Account
-			userRepository.save(useradmin);
-			userRepository.save(client);
+			clientRepository.save(useradmin);
+			clientRepository.save(client);
 
 			// creacion de cuentas
 			Account account1 = new Account(1000);
