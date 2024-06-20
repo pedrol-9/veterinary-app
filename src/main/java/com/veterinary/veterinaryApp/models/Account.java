@@ -13,6 +13,9 @@ public class Account {
 
   private double balance;
 
+  private String number;
+
+  @OneToOne(mappedBy = "account")
   @JoinColumn(name = "user_id")
   private Client client;
 
@@ -66,14 +69,6 @@ public class Account {
   }
 
   public void setUser(Client client) {
-    this.client = client;
-  }
-
-  public Client getClient() {
-    return client;
-  }
-
-  public void setClient(Client client) {
     this.client = client;
   }
 
