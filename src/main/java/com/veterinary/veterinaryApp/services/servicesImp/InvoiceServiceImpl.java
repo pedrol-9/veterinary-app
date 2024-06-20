@@ -1,12 +1,11 @@
 package com.veterinary.veterinaryApp.services.servicesImp;
 
 import com.veterinary.veterinaryApp.Repositories.InvoiceRepository;
-import com.veterinary.veterinaryApp.models.Account;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Invoice;
-import com.veterinary.veterinaryApp.models.Service;
+import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.services.InvoiceService;
-import com.veterinary.veterinaryApp.services.ServiceService;
+import com.veterinary.veterinaryApp.services.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +19,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     private InvoiceRepository invoiceRepository;
 
     @Autowired
-    private ServiceService serviceService;
-
-    //@Autowired
-    //private AccountService accountService;
+    private OfferingService offeringService;
 
 
     @Override
@@ -37,23 +33,23 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<?> createInvoice(Client client, List<Long> serviceIds) {
+    public ResponseEntity<?> createInvoice(Client client, List<Long> offeringsIds) {
         //TODO: TENDRIA QUE TENER LA CUENTA DEL CLIENTE POR EL ID
         //List<Account> accounts = accountService.getAccountById(accountId);
 
 
-        List<Service> services = serviceService.findAllByIds(serviceIds);
+        List<Offering> offerings = offeringService.findAllByIds(offeringsIds);
 
-        if (services.isEmpty()) {
-            return new ResponseEntity<>("No services found.", HttpStatus.NOT_FOUND);
+        if (offerings.isEmpty()) {
+            return new ResponseEntity<>("No offerings found.", HttpStatus.NOT_FOUND);
         }
 
-        double totalAmount = calculateTotalAmount(services);
+        double totalAmount = calculateTotalAmount(offerings);
 
         //CREA  LA FACTURA
         Invoice invoice = new Invoice();
         //invoice.setAccount(account);
-        invoice.setServices(services);
+        invoice.setOfferings(offerings);
         invoice.setDate(LocalDateTime.now());
         invoice.setAmount(totalAmount);
         invoice.setPaid(false); //TODO: SE PUEDE ACTUALIZAR A TRUE CUANDO SE PAGUE
@@ -70,10 +66,10 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     //METODO PROPIO
-    private double calculateTotalAmount(List<Service> services) {
-        return services
+    private double calculateTotalAmount(List<Offering> offerings) {
+        return offerings
                 .stream()
-                .mapToDouble(Service ::getPrice)
+                .mapToDouble(Offering ::getPrice)
                 .sum();
     }
 }

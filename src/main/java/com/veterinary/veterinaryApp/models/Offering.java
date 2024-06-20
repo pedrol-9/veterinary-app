@@ -2,11 +2,10 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class Service {
+public class Offering {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +32,10 @@ public class Service {
     private List<Appointment> appointments; // contiene los bloques horarios reservados
 
     //CONSTRUCTORES
-    public Service() {
+    public Offering() {
     }
 
-    public Service(String name, String description, double price) {
+    public Offering(String name, String description, double price) {
         this.name = name;
         this.description = description;
         this.price = price;

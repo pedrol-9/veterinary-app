@@ -1,6 +1,6 @@
 package com.veterinary.veterinaryApp.DTOs;
 
-import com.veterinary.veterinaryApp.models.Service;
+import com.veterinary.veterinaryApp.models.Offering;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ public class ServiceDTO {
 
     private List<Long> invoiceId;
 
-    public ServiceDTO(Service service) {
-        this.id = service.getId();
-        this.name = service.getName();
-        this.description = service.getDescription();
-        this.price = service.getPrice();
+    public ServiceDTO(Offering offering) {
+        this.id = offering.getId();
+        this.name = offering.getName();
+        this.description = offering.getDescription();
+        this.price = offering.getPrice();
 
-        this.invoiceId = service.getInvoices().stream().map(InvoiceDTO::new).map(InvoiceDTO::getId).toList();
+        this.invoiceId = offering.getInvoices().stream().map(InvoiceDTO::new).map(InvoiceDTO::getId).toList();
 
     }
 

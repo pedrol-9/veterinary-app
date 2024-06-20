@@ -1,10 +1,13 @@
 package com.veterinary.veterinaryApp.DTOs;
 
 import com.veterinary.veterinaryApp.models.Invoice;
+import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.models.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class InvoiceDTO {
     private long id;
@@ -17,14 +20,14 @@ public class InvoiceDTO {
 
     private long accountId;
 
-    private List<Long> serviceId;
+    private List<Long> offeringId;
 
     public InvoiceDTO(Invoice invoice) {
         this.date = invoice.getDate();
         this.amount = invoice.getAmount();
         this.paid = invoice.isPaid();
         this.accountId = invoice.getAccount().getId();
-        this.serviceId = invoice.getServices().stream().map(Service::getId).toList();
+        this.offeringId = invoice.getOfferings().stream().map(Offering::getId).collect(toList());
     }
 
     // Getters
@@ -49,6 +52,6 @@ public class InvoiceDTO {
     }
 
     public List<Long> getServiceId() {
-        return serviceId;
+        return offeringId;
     }
 }

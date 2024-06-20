@@ -27,7 +27,7 @@ public class Invoice {
     // Relación muchos a muchos con Services
     @ManyToMany(mappedBy = "invoices")
     @JoinColumn(name = "service_id")
-    private List<Service> services;
+    private List<Offering> offerings;
 
     //CONSTRUCTORES
     public Invoice() {
@@ -81,14 +81,12 @@ public class Invoice {
         this.account = account;
     }
 
-    public List<Service> getServices() {
-        return services;
+    public List<Offering> getOfferings() {
+        return offerings;
     }
 
-    public void setServices(List<Service> services) {
-        this.services = services;
+    public void setOfferings(List<Offering> offerings) {
+        this.offerings = offerings;
     }
-
-
 }
 
