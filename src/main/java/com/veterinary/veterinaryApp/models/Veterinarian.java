@@ -1,18 +1,24 @@
 package com.veterinary.veterinaryApp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Veterinarian {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String specialty;
+
     private Client client;
+
+    @OneToMany(mappedBy = "veterinarian")
+    private List<Appointment> appointments;
 
     public Veterinarian(String name, String specialty, Client client) {
         this.name = name;
@@ -53,5 +59,13 @@ public class Veterinarian {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }

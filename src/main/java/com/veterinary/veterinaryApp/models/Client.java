@@ -1,9 +1,8 @@
 package com.veterinary.veterinaryApp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Client {
@@ -23,6 +22,15 @@ public class Client {
   int phone;
 
   boolean admin;
+
+  @OneToOne // tengo mis dudas
+  private Account account;
+
+  @OneToMany(mappedBy = "owner")
+  private List<Pet> pets;
+
+  @OneToMany(mappedBy = "client")
+  private Appointment appointment;
 
   // Constructores
   public Client() {
@@ -96,6 +104,30 @@ public class Client {
 
   public void setAdmin(boolean admin) {
     this.admin = admin;
+  }
+
+  public Account getAccount() {
+    return account;
+  }
+
+  public void setAccount(Account account) {
+    this.account = account;
+  }
+
+  public Appointment getAppointment() {
+    return appointment;
+  }
+
+  public void setAppointment(Appointment appointment) {
+    this.appointment = appointment;
+  }
+
+  public List<Pet> getPets() {
+    return pets;
+  }
+
+  public void setPets(List<Pet> pets) {
+    this.pets = pets;
   }
 
   @Override
