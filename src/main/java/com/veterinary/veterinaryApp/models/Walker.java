@@ -1,9 +1,6 @@
 package com.veterinary.veterinaryApp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Walker {
@@ -11,10 +8,17 @@ public class Walker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
     private String phone;
+
     private String address;
+
+    @OneToMany(mappedBy = "walker")
+    private Appointment appointment;
 
     public Walker() {
     }
@@ -60,5 +64,17 @@ public class Walker {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
