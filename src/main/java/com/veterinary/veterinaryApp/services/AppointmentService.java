@@ -8,9 +8,7 @@ import java.util.Optional;
 
 public interface AppointmentService {
     List<Appointment> getAllAppointments();
-    List<Appointment> getAppointmentByClient(Long clientId);
-
+    List<AppointmentDTO> getAppointmentDTOs();
     Appointment getAppointmentById(Long id);
-
-    Appointment createAppointment(Appointment appointment);
+    void createAppointment(Appointment appointment);
 }
