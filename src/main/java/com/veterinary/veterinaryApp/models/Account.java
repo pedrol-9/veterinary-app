@@ -15,7 +15,8 @@ public class Account {
 
     private String number;
 
-    @JoinColumn(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @OneToMany(mappedBy = "account")

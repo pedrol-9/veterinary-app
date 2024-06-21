@@ -62,14 +62,6 @@ public class Appointment {
     this.veterinarian = veterinarian;
   }
 
-  public Walker getWalker() {
-    return walker;
-  }
-
-  public void setWalker(Walker walker) {
-    this.walker = walker;
-  }
-
   public Client getClient() {
     return client;
   }

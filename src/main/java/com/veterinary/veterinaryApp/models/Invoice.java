@@ -14,30 +14,31 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private LocalDateTime date;
+    private LocalDateTime issuedOn;
 
     private double amount;
 
     private boolean paid;
 
+    private InvoiceStatus status;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
 
-    // Relación muchos a muchos con Services
-    @ManyToMany(mappedBy = "invoices")
-    @JoinColumn(name = "service_id")
-    private List<Offering> offerings;
+    @OneToOne
+    @JoinColumn(name = "appointment_id")
+    private Appointment appointment;
 
     //CONSTRUCTORES
     public Invoice() {
     }
 
-    public Invoice(LocalDateTime date, double amount, boolean paid, Account account) {
-        this.date = date;
+    public Invoice(LocalDateTime issuedOn, double amount, boolean paid, InvoiceStatus status) {
+        this.issuedOn = issuedOn;
         this.amount = amount;
         this.paid = paid;
-        this.account = account;
+        this.status = status;
     }
 
     //GETTERS Y SETTERS
@@ -49,12 +50,12 @@ public class Invoice {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getIssuedOn() {
+        return issuedOn;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setIssuedOn(LocalDateTime issuedOn) {
+        this.issuedOn = issuedOn;
     }
 
     public double getAmount() {
@@ -81,12 +82,20 @@ public class Invoice {
         this.account = account;
     }
 
-    public List<Offering> getOfferings() {
-        return offerings;
+    public Appointment getAppointment() {
+        return appointment;
     }
 
-    public void setOfferings(List<Offering> offerings) {
-        this.offerings = offerings;
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public InvoiceStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(InvoiceStatus status) {
+        this.status = status;
     }
 }
 

@@ -16,6 +16,8 @@ public class Pet {
 
     private String breed;
 
+    private String specialTreatment;
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Client owner;
@@ -80,6 +82,14 @@ public class Pet {
 
     public void setOwner(Client owner) {
         this.owner = owner;
+    }
+
+    public String getSpecialTreatment() {
+        return specialTreatment;
+    }
+
+    public void setSpecialTreatment(String specialTreatment) {
+        this.specialTreatment = specialTreatment;
     }
 
     public Appointment getAppointment() {

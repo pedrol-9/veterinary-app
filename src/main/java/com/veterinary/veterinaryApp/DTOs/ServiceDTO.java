@@ -13,7 +13,7 @@ public class ServiceDTO {
 
     private double price;
 
-    private List<Long> invoiceId;
+    //private List<Long> invoiceId;
 
     public ServiceDTO(Offering offering) {
         this.id = offering.getId();
@@ -21,7 +21,7 @@ public class ServiceDTO {
         this.description = offering.getDescription();
         this.price = offering.getPrice();
 
-        this.invoiceId = offering.getInvoices().stream().map(InvoiceDTO::new).map(InvoiceDTO::getId).toList();
+        //this.invoiceId = offering.getInvoices().stream().map(InvoiceDTO::new).map(InvoiceDTO::getId).toList();
 
     }
 

@@ -15,15 +15,18 @@ public class Veterinarian {
 
     private String specialty;
 
-    private Client client;
+    private String address;
+
+    private int phone;
 
     @OneToMany(mappedBy = "veterinarian")
     private List<Appointment> appointments;
 
-    public Veterinarian(String name, String specialty, Client client) {
+    public Veterinarian(String name, String specialty, String address, int phone) {
         this.name = name;
         this.specialty = specialty;
-        this.client = client;
+        this.address = address;
+        this.phone = phone;
     }
 
     public Veterinarian() {
@@ -53,12 +56,20 @@ public class Veterinarian {
         this.specialty = specialty;
     }
 
-    public Client getClient() {
-        return client;
+    public String getAddress() {
+        return address;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
 
     public List<Appointment> getAppointments() {
