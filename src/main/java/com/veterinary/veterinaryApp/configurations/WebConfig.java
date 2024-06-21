@@ -40,8 +40,8 @@ public class WebConfig {
                 .authorizeHttpRequests(authorize ->
                         authorize
                                 .requestMatchers("/api/auth/login","/api/auth/register").permitAll()
-                                .requestMatchers("/api/accounts", "/api/clients", "/api/walker", "/api/Service", "/api/Invoice" ).hasAnyRole("CLIENT", "ADMIN")
-                                .requestMatchers("/api/accounts/**", "/api/clients/**", "/api/walker/**", "/api/Service/**", "/api/Invoice/**" ).hasRole("ADMIN")
+                                .requestMatchers("/api/accounts", "/api/clients", "/api/Service", "/api/Invoice" ).hasAnyRole("CLIENT", "ADMIN")
+                                .requestMatchers("/api/accounts/**", "/api/clients/**", "/api/Service/**", "/api/Invoice/**" ).hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
 

@@ -7,13 +7,14 @@ import java.util.List;
 @Entity
 public class Account {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private double balance;
+
     private String number;
+
     @JoinColumn(name = "user_id")
     private Client client;
 

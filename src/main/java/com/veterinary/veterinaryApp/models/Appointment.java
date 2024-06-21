@@ -18,10 +18,6 @@ public class Appointment {
   private Veterinarian veterinarian;
 
   @ManyToOne
-  @JoinColumn(name = "walker_id")
-  private Walker walker;
-
-  @ManyToOne
   @JoinColumn(name = "client_id")
   private Client client;
 
