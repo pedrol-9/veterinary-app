@@ -1,6 +1,7 @@
 package com.veterinary.veterinaryApp.DTOs;
 
 import com.veterinary.veterinaryApp.models.Appointment;
+import com.veterinary.veterinaryApp.models.AppointmentStatus;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Pet;
 
@@ -24,7 +25,7 @@ public class ClientDTO {
 
   private List<Pet> pets;
 
-   private List<Appointment> confirmedAppointments;
+  private List<Appointment> confirmedAppointments;
 
   public ClientDTO(Client client) {
     this.id = client.getId();
@@ -35,7 +36,7 @@ public class ClientDTO {
     this.phone = client.getPhone();
     this.admin = client.isAdmin();
     this.pets = client.getPets();
-    // this.confirmedAppointments = client.getAppointments().stream().filter(app -> app.status.equals("CONFIRMED")).toList(); // ARREGLAR ESTE MÉTODO PARA QUE SE MUESTREN EN EL JSON SOLO LAS ACTIVAS LUEGO DE PULLEAR APPOINTMENT CLASS
+    this.confirmedAppointments = client.getAppointments().stream().filter(app -> app.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)).toList();
   }
 
   public Long getId() {
@@ -68,5 +69,9 @@ public class ClientDTO {
 
   public List<Appointment> getConfirmedAppointments() {
     return confirmedAppointments;
+  }
+
+  public String getAccountNumber() {
+    return accountNumber;
   }
 }

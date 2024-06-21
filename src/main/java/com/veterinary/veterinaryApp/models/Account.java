@@ -15,6 +15,8 @@ public class Account {
 
     private String number;
 
+    private boolean balancePaid;
+
     @OneToOne
     @JoinColumn(name = "client_id")
     private Client client;
@@ -29,6 +31,7 @@ public class Account {
     public Account(double balance, String number) {
         this.balance = balance;
         this.number = number;
+        this.balancePaid = setBalancePaid(balance);
     }
 
     // Getters y Setters
@@ -50,6 +53,22 @@ public class Account {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public boolean isBalancePaid() {
+        return balancePaid;
+    }
+
+    public void setBalancePaid(boolean balancePaid) {
+        this.balancePaid = balancePaid;
+    }
+
+    public boolean setBalancePaid(double balance) {
+        this.balance = balance;
+        if (balance == 0) {
+            this.balancePaid = true;
+        }
+        return balancePaid;
     }
 
     public void setId(Long id) {

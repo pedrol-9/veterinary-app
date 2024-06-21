@@ -7,18 +7,14 @@ import java.util.List;
 
 @Entity
 public class Invoice {
-    //PROPIEDADES
-    //PK
+
     @Id
-    //ID AUTOMATICAMENTE
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private LocalDateTime issuedOn;
 
     private double amount;
-
-    private boolean paid;
 
     private InvoiceStatus status;
 
@@ -37,8 +33,8 @@ public class Invoice {
     public Invoice(LocalDateTime issuedOn, double amount, boolean paid, InvoiceStatus status) {
         this.issuedOn = issuedOn;
         this.amount = amount;
-        this.paid = paid;
         this.status = status;
+        this.setStatus(this.getAccount(), this.getAppointment());
     }
 
     //GETTERS Y SETTERS
@@ -66,14 +62,6 @@ public class Invoice {
         this.amount = amount;
     }
 
-    public boolean isPaid() {
-        return paid;
-    }
-
-    public void setPaid(boolean paid) {
-        this.paid = paid;
-    }
-
     public Account getAccount() {
         return account;
     }
@@ -96,6 +84,23 @@ public class Invoice {
 
     public void setStatus(InvoiceStatus status) {
         this.status = status;
+    }
+
+    // Otros metodos
+    public void setStatus(Account account, Appointment appointment) {
+        this.account = account;
+        if (account.getBalance() > 0 || appointment.getAppointmentStatus().equals(AppointmentStatus.SCHEDULED)) {
+            this.status = InvoiceStatus.PENDING;
+        } else {
+            this.status = InvoiceStatus.PAID;
+        }
+
+        if (appointment.getAppointmentStatus().equals(AppointmentStatus.CANCELLED)) {
+            this.status = InvoiceStatus.CANCELLED;
+        } else if (appointment.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)) {
+            this.status = InvoiceStatus.CHARGED;
+        }
+
     }
 }
 
