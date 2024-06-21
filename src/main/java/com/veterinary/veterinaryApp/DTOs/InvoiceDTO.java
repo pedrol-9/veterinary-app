@@ -1,33 +1,33 @@
 package com.veterinary.veterinaryApp.DTOs;
 
 import com.veterinary.veterinaryApp.models.Invoice;
-import com.veterinary.veterinaryApp.models.Offering;
-import com.veterinary.veterinaryApp.models.Service;
+import com.veterinary.veterinaryApp.models.InvoiceStatus;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 public class InvoiceDTO {
+
     private long id;
 
-    private LocalDateTime date;
+    private LocalDateTime issuedOn;
 
     private double amount;
 
-    private boolean paid;
+    private InvoiceStatus status;
 
-    private long accountId;
+    private String destinationAccount;
 
-    private List<Long> offeringId;
+    private String billedService;
+
+    private String serviceDescription;
 
     public InvoiceDTO(Invoice invoice) {
-        this.date = invoice.getDate();
-        this.amount = invoice.getAmount();
-        this.paid = invoice.isPaid();
-        this.accountId = invoice.getAccount().getId();
-        this.offeringId = invoice.getOfferings().stream().map(Offering::getId).collect(toList());
+        this.issuedOn = invoice.getIssuedOn();
+        this.amount = invoice.getAppointment().getOffering().getPrice();
+        this.status = invoice.getStatus();
+        this.destinationAccount = invoice.getAccount().getNumber();
+        this.billedService = invoice.getAppointment().getOffering().getName();
+        this.serviceDescription = invoice.getAppointment().getOffering().getDescription();
     }
 
     // Getters
@@ -36,22 +36,22 @@ public class InvoiceDTO {
     }
 
     public LocalDateTime getDate() {
-        return date;
+        return issuedOn;
     }
 
     public double getAmount() {
         return amount;
     }
 
-    public boolean isPaid() {
-        return paid;
+    public String getDestinationAccount() {
+        return destinationAccount;
     }
 
-    public long getAccountId() {
-        return accountId;
+    public String getBilledService() {
+        return billedService;
     }
 
-    public List<Long> getServiceId() {
-        return offeringId;
+    public String getServiceDescription() {
+        return serviceDescription;
     }
 }

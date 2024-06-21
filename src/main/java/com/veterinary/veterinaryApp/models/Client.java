@@ -23,14 +23,14 @@ public class Client {
 
   boolean admin;
 
-  @OneToOne // tengo mis dudas
+  @OneToOne(mappedBy = "client")
   private Account account;
 
   @OneToMany(mappedBy = "owner")
   private List<Pet> pets;
 
   @OneToMany(mappedBy = "client")
-  private Appointment appointment;
+  private List<Appointment> appointments;
 
   // Constructores
   public Client() {
@@ -114,12 +114,12 @@ public class Client {
     this.account = account;
   }
 
-  public Appointment getAppointment() {
-    return appointment;
+  public List<Appointment>  getAppointments() {
+    return appointments;
   }
 
-  public void setAppointment(Appointment appointment) {
-    this.appointment = appointment;
+  public void setAppointments(List<Appointment> appointments) {
+    this.appointments = appointments;
   }
 
   public List<Pet> getPets() {

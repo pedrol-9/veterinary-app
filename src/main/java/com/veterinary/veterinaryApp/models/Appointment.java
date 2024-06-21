@@ -1,6 +1,5 @@
 package com.veterinary.veterinaryApp.models;
 
-import com.veterinary.veterinaryApp.utils.AppointmentStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,7 +12,12 @@ public class Appointment {
     private Long id;
 
     private LocalDateTime dateTime;
+
     private LocalDateTime creationDatetime;
+
+    private String notes;
+
+    private AppointmentStatus appointmentStatus; // SCHEDULED, CONFIRMED, CLOSED, cancelled;
 
     @ManyToOne
     @JoinColumn(name = "veterinarian_id")
@@ -30,23 +34,21 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "service_id")
     private Offering offering;
+
+    @ManyToOne
+    @JoinColumn(name = "invoice_id")
     private Invoice invoice;
-    private AppointmentStatus appointmentStatus; // SCHEDULED, CONFIRMED, CLOSED, cancelled;
+
     // constructores
-
-
     public Appointment() {
     }
 
-    public Appointment(LocalDateTime dateTime, LocalDateTime creationDatetime, Veterinarian veterinarian, Client client, Pet pet, Offering offering, AppointmentStatus appointmentStatus) {
+    public Appointment(LocalDateTime dateTime, LocalDateTime creationDatetime, String notes){
         this.dateTime = dateTime;
         this.creationDatetime = creationDatetime;
-        this.veterinarian = veterinarian;
-        this.client = client;
-        this.pet = pet;
-        this.offering = offering;
-        this.appointmentStatus = appointmentStatus;
+        this.notes = notes;
     }
+
 
   public Long getId() {
     return id;
@@ -70,6 +72,14 @@ public class Appointment {
 
   public void setCreationDatetime(LocalDateTime creationDatetime) {
     this.creationDatetime = creationDatetime;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
   }
 
   public Veterinarian getVeterinarian() {

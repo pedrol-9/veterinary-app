@@ -1,10 +1,7 @@
 package com.veterinary.veterinaryApp.DTOs;
 
 import com.veterinary.veterinaryApp.models.Account;
-import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Invoice;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
@@ -14,17 +11,37 @@ public class AccountDTO {
 
     private double balance;
 
-    private Client client;
+    private long clientId;
+
+    private String clientName;
 
     private List<Invoice> invoices;
-
-    public AccountDTO() {
-    }
 
     public AccountDTO(Account account) {
         this.id = account.getId();
         this.balance = account.getBalance();
-        this.client = account.getClient();
+        this.clientId = account.getClient().getId(); // para que se muestre el id del cliente en el json
+        this.clientName = account.getClient().getFirstName() + " " + account.getClient().getLastName(); // para que se muestre el nombre del cliente en el json
         this.invoices = account.getInvoices();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public long getClientId() {
+        return clientId;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
     }
 }

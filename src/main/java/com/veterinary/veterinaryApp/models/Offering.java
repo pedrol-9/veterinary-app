@@ -25,9 +25,6 @@ public class Offering {
     @Column(name="HoursOfService")
     private List<String> hoursOfService; // los horarios para determinado servicio
 
-    @ManyToMany
-    private List<Invoice> invoices;
-
     @OneToMany(mappedBy = "service")
     private List<Appointment> appointments; // contiene los bloques horarios reservados
 
@@ -68,14 +65,6 @@ public class Offering {
 
     public double getPrice() {
         return price;
-    }
-
-    public List<Invoice> getInvoices() {
-        return invoices;
-    }
-
-    public void setInvoices(List<Invoice> invoices) {
-        this.invoices = invoices;
     }
 
     public void setPrice(double price) {

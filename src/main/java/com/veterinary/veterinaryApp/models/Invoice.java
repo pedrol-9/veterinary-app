@@ -7,37 +7,34 @@ import java.util.List;
 
 @Entity
 public class Invoice {
-    //PROPIEDADES
-    //PK
+
     @Id
-    //ID AUTOMATICAMENTE
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private LocalDateTime date;
+    private LocalDateTime issuedOn;
 
     private double amount;
 
-    private boolean paid;
+    private InvoiceStatus status;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
 
-    // Relación muchos a muchos con Services
-    @ManyToMany(mappedBy = "invoices")
-    @JoinColumn(name = "service_id")
-    private List<Offering> offerings;
+    @OneToOne
+    @JoinColumn(name = "appointment_id")
+    private Appointment appointment;
 
     //CONSTRUCTORES
     public Invoice() {
     }
 
-    public Invoice(LocalDateTime date, double amount, boolean paid, Account account) {
-        this.date = date;
+    public Invoice(LocalDateTime issuedOn, double amount, boolean paid, InvoiceStatus status) {
+        this.issuedOn = issuedOn;
         this.amount = amount;
-        this.paid = paid;
-        this.account = account;
+        this.status = status;
+        this.setStatus(this.getAccount(), this.getAppointment());
     }
 
     //GETTERS Y SETTERS
@@ -49,12 +46,12 @@ public class Invoice {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getIssuedOn() {
+        return issuedOn;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setIssuedOn(LocalDateTime issuedOn) {
+        this.issuedOn = issuedOn;
     }
 
     public double getAmount() {
@@ -65,14 +62,6 @@ public class Invoice {
         this.amount = amount;
     }
 
-    public boolean isPaid() {
-        return paid;
-    }
-
-    public void setPaid(boolean paid) {
-        this.paid = paid;
-    }
-
     public Account getAccount() {
         return account;
     }
@@ -81,12 +70,37 @@ public class Invoice {
         this.account = account;
     }
 
-    public List<Offering> getOfferings() {
-        return offerings;
+    public Appointment getAppointment() {
+        return appointment;
     }
 
-    public void setOfferings(List<Offering> offerings) {
-        this.offerings = offerings;
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public InvoiceStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(InvoiceStatus status) {
+        this.status = status;
+    }
+
+    // Otros metodos
+    public void setStatus(Account account, Appointment appointment) {
+        this.account = account;
+        if (account.getBalance() > 0 || appointment.getAppointmentStatus().equals(AppointmentStatus.SCHEDULED)) {
+            this.status = InvoiceStatus.PENDING;
+        } else {
+            this.status = InvoiceStatus.PAID;
+        }
+
+        if (appointment.getAppointmentStatus().equals(AppointmentStatus.CANCELLED)) {
+            this.status = InvoiceStatus.CANCELLED;
+        } else if (appointment.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)) {
+            this.status = InvoiceStatus.CHARGED;
+        }
+
     }
 }
 
