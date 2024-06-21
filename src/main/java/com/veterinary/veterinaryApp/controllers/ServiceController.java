@@ -1,8 +1,7 @@
 package com.veterinary.veterinaryApp.controllers;
 
-import com.veterinary.veterinaryApp.Repositories.ServiceRepository;
-import com.veterinary.veterinaryApp.models.Service;
-import com.veterinary.veterinaryApp.services.ServiceService;
+import com.veterinary.veterinaryApp.models.Offering;
+import com.veterinary.veterinaryApp.services.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,27 +17,26 @@ import java.util.List;
 public class ServiceController {
 
     @Autowired
-    private ServiceService serviceService;
+    OfferingService offeringService;
+    @GetMapping("/offerings")
+    public ResponseEntity<?> getAllOfferings() {
+       List<Offering> offerings = offeringService.getAllOfferings();
 
-    @GetMapping("/services")
-    public ResponseEntity<?> getAllServices() {
-       List<Service> services = serviceService.getAllServices();
-
-        if (services.isEmpty()) {
-            return new ResponseEntity<>("No services found.", HttpStatus.NOT_FOUND);
+        if (offerings.isEmpty()) {
+            return new ResponseEntity<>("No offerings found.", HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(services, HttpStatus.OK);
+        return new ResponseEntity<>(offerings, HttpStatus.OK);
     }
 
-    @GetMapping("/services/{id}")
-    public ResponseEntity<?> getServiceById(@PathVariable long id) {
-        Service service = serviceService.getServiceById(id);
+    @GetMapping("/offerings/{id}")
+    public ResponseEntity<?> getOfferingById(@PathVariable long id) {
+        Offering offering = offeringService.getOfferingById(id);
 
-        if (service == null) {
-            return new ResponseEntity<>("No service with this id was found.", HttpStatus.NOT_FOUND);
+        if (offering == null) {
+            return new ResponseEntity<>("No offering with this id was found.", HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(service, HttpStatus.OK);
+        return new ResponseEntity<>(offering, HttpStatus.OK);
     }
 }

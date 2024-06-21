@@ -31,7 +31,7 @@ public class Appointment {
 
   @ManyToOne
   @JoinColumn(name = "service_id")
-  private Service service;
+  private Offering offering;
 
   // constructores
   public Appointment(LocalDateTime dateTime) {
@@ -90,12 +90,12 @@ public class Appointment {
     this.pet = pet;
   }
 
-  public Service getService() {
-    return service;
+  public Offering getOffering() {
+    return offering;
   }
 
-  public void setService(Service service) {
-    this.service = service;
+  public void setOffering(Offering offering) {
+    this.offering = offering;
   }
 
 
