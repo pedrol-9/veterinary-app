@@ -1,5 +1,6 @@
 package com.veterinary.veterinaryApp.models;
 
+import com.veterinary.veterinaryApp.utils.AppointmentStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -7,37 +8,46 @@ import java.time.LocalDateTime;
 @Entity
 public class Appointment {
 
-  @Id
-  @GeneratedValue
-  private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-  private LocalDateTime dateTime;
+    private LocalDateTime dateTime;
+    private LocalDateTime creationDatetime;
 
-  @ManyToOne
-  @JoinColumn(name = "veterinarian_id")
-  private Veterinarian veterinarian;
+    @ManyToOne
+    @JoinColumn(name = "veterinarian_id")
+    private Veterinarian veterinarian;
 
-  @ManyToOne
-  @JoinColumn(name = "client_id")
-  private Client client;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
-  @ManyToOne
-  @JoinColumn(name = "pet_id")
-  private Pet pet;
+    @ManyToOne
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
 
-  @ManyToOne
-  @JoinColumn(name = "service_id")
-  private Offering offering;
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private Offering offering;
+    private Invoice invoice;
+    private AppointmentStatus appointmentStatus; // SCHEDULED, CONFIRMED, CLOSED, cancelled;
+    // constructores
 
-  // constructores
-  public Appointment(LocalDateTime dateTime) {
-    this.dateTime = dateTime;
-  }
 
-  public Appointment() {
-  }
+    public Appointment() {
+    }
 
-  // getters y setters
+    public Appointment(LocalDateTime dateTime, LocalDateTime creationDatetime, Veterinarian veterinarian, Client client, Pet pet, Offering offering, AppointmentStatus appointmentStatus) {
+        this.dateTime = dateTime;
+        this.creationDatetime = creationDatetime;
+        this.veterinarian = veterinarian;
+        this.client = client;
+        this.pet = pet;
+        this.offering = offering;
+        this.appointmentStatus = appointmentStatus;
+    }
+
   public Long getId() {
     return id;
   }
@@ -54,20 +64,20 @@ public class Appointment {
     this.dateTime = dateTime;
   }
 
+  public LocalDateTime getCreationDatetime() {
+    return creationDatetime;
+  }
+
+  public void setCreationDatetime(LocalDateTime creationDatetime) {
+    this.creationDatetime = creationDatetime;
+  }
+
   public Veterinarian getVeterinarian() {
     return veterinarian;
   }
 
   public void setVeterinarian(Veterinarian veterinarian) {
     this.veterinarian = veterinarian;
-  }
-
-  public Walker getWalker() {
-    return walker;
-  }
-
-  public void setWalker(Walker walker) {
-    this.walker = walker;
   }
 
   public Client getClient() {
@@ -94,5 +104,19 @@ public class Appointment {
     this.offering = offering;
   }
 
+  public Invoice getInvoice() {
+    return invoice;
+  }
 
+  public void setInvoice(Invoice invoice) {
+    this.invoice = invoice;
+  }
+
+  public AppointmentStatus getAppointmentStatus() {
+    return appointmentStatus;
+  }
+
+  public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
+    this.appointmentStatus = appointmentStatus;
+  }
 }
