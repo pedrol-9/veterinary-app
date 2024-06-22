@@ -18,11 +18,11 @@ public class Offering {
     private double price;
 
     @ElementCollection
-    @Column(name="DaysOfService")
+    @Column(name = "DaysOfService")
     private List<String> daysOfService; // los dias para determinado servicio.
 
     @ElementCollection
-    @Column(name="HoursOfService")
+    @Column(name = "HoursOfService")
     private List<String> hoursOfService; // los horarios para determinado servicio
 
     @OneToMany(mappedBy = "service")
@@ -32,19 +32,17 @@ public class Offering {
     public Offering() {
     }
 
-    public Offering(String name, String description, double price) {
+    public Offering(String name, String description, double price, List<String> daysOfService, List<String> hoursOfService) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.daysOfService = daysOfService;
+        this.hoursOfService = hoursOfService;
     }
 
     //GETTERS Y SETTERS
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
