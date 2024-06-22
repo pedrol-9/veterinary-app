@@ -49,7 +49,6 @@ public class Appointment {
         this.notes = notes;
     }
 
-
   public Long getId() {
     return id;
   }

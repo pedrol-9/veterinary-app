@@ -15,6 +15,8 @@ public class Offering {
 
     private String description;
 
+    private AnimalSize animalSize;
+
     private double price;
 
     @ElementCollection
@@ -28,17 +30,20 @@ public class Offering {
     @OneToMany(mappedBy = "service")
     private List<Appointment> appointments; // contiene los bloques horarios reservados
 
-    //CONSTRUCTORES
+    // CONSTRUCTORES
     public Offering() {
     }
 
-    public Offering(String name, String description, double price) {
+    public Offering(String name, String description, AnimalSize animalSize, double price, List<String> daysOfService, List<String> hoursOfService) {
         this.name = name;
         this.description = description;
+        this.animalSize = animalSize;
         this.price = price;
+        this.daysOfService = daysOfService;
+        this.hoursOfService = hoursOfService;
     }
 
-    //GETTERS Y SETTERS
+    // GETTERS Y SETTERS
     public long getId() {
         return id;
     }
@@ -61,6 +66,14 @@ public class Offering {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public AnimalSize getAnimalSize() {
+        return animalSize;
+    }
+
+    public void setAnimalSize(AnimalSize animalSize) {
+        this.animalSize = animalSize;
     }
 
     public double getPrice() {

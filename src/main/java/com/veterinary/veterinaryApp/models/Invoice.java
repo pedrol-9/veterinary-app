@@ -100,7 +100,6 @@ public class Invoice {
         } else if (appointment.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)) {
             this.status = InvoiceStatus.CHARGED;
         }
-
     }
 }
 
