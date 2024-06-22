@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl implements ClientService {
 
     ClientRepository clientRepository;
+
+
     @Override
     public List<Client> getAllClients() {
         return clientRepository.findAll();
@@ -22,12 +24,17 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<ClientDTO> getAllClientsDto() {
+    public List<ClientDTO> getAllClientsDto(Client client) {
         return getAllClients().stream().map(ClientDTO::new).collect(Collectors.toList());
     }
 
     @Override
-    public void saveClient(Client client) {
+    public Client getClientByEmail(String email) {
+        return clientRepository.findByEmail(email);
+    }
 
+    @Override
+    public void saveClient(Client client) {
+        clientRepository.save(client);
     }
 }

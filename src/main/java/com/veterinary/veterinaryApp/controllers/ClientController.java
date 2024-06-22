@@ -14,16 +14,16 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
-
-
-    @RequestMapping("/all")
-    public ResponseEntity<?> getAllClients() {
-        return ResponseEntity.ok(clientService.getAllClientsDto());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getClientById(@PathVariable Long id) {
-        return ResponseEntity.ok(clientService.getClientById(id));
-    }
+//
+//
+//    @RequestMapping("/all")
+//    public ResponseEntity<?> getAllClients() {
+//        return ResponseEntity.ok(clientService.getAllClientsDto());
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> getClientById(@PathVariable Long id) {
+//        return ResponseEntity.ok(clientService.getClientById(id));
+//    }
 
 }
