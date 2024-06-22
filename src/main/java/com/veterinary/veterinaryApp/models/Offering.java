@@ -15,34 +15,41 @@ public class Offering {
 
     private String description;
 
+    private AnimalSize animalSize;
+
     private double price;
 
     @ElementCollection
-    @Column(name = "DaysOfService")
+    @Column(name="DaysOfService")
     private List<String> daysOfService; // los dias para determinado servicio.
 
     @ElementCollection
-    @Column(name = "HoursOfService")
+    @Column(name="HoursOfService")
     private List<String> hoursOfService; // los horarios para determinado servicio
 
     @OneToMany(mappedBy = "service")
     private List<Appointment> appointments; // contiene los bloques horarios reservados
 
-    //CONSTRUCTORES
+    // CONSTRUCTORES
     public Offering() {
     }
 
-    public Offering(String name, String description, double price, List<String> daysOfService, List<String> hoursOfService) {
+    public Offering(String name, String description, AnimalSize animalSize, double price, List<String> daysOfService, List<String> hoursOfService) {
         this.name = name;
         this.description = description;
+        this.animalSize = animalSize;
         this.price = price;
         this.daysOfService = daysOfService;
         this.hoursOfService = hoursOfService;
     }
 
-    //GETTERS Y SETTERS
+    // GETTERS Y SETTERS
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -59,6 +66,14 @@ public class Offering {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public AnimalSize getAnimalSize() {
+        return animalSize;
+    }
+
+    public void setAnimalSize(AnimalSize animalSize) {
+        this.animalSize = animalSize;
     }
 
     public double getPrice() {
