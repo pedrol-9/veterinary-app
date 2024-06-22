@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OfferingDTO {
+  
     private long id;
 
     private String name;
@@ -50,7 +51,7 @@ public class OfferingDTO {
     public double getPrice() {
         return price;
     }
-
+  
     public AnimalSize getAnimalSize() {
         return animalSize;
     }

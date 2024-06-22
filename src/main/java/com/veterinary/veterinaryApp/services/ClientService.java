@@ -8,6 +8,7 @@ import java.util.List;
 public interface ClientService {
     List<Client> getAllClients();
     Client getClientById(Long id);
-    List<ClientDTO> getAllClientsDto();
+    List<ClientDTO> getAllClientsDto(Client client);
+    Client getClientByEmail(String email);
     void saveClient(Client client);
 }
