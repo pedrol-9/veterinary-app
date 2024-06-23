@@ -2,6 +2,9 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Pet {
     @Id
@@ -22,15 +25,16 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     private Client owner;
 
-    @OneToMany(mappedBy = "pet")
-    private Appointment appointment;
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    private List<Appointment> appointments = new ArrayList<>();
 
     // contructores
-    public Pet(String petName, int petAge, String specie, String breed) {
+    public Pet(String petName, int petAge, String specie, String breed, String specialTreatment) {
         this.petName = petName;
         this.petAge = petAge;
         this.specie = specie;
         this.breed = breed;
+        this.specialTreatment = specialTreatment;
     }
 
     public Pet() {}
@@ -92,11 +96,17 @@ public class Pet {
         this.specialTreatment = specialTreatment;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
+    public void setAppointment(List<Appointment> appointment) {
+        this.appointments = appointment;
+    }
+
+    // otros metodos
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+        appointment.setPet(this);
     }
 }

@@ -30,11 +30,11 @@ public class Invoice {
     public Invoice() {
     }
 
-    public Invoice(LocalDateTime issuedOn, double amount, boolean paid, InvoiceStatus status) {
+    public Invoice(LocalDateTime issuedOn, double amount, InvoiceStatus status) {
         this.issuedOn = issuedOn;
         this.amount = amount;
         this.status = status;
-        this.setStatus(this.getAccount(), this.getAppointment());
+        // setStatus(this.getAppointment());
     }
 
     //GETTERS Y SETTERS
@@ -87,9 +87,12 @@ public class Invoice {
     }
 
     // Otros metodos
-    public void setStatus(Account account, Appointment appointment) {
-        this.account = account;
-        if (account.getBalance() > 0 || appointment.getAppointmentStatus().equals(AppointmentStatus.SCHEDULED)) {
+
+    /* NO FUNCA ESTE MÉTODO
+
+    public void setStatus( Appointment appointment) {
+
+        if (this.getAccount().getBalance() > 0 || appointment.getAppointmentStatus().equals(AppointmentStatus.SCHEDULED)) {
             this.status = InvoiceStatus.PENDING;
         } else {
             this.status = InvoiceStatus.PAID;
@@ -100,6 +103,6 @@ public class Invoice {
         } else if (appointment.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)) {
             this.status = InvoiceStatus.CHARGED;
         }
-    }
+    }*/
 }
 

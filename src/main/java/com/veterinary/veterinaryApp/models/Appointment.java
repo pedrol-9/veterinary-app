@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class Appointment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDateTime dateTime;
@@ -43,10 +43,11 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(LocalDateTime dateTime, LocalDateTime creationDatetime, String notes){
+    public Appointment(LocalDateTime dateTime, LocalDateTime creationDatetime, String notes, AppointmentStatus appointmentStatus) {
         this.dateTime = dateTime;
         this.creationDatetime = creationDatetime;
         this.notes = notes;
+        this.appointmentStatus = appointmentStatus;
     }
 
   public Long getId() {

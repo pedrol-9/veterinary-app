@@ -1,9 +1,12 @@
 package com.veterinary.veterinaryApp.DTOs;
 
+import com.veterinary.veterinaryApp.models.Appointment;
+import com.veterinary.veterinaryApp.models.AppointmentStatus;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Pet;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PetDTO {
 
@@ -19,7 +22,7 @@ public class PetDTO {
 
     private String specialTreatment;
 
-    private LocalDateTime appointmentDate; // asumiendo que tiene una sola cita por mascota
+    private List<LocalDateTime> appointmentDate; // asumiendo que tiene una sola cita por mascota
 
     private String owner;
 
@@ -32,7 +35,7 @@ public class PetDTO {
         this.specie = pet.getSpecie();
         this.breed = pet.getBreed();
         this.specialTreatment = pet.getSpecialTreatment();
-        this.appointmentDate = pet.getAppointment().getDateTime(); // creo que la relación mascota tiene una relación OneToOne con Appointment porque el Client es quien puede tener varios appointments y la pet es quien puede tener un appointment por cada vez que se crea un appointment
+        this.appointmentDate =  pet.getAppointments().stream().map(Appointment::getDateTime).toList();
         this.owner = pet.getOwner().getFirstName() + " " + pet.getOwner().getLastName();
     }
 
@@ -60,7 +63,7 @@ public class PetDTO {
         return specialTreatment;
     }
 
-    public LocalDateTime getAppointmentDate() {
+    public List<LocalDateTime> getAppointmentDate() {
         return appointmentDate;
     }
 

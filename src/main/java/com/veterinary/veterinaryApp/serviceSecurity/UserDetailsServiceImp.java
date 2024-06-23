@@ -1,3 +1,4 @@
+/*
 package com.veterinary.veterinaryApp.serviceSecurity;
 
 import com.veterinary.veterinaryApp.Repositories.ClientRepository;
@@ -10,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImplem implements UserDetailsService {
+public class UserDetailsServiceImp implements UserDetailsService {
 
     @Autowired
     private ClientRepository clientRepository;
@@ -37,3 +38,4 @@ public class UserDetailsServiceImplem implements UserDetailsService {
                 .build();
     }
 }
+*/
