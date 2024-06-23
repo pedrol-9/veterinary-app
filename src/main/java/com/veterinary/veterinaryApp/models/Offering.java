@@ -16,6 +16,7 @@ public class Offering {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
     private AnimalSize animalSize;
 
     private double price;

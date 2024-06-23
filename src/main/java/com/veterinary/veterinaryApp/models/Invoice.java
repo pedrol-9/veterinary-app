@@ -16,6 +16,7 @@ public class Invoice {
 
     private double amount;
 
+    @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
 
     @ManyToOne

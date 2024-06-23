@@ -17,6 +17,7 @@ public class Appointment {
 
     private String notes;
 
+    @Enumerated(EnumType.STRING)
     private AppointmentStatus appointmentStatus; // SCHEDULED, CONFIRMED, CLOSED, cancelled;
 
     @ManyToOne

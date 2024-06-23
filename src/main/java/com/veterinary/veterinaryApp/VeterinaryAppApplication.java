@@ -26,13 +26,18 @@ public class VeterinaryAppApplication {
 
 			// creacion de usuarios
 			Client userAdmin = new Client("Jelena", "Palavecino", "jelena@vetadmin.com", "123", 31334177);
-			clientRepository.save(userAdmin);
+
 			Client lucas = new Client("Lucas", "Madrigal", "lucas@mail.com", "123", 51258927);
-			clientRepository.save(lucas);
+
 			Client pedro = new Client("Pedro", "Sanabria", "pedro@sanabria.com", "123", 51258927);
-			clientRepository.save(pedro);
+
 			Client leonel = new Client("Leonel", "Borjas", "leonel@borjas.com", "123", 51258927);
+
+			clientRepository.save(userAdmin);
+			clientRepository.save(lucas);
+			clientRepository.save(pedro);
 			clientRepository.save(leonel);
+
 
 			// creacion de cuentas
 			Account account1 = new Account(1000, fiveDigits());
@@ -72,14 +77,24 @@ public class VeterinaryAppApplication {
 			petRepository.save(pet5);
 			petRepository.save(pet6);
 
+			// creación de Appointment
+			Appointment appointment1 = new Appointment(LocalDateTime.now().plusDays(3), LocalDateTime.now(), "Please get my dog a good shower, I´ll pick him up at noon", AppointmentStatus.CONFIRMED);
+
 			// Creación de Veterinarios
 			Veterinarian vet1 = new Veterinarian("Brayan", "Veterinary Dermatology", "Calle 1 # 2 - 3", 31334177);
-			veterinarianRepository.save(vet1);
+
 			Veterinarian vet2 = new Veterinarian("Brayan", "Animal Behavior", "Calle 4 # 5 - 6", 31334177);
-			veterinarianRepository.save(vet2);
+
 			Veterinarian vet3 = new Veterinarian("Brayan", "Veterinary Anesthesiology and Emergency Medicine", "Calle 7 # 8 - 9", 31334177);
-			veterinarianRepository.save(vet3);
+
 			Veterinarian vet4 = new Veterinarian("Brayan", "Intern", "Calle 10 # 11 - 12", 31334177);
+
+			// Asignación de Cita a veterinario
+			vet1.addAppointment(appointment1);
+
+			veterinarianRepository.save(vet1);
+			veterinarianRepository.save(vet2);
+			veterinarianRepository.save(vet3);
 			veterinarianRepository.save(vet4);
 
 			// creación de Servicios
@@ -87,14 +102,23 @@ public class VeterinaryAppApplication {
 
 			Offering dogWalk = new Offering("Dog Walk", "Enjoy peace of mind with our professional Dog Walk Service, designed to keep your furry friend happy and active.", AnimalSize.NONE, 500, new ArrayList<>(List.of("LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO")), new ArrayList<>(List.of("7:00 AM", "7:00 PM")));
 
-			// creación de Appointment
-			Appointment appointment1 = new Appointment(LocalDateTime.now().plusDays(3), LocalDateTime.now(), "Please get my dog a good shower, I´ll pick him up at noon", AppointmentStatus.CONFIRMED);
-			appointmentRepository.save(appointment1);
+			// Asignación de Servicio a Cita
+			dogShower.addAppointment(appointment1);
+
+			offeringRepository.save(dogShower);
+			offeringRepository.save(dogWalk);
 
 			// Creación de Invoice
 			Invoice invoice1 = new Invoice(LocalDateTime.now(), 1000, InvoiceStatus.PENDING);
 
-			// Asignar cita al cliente
+			// Asignar invoice a la cita
+			invoice1.setAppointment(appointment1);
+			appointment1.setInvoice(invoice1);
+			invoice1.setAccount(account1);
+
+			invoiceRepository.save(invoice1);
+
+			// Asignación de cita al cliente
 			lucas.addAppointment(appointment1);
 
 			// asignar cuenta a la invoice
@@ -106,27 +130,7 @@ public class VeterinaryAppApplication {
 			// Asignar cita al veterinario
 			vet2.addAppointment(appointment1);
 
-			// Asignar servicio a la cita
-			appointment1.setOffering(dogShower);
-
-			// Asignar invoice a la cita
-			appointment1.setInvoice(invoice1);
-
-			// Asignar invoice a la cuenta y setear status según el balance de la cuenta y el estado de la cita
-			// invoice1.setStatus(appointment1);
-
-			// Persistir objetos
-
-
-	/*		veterinarianRepository.save(vet1);
-			veterinarianRepository.save(vet2);
-			veterinarianRepository.save(vet3);
-			veterinarianRepository.save(vet4);*/
-
-			offeringRepository.save(dogShower);
-			offeringRepository.save(dogWalk);
-			invoiceRepository.save(invoice1);
-
+			appointmentRepository.save(appointment1);
 
 			// para saber cuando inicia la app
 			System.out.println("****************************************************");
