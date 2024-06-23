@@ -4,10 +4,12 @@ import com.veterinary.veterinaryApp.DTOs.ClientDTO;
 import com.veterinary.veterinaryApp.Repositories.ClientRepository;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.services.ClientService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ClientServiceImpl implements ClientService {
 
     ClientRepository clientRepository;

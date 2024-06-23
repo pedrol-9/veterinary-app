@@ -21,7 +21,7 @@ public class Account {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Invoice> invoices;
 
     // Constructores

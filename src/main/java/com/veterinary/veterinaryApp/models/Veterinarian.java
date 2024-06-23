@@ -2,6 +2,7 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,8 +20,8 @@ public class Veterinarian {
 
     private int phone;
 
-    @OneToMany(mappedBy = "veterinarian")
-    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "veterinarian", cascade = CascadeType.ALL)
+    private List<Appointment> appointments = new ArrayList<>();
 
     public Veterinarian(String name, String specialty, String address, int phone) {
         this.name = name;
@@ -78,5 +79,11 @@ public class Veterinarian {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    // Otros metodos
+    public void addAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
+        appointment.setVeterinarian(this);
     }
 }

@@ -3,16 +3,19 @@ package com.veterinary.veterinaryApp.services.servicesImp;
 import com.veterinary.veterinaryApp.Repositories.InvoiceRepository;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Invoice;
+import com.veterinary.veterinaryApp.models.InvoiceStatus;
 import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.services.InvoiceService;
 import com.veterinary.veterinaryApp.services.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class InvoiceServiceImpl implements InvoiceService {
 
     @Autowired
@@ -49,10 +52,10 @@ public class InvoiceServiceImpl implements InvoiceService {
         //CREA  LA FACTURA
         Invoice invoice = new Invoice();
         //invoice.setAccount(account);
-        invoice.setOfferings(offerings);
-        invoice.setDate(LocalDateTime.now());
+        // invoice.setOfferings(offerings);
+        invoice.setIssuedOn(LocalDateTime.now());
         invoice.setAmount(totalAmount);
-        invoice.setPaid(false); //TODO: SE PUEDE ACTUALIZAR A TRUE CUANDO SE PAGUE
+        invoice.setStatus(InvoiceStatus.PAID); //TODO: SE PUEDE ACTUALIZAR A TRUE CUANDO SE PAGUE
 
         saveInvoice(invoice);
         //metodo add para poder añadir la factura al cliente o a la cuenta

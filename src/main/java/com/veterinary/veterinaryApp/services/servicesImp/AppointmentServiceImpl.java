@@ -5,9 +5,11 @@ import com.veterinary.veterinaryApp.Repositories.AppointmentRepository;
 import com.veterinary.veterinaryApp.models.Appointment;
 import com.veterinary.veterinaryApp.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired

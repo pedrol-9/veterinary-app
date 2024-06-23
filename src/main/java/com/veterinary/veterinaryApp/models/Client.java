@@ -2,6 +2,7 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,14 +24,14 @@ public class Client {
 
   boolean admin;
 
-  @OneToOne(mappedBy = "client")
+  @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
   private Account account;
 
-  @OneToMany(mappedBy = "owner")
-  private List<Pet> pets;
+  @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+  private List<Pet> pets = new ArrayList<>();
 
-  @OneToMany(mappedBy = "client")
-  private List<Appointment> appointments;
+  @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+  private List<Appointment> appointments = new ArrayList<>();
 
   // Constructores
   public Client() {
@@ -99,7 +100,7 @@ public class Client {
   }
 
   public void setAdmin(String email) {
-    this.admin = email.contains("@admin.com");
+    this.admin = email.contains("@vetadmin.com");
   }
 
   public void setAdmin(boolean admin) {
@@ -128,6 +129,17 @@ public class Client {
 
   public void setPets(List<Pet> pets) {
     this.pets = pets;
+  }
+
+  // Otros metodos
+  public void addAppointment(Appointment appointment) {
+    this.appointments.add(appointment);
+    appointment.setClient(this);
+  }
+
+  public void addPet(Pet pet) {
+    pet.setOwner(this);
+    pets.add(pet);
   }
 
   @Override

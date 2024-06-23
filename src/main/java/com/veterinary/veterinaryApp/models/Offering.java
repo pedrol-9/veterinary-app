@@ -2,6 +2,7 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,7 @@ public class Offering {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
     private AnimalSize animalSize;
 
     private double price;
@@ -27,8 +29,8 @@ public class Offering {
     @Column(name="HoursOfService")
     private List<String> hoursOfService; // los horarios para determinado servicio
 
-    @OneToMany(mappedBy = "service")
-    private List<Appointment> appointments; // contiene los bloques horarios reservados
+    @OneToMany(mappedBy = "offering")
+    private List<Appointment> appointments = new ArrayList<>(); // contiene los bloques horarios reservados
 
     // CONSTRUCTORES
     public Offering() {
@@ -106,5 +108,11 @@ public class Offering {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    // Otros metodos
+    public void addAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
+        appointment.setOffering(this);
     }
 }

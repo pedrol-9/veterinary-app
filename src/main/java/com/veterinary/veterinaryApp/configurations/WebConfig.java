@@ -1,3 +1,4 @@
+/*
 package com.veterinary.veterinaryApp.configurations;
 
 import com.veterinary.veterinaryApp.filters.JwtRequestFilter;
@@ -61,3 +62,4 @@ public class WebConfig {
     }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.veterinary.veterinaryApp.controllers;
 
 import com.veterinary.veterinaryApp.DTOs.ClientDTO;
@@ -8,7 +9,7 @@ import com.veterinary.veterinaryApp.Repositories.ClientRepository;
 import com.veterinary.veterinaryApp.models.Account;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.serviceSecurity.JwtUtilService;
-import com.veterinary.veterinaryApp.serviceSecurity.UserDetailsServiceImplem;
+import com.veterinary.veterinaryApp.serviceSecurity.UserDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-
 import static com.veterinary.veterinaryApp.utils.Utils.fiveDigits;
 
 @RestController
@@ -36,7 +35,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserDetailsServiceImplem userDetailsServiceImplem;
+    private UserDetailsServiceImp userDetailsServiceImp;
 
     @Autowired
     private JwtUtilService jwtUtilService;
@@ -52,7 +51,7 @@ public class AuthController {
     public ResponseEntity<?> login (@RequestBody LoginDTO loginDTO){
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.email(),loginDTO.password())); // usa un autenticaction provaider que genera un usedetails usando el userdetails que yo le paso
-            final UserDetails userDetails = userDetailsServiceImplem.loadUserByUsername(loginDTO.email()); // carga los detalles de usuario
+            final UserDetails userDetails = userDetailsServiceImp.loadUserByUsername(loginDTO.email()); // carga los detalles de usuario
             final String jwt = jwtUtilService.generateToken(userDetails); //genera el token
             return ResponseEntity.ok(jwt); // respuesta ok y esperamos que nos devuelva el token
         }catch (Exception e){
@@ -116,3 +115,4 @@ public class AuthController {
 
 
 }
+*/
