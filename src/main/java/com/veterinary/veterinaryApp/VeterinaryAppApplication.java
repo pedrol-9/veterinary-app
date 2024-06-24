@@ -104,17 +104,6 @@ public class VeterinaryAppApplication {
 			veterinarianRepository.save(vet3);
 			veterinarianRepository.save(vet4);
 
-			// creación de Servicios
-			Offering dogShower = new Offering("Dog Shower", "Experience our comprehensive Dog Shower Service, tailored to pamper dogs of all sizes.", AnimalSize.NONE, 1000, new ArrayList<>(List.of("LUNES", "MIERCOLES", "VIERNES")), new ArrayList<>(List.of("8:00 AM", "10:00 AM")));
-
-			Offering dogWalk = new Offering("Dog Walk", "Enjoy peace of mind with our professional Dog Walk Service, designed to keep your furry friend happy and active.", AnimalSize.NONE, 500, new ArrayList<>(List.of("LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO")), new ArrayList<>(List.of("7:00 AM", "7:00 PM")));
-
-			// Asignación de Servicio a Cita
-			dogShower.addAppointment(appointment1);
-
-			offeringRepository.save(dogShower);
-			offeringRepository.save(dogWalk);
-
 			// Creación de Invoice
 			Invoice invoice1 = new Invoice(LocalDateTime.now(), 1000, InvoiceStatus.CHARGED);
 

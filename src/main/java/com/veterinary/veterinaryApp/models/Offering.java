@@ -16,9 +16,6 @@ public class Offering {
 
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    private AnimalSize animalSize;
-
     private double price;
 
     @ElementCollection
@@ -36,10 +33,9 @@ public class Offering {
     public Offering() {
     }
 
-    public Offering(String name, String description, AnimalSize animalSize, double price, List<String> daysOfService, List<String> hoursOfService) {
+    public Offering(String name, String description, double price, List<String> daysOfService, List<String> hoursOfService) {
         this.name = name;
         this.description = description;
-        this.animalSize = animalSize;
         this.price = price;
         this.daysOfService = daysOfService;
         this.hoursOfService = hoursOfService;
