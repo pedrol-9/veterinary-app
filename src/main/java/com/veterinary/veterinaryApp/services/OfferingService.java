@@ -13,5 +13,5 @@ public interface OfferingService {
 
     Offering getOfferingById(long id);
 
-    List<Offering> findAllByIds(List<Long> ids);
+    void save(Offering offering);
 }
