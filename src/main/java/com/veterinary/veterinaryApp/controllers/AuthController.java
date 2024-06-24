@@ -46,7 +46,6 @@ public class AuthController {
     @Autowired
     private AccountRepository accountRepository;
 
-
     @PostMapping("/login")
     public ResponseEntity<?> login (@RequestBody LoginDTO loginDTO){
         try{

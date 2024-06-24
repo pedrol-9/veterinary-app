@@ -5,6 +5,7 @@ import com.veterinary.veterinaryApp.models.AppointmentStatus;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Pet;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ClientDTO {
@@ -23,11 +24,14 @@ public class ClientDTO {
 
   private boolean admin;
 
-  private List<Pet> pets;
+  private List<String> pets;
 
-  private List<Appointment> confirmedAppointments;
+  private List<LocalDateTime> confirmedAppointments;
 
   public ClientDTO(Client client) {
+
+    List<Appointment> appointmentsAux = client.getAppointments().stream().filter(app -> app.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)).toList(); // variable auxiliar para obtener las citas confirmadas y sacar solo un array de fechas
+
     this.id = client.getId();
     this.clientName = client.getFirstName() + " " + client.getLastName();
     this.email = client.getEmail();
@@ -35,8 +39,9 @@ public class ClientDTO {
     this.accountNumber = client.getAccount().getNumber();
     this.phone = client.getPhone();
     this.admin = client.isAdmin();
-    this.pets = client.getPets();
-    this.confirmedAppointments = client.getAppointments().stream().filter(app -> app.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)).toList();
+    this.pets = client.getPets().stream().map(Pet::getPetName).toList();
+    this.confirmedAppointments = appointmentsAux.stream().map(Appointment::getDateTime).toList();
+
   }
 
   public Long getId() {
@@ -63,11 +68,11 @@ public class ClientDTO {
     return admin;
   }
 
-  public List<Pet> getPets() {
+  public List<String> getPets() {
     return pets;
   }
 
-  public List<Appointment> getConfirmedAppointments() {
+  public List<LocalDateTime> getConfirmedAppointments() {
     return confirmedAppointments;
   }
 

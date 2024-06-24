@@ -1,5 +1,6 @@
 package com.veterinary.veterinaryApp.controllers;
 
+import com.veterinary.veterinaryApp.DTOs.OfferingDTO;
 import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.services.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/veterinary")
-public class ServiceController {
+@RequestMapping("/api-veterinary/offerings")
+public class OfferingController {
 
     @Autowired
     OfferingService offeringService;
-    @GetMapping("/offerings")
+
+    @GetMapping("/")
     public ResponseEntity<?> getAllOfferings() {
-       List<Offering> offerings = offeringService.getAllOfferings();
+
+       List<OfferingDTO> offerings = offeringService.getAllOfferingsDTO();
 
         if (offerings.isEmpty()) {
             return new ResponseEntity<>("No offerings found.", HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(offerings, HttpStatus.OK);
+
     }
 
     @GetMapping("/offerings/{id}")

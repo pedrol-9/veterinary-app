@@ -4,20 +4,23 @@ import com.veterinary.veterinaryApp.DTOs.ClientDTO;
 import com.veterinary.veterinaryApp.Repositories.ClientRepository;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.services.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class ClientServiceImpl implements ClientService {
 
+    @Autowired
     ClientRepository clientRepository;
 
-
     @Override
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
+    public List<ClientDTO> getAllClients() {
+        return clientRepository.findAll().stream().map(ClientDTO::new).collect(toList());
     }
 
     @Override
@@ -25,10 +28,10 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public List<ClientDTO> getAllClientsDto(Client client) {
-        return getAllClients().stream().map(ClientDTO::new).collect(Collectors.toList());
-    }
+   /* @Override
+    public List<ClientDTO> getAllClientsDto() {
+        return getAllClients().stream().map(ClientDTO::new).collect(toList());
+    }*/
 
     @Override
     public Client getClientByEmail(String email) {

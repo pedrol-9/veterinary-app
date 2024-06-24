@@ -12,22 +12,24 @@ public class AppointmentDTO {
     private LocalDateTime dateTime;
     private LocalDateTime creationDatetime;
     private String notes;
-    private Veterinarian veterinarian;
+    private String veterinarian;
     private String clientName;
     private String petName;
     private String offeringName;
     private InvoiceDTO invoice;
 
     public AppointmentDTO(Appointment appointment) {
+
         this.id = appointment.getId();
         this.dateTime = appointment.getDateTime();
         this.notes = appointment.getNotes();
         this.creationDatetime = appointment.getCreationDatetime();
-        this.veterinarian = appointment.getVeterinarian();
+        this.veterinarian = appointment.getVeterinarian().getName();
         this.clientName = appointment.getClient().getFirstName() + " " + appointment.getClient().getLastName();
         this.petName = appointment.getPet().getPetName();
         this.offeringName = appointment.getOffering().getName();
         this.invoice = new InvoiceDTO(appointment.getInvoice());
+
     }
 
     public Long getId() {
@@ -46,7 +48,7 @@ public class AppointmentDTO {
         return notes;
     }
 
-    public Veterinarian getVeterinarian() {
+    public String getVeterinarian() {
         return veterinarian;
     }
 

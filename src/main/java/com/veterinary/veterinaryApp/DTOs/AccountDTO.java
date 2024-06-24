@@ -15,14 +15,18 @@ public class AccountDTO {
 
     private String clientName;
 
-    private List<Invoice> invoices;
+    private List<InvoiceDTO> chargedInvoices;
 
     public AccountDTO(Account account) {
+
+        List<Invoice> invoicesAux = account.getInvoices().stream().filter(i -> i.getStatus().name().equals("CHARGED")).toList(); // para que solo aparezcan las facturas cargadas a las cuentas, no las facturas pendientes.
+
         this.id = account.getId();
         this.balance = account.getBalance();
-        this.clientId = account.getClient().getId(); // para que se muestre el id del cliente en el json
-        this.clientName = account.getClient().getFirstName() + " " + account.getClient().getLastName(); // para que se muestre el nombre del cliente en el json
-        this.invoices = account.getInvoices();
+        this.clientId = account.getClient().getId();
+        this.clientName = account.getClient().getFirstName() + " " + account.getClient().getLastName();
+        this.chargedInvoices = invoicesAux.stream().map(InvoiceDTO::new).toList();
+
     }
 
     public Long getId() {
@@ -41,7 +45,7 @@ public class AccountDTO {
         return clientName;
     }
 
-    public List<Invoice> getInvoices() {
-        return invoices;
+    public List<InvoiceDTO> getChargedInvoices() {
+        return chargedInvoices;
     }
 }
