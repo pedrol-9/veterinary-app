@@ -16,7 +16,7 @@ public class OfferingDTO {
 
     private List<String> animalSize;
 
-    private List<Double> prices;
+    private double price;
 
 //    private List<String> daysOfService;
 //
@@ -28,8 +28,7 @@ public class OfferingDTO {
         this.id = offering.getId();
         this.name = offering.getName();
         this.description = offering.getDescription();
-        this.animalSize = offering.getAnimalSizes();
-        this.prices = offering.getPrice();
+        this.price = offering.getPrice();
 //        this.daysOfService = offering.getDaysOfService(); // no sé si sea necesario
 //        this.hoursOfService = offering.getHoursOfService(); // no sé si sea necesario
         this.appointments = offering.getAppointments().stream().map(Appointment::getDateTime).toList(); // tengo mis dudas, creeería que hay que pasar los objetos completos de appointments para
@@ -47,8 +46,8 @@ public class OfferingDTO {
         return description;
     }
 
-    public List<Double> getPrice() {
-        return prices;
+    public double getPrice() {
+        return price;
     }
   
     public List<String> getAnimalSize() {
