@@ -13,11 +13,13 @@ public class Pet {
 
     private String petName;
 
-    private int petAge;
+    private String petAge;
 
     private String specie;
 
     private String breed;
+
+    private AnimalSize animalSize;
 
     private String specialTreatment;
 
@@ -29,7 +31,7 @@ public class Pet {
     private List<Appointment> appointments = new ArrayList<>();
 
     // contructores
-    public Pet(String petName, int petAge, String specie, String breed, String specialTreatment) {
+    public Pet(String petName, String petAge, String specie, String breed, String specialTreatment) {
         this.petName = petName;
         this.petAge = petAge;
         this.specie = specie;
@@ -56,11 +58,11 @@ public class Pet {
         this.petName = petName;
     }
 
-    public int getPetAge() {
+    public String getPetAge() {
         return petAge;
     }
 
-    public void setPetAge(int petAge) {
+    public void setPetAge(String petAge) {
         this.petAge = petAge;
     }
 
@@ -78,6 +80,18 @@ public class Pet {
 
     public void setBreed(String breed) {
         this.breed = breed;
+    }
+
+    public AnimalSize getAnimalSize() {
+        return animalSize;
+    }
+
+    public void setAnimalSize(AnimalSize animalSize) {
+        this.animalSize = animalSize;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     public Client getOwner() {

@@ -1,6 +1,5 @@
 package com.veterinary.veterinaryApp.DTOs;
 
-import com.veterinary.veterinaryApp.models.AnimalSize;
 import com.veterinary.veterinaryApp.models.Appointment;
 import com.veterinary.veterinaryApp.models.Offering;
 
@@ -15,9 +14,9 @@ public class OfferingDTO {
 
     private String description;
 
-    private AnimalSize animalSize;
+    private List<String> animalSize;
 
-    private double price;
+    private List<Double> prices;
 
 //    private List<String> daysOfService;
 //
@@ -29,8 +28,8 @@ public class OfferingDTO {
         this.id = offering.getId();
         this.name = offering.getName();
         this.description = offering.getDescription();
-        this.animalSize = offering.getAnimalSize();
-        this.price = offering.getPrice();
+        this.animalSize = offering.getAnimalSizes();
+        this.prices = offering.getPrice();
 //        this.daysOfService = offering.getDaysOfService(); // no sé si sea necesario
 //        this.hoursOfService = offering.getHoursOfService(); // no sé si sea necesario
         this.appointments = offering.getAppointments().stream().map(Appointment::getDateTime).toList(); // tengo mis dudas, creeería que hay que pasar los objetos completos de appointments para
@@ -48,11 +47,11 @@ public class OfferingDTO {
         return description;
     }
 
-    public double getPrice() {
-        return price;
+    public List<Double> getPrice() {
+        return prices;
     }
   
-    public AnimalSize getAnimalSize() {
+    public List<String> getAnimalSize() {
         return animalSize;
     }
 

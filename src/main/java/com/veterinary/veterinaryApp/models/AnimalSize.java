@@ -1,5 +1,5 @@
 package com.veterinary.veterinaryApp.models;
 
 public enum AnimalSize {
-  SMALL, MEDIUM, LARGE, NONE
+  SMALL, MEDIUM, LARGE, BIGGER
 }
