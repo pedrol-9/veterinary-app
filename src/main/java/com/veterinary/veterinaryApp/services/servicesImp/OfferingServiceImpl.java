@@ -31,7 +31,7 @@ public class OfferingServiceImpl implements OfferingService {
     }
 
     @Override
-    public List<Offering> findAllByIds(List<Long> ids) {
-        return List.of();
+    public void save(Offering offering) {
+        offeringRepository.save(offering);
     }
 }
