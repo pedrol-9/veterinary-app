@@ -19,60 +19,23 @@ import java.util.List;
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
 
-    @Autowired
-    private InvoiceRepository invoiceRepository;
-
-    @Autowired
-    private OfferingService offeringService;
-
-
     @Override
     public List<InvoiceDTO> getAllInvoices() {
-        return invoiceRepository.findAll().stream().map(InvoiceDTO::new).toList();
+        return List.of();
     }
 
     @Override
     public Invoice getInvoiceById(long id) {
-        return invoiceRepository.findById(id).orElse(null);
+        return null;
     }
 
     @Override
-    public ResponseEntity<?> createInvoice(Client client, List<Long> offeringsIds) {
-        //TODO: TENDRIA QUE TENER LA CUENTA DEL CLIENTE POR EL ID
-        //List<Account> accounts = accountService.getAccountById(accountId);
-
-        List<Offering> offerings = offeringService.findAllByIds(offeringsIds);
-
-        if (offerings.isEmpty()) {
-            return new ResponseEntity<>("No offerings found.", HttpStatus.NOT_FOUND);
-        }
-
-        double totalAmount = calculateTotalAmount(offerings);
-
-        //CREA  LA FACTURA
-        Invoice invoice = new Invoice();
-        //invoice.setAccount(account);
-        // invoice.setOfferings(offerings);
-        invoice.setIssuedOn(LocalDateTime.now());
-        invoice.setAmount(totalAmount);
-        invoice.setStatus(InvoiceStatus.PAID); //TODO: SE PUEDE ACTUALIZAR A TRUE CUANDO SE PAGUE
-
-        saveInvoice(invoice);
-        //metodo add para poder añadir la factura al cliente o a la cuenta
-
-        return new ResponseEntity<>(invoice, HttpStatus.OK);
+    public ResponseEntity<?> createInvoice(Client client, List<Long> serviceIds) {
+        return null;
     }
 
     @Override
     public void saveInvoice(Invoice invoice) {
-        invoiceRepository.save(invoice);
-    }
 
-    //METODO PROPIO
-    private double calculateTotalAmount(List<Offering> offerings) {
-        return offerings
-                .stream()
-                .mapToDouble(Offering ::getPrice)
-                .sum();
     }
 }

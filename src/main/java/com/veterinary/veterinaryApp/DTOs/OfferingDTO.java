@@ -29,7 +29,6 @@ public class OfferingDTO {
         this.id = offering.getId();
         this.name = offering.getName();
         this.description = offering.getDescription();
-        this.animalSize = offering.getAnimalSize();
         this.price = offering.getPrice();
 //        this.daysOfService = offering.getDaysOfService(); // no sé si sea necesario
 //        this.hoursOfService = offering.getHoursOfService(); // no sé si sea necesario

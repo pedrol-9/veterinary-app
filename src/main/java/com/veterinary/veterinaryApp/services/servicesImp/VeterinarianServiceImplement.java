@@ -23,8 +23,9 @@ public class VeterinarianServiceImplement implements VeterinarianService {
 
     @Override
     public List<VeterinarianDTO> getAllVeterinariansDTO() {
-        return getAllVeterinarians().stream().filter(veterinarian -> veterinarian.getId().equals(id)).findFirst().orElse(null);
+        return List.of();
     }
+
 
     @Override
     public void saveVeterinarian(Veterinarian veterinarian) {

@@ -66,14 +66,6 @@ public class Offering {
         this.description = description;
     }
 
-    public AnimalSize getAnimalSize() {
-        return animalSize;
-    }
-
-    public void setAnimalSize(AnimalSize animalSize) {
-        this.animalSize = animalSize;
-    }
-
     public double getPrice() {
         return price;
     }
