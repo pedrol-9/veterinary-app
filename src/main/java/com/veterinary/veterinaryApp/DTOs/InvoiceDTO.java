@@ -22,7 +22,7 @@ public class InvoiceDTO {
     public InvoiceDTO(Invoice invoice) {
         this.id = invoice.getId();
         this.issuedOn = invoice.getIssuedOn();
-        this.amount = invoice.getAppointment().getOffering().getPrice();
+        // this.amount = invoice.getAppointment().getOffering().getPrice();
         this.status = invoice.getStatus();
         this.destinationAccount = invoice.getAccount().getNumber();
         this.billedService = invoice.getAppointment().getOffering().getName(); // nombre del servicio
