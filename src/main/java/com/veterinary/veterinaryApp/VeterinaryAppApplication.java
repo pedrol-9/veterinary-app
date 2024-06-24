@@ -60,12 +60,12 @@ public class VeterinaryAppApplication {
 			accountRepository.save(account4);
 			
 			// Creación de Pets
-			Pet pet1 = new Pet("Pulguita", 5, "Perro", "Chihuahua", "healthy dog");
-			Pet pet2 = new Pet("Luna", 2, "Gato", "Persa", "healthy cat");
-			Pet pet3 = new Pet("Pelusa", 3, "Gato", "Siames", "angry cat, need sedation");
-			Pet pet4 = new Pet("Coco", 1, "Perro", "Pastor Aleman", "blind dog");
-			Pet pet5 = new Pet("Tomate", 6, "Perro", "Pastor Aleman", "healthy dog");
-			Pet pet6 = new Pet("Firulais", 15, "Perro", "Golden Retriever", "very old dog");
+			Pet pet1 = new Pet("Pulguita", "5 años", "Perro", "Chihuahua", "healthy dog");
+			Pet pet2 = new Pet("Luna", "2 años", "Gato", "Persa", "healthy cat");
+			Pet pet3 = new Pet("Pelusa", "3 meses", "Gato", "Siames", "angry cat, need sedation");
+			Pet pet4 = new Pet("Coco", "1 año", "Perro", "Pastor Aleman", "blind dog");
+			Pet pet5 = new Pet("Tomate", "6 meses", "Perro", "Pastor Aleman", "healthy dog");
+			Pet pet6 = new Pet("Firulais", "15 años", "Perro", "Golden Retriever", "very old dog");
 
 			userAdmin.addPet(pet1);
 			lucas.addPet(pet2);
@@ -105,9 +105,9 @@ public class VeterinaryAppApplication {
 			veterinarianRepository.save(vet4);
 
 			// creación de Servicios
-			Offering dogShower = new Offering("Dog Shower", "Experience our comprehensive Dog Shower Service, tailored to pamper dogs of all sizes.", AnimalSize.NONE, 1000, new ArrayList<>(List.of("LUNES", "MIERCOLES", "VIERNES")), new ArrayList<>(List.of("8:00 AM", "10:00 AM")));
+			Offering dogShower = new Offering("Dog Shower", "Experience our comprehensive Dog Shower Service, tailored to pamper dogs of all sizes.", 150.0, new ArrayList<>(List.of("LUNES", "MIERCOLES", "VIERNES")), new ArrayList<>(List.of("8:00 AM", "10:00 AM")));
 
-			Offering dogWalk = new Offering("Dog Walk", "Enjoy peace of mind with our professional Dog Walk Service, designed to keep your furry friend happy and active.", AnimalSize.NONE, 500, new ArrayList<>(List.of("LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO")), new ArrayList<>(List.of("7:00 AM", "7:00 PM")));
+			Offering dogWalk = new Offering("Dog Walk", "Enjoy peace of mind with our professional Dog Walk Service, designed to keep your furry friend happy and active.",  15.0, new ArrayList<>(List.of("LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO")), new ArrayList<>(List.of("7:00 AM", "7:00 PM")));
 
 			// Asignación de Servicio a Cita
 			dogShower.addAppointment(appointment1);
