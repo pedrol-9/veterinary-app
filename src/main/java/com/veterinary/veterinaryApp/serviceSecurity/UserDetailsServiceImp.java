@@ -1,4 +1,3 @@
-/*
 package com.veterinary.veterinaryApp.serviceSecurity;
 
 import com.veterinary.veterinaryApp.Repositories.ClientRepository;
@@ -18,6 +17,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         Client client = clientRepository.findByEmail(username);
 
         if (client == null){
@@ -38,4 +38,3 @@ public class UserDetailsServiceImp implements UserDetailsService {
                 .build();
     }
 }
-*/

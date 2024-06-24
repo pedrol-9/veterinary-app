@@ -1,4 +1,3 @@
-/*
 package com.veterinary.veterinaryApp.configurations;
 
 import com.veterinary.veterinaryApp.filters.JwtRequestFilter;
@@ -27,39 +26,41 @@ public class WebConfig {
     private CorsConfigurationSource corsConfigurationSource;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{ //Crea la seguridad por nosotros
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 
         httpSecurity
-                .cors(cors -> cors.configurationSource(corsConfigurationSource)) // recibimos la configuracion de cors que hicimos previamente
-                .csrf(AbstractHttpConfigurer::disable) //cros site request forshare impide ataques de formulario, genera un token unico a cada formulario que tenemos en nuestra aplicacion
-                .httpBasic(AbstractHttpConfigurer::disable) // Autenticacion basica que nos provee Spring Security pero no es segura por que las credenciales viajan sin cifrar
-                .formLogin(AbstractHttpConfigurer::disable) //no usamos formulario de login
+                .cors(cors -> cors.configurationSource(corsConfigurationSource))
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
 
                 .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(
-                        HeadersConfigurer.FrameOptionsConfig::disable)) // Se desabilita para poder consumir apis de terceros en este caso el h2Console que puede intentar cargarse como si fuera un iframe
+                        HeadersConfigurer.FrameOptionsConfig::disable))
 
                 .authorizeHttpRequests(authorize ->
                         authorize
-                                .requestMatchers("/api/auth/login","/api/auth/register").permitAll()
-                                .requestMatchers("/api/accounts", "/api/clients", "/api/Service", "/api/Invoice" ).hasAnyRole("CLIENT", "ADMIN")
-                                .requestMatchers("/api/accounts/**", "/api/clients/**", "/api/Service/**", "/api/Invoice/**" ).hasRole("ADMIN")
+                                .requestMatchers("/api-veterinary/login", "/api-veterinary/register", "/h2-console/**").permitAll()
+
+                                .requestMatchers( "/api-veterinary/current", "/api-veterinary/offerings/", "/api-veterinary/invoices/current", "/api-veterinary/pets/current", "/api-veterinary/appointments/current", "/api-veterinary/veterinarians/").hasRole("CLIENT")
+
+                                .requestMatchers("/api-veterinary/**" ).hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
 
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class) // agregamos el jwtRequestFilter antes del filter que tendriamos por defecto
-                .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Desabilitamos el uso de sesiones, por que lo manejaremos con autencicacion atravez de token
-                ); //STATELESS POR QUE NO LA UTILIZAREMOS
-        return httpSecurity.build(); // Construimos la configuracion de la cadena de seguridad
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
+        return httpSecurity.build();
     }
+
     @Bean
-    public PasswordEncoder passwordEncoder(){ // sirve para encritar las contraseñas
+    public PasswordEncoder passwordEncoder(){
         return  new BCryptPasswordEncoder();
     }
 
-    @Bean//autenticamos a los usurios una vez logeados
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception{
         return authenticationConfiguration.getAuthenticationManager();
     }
 
 }
-*/
