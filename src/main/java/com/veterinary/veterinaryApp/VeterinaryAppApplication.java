@@ -38,7 +38,6 @@ public class VeterinaryAppApplication {
 			clientRepository.save(pedro);
 			clientRepository.save(leonel);
 
-
 			// creacion de cuentas
 			Account account1 = new Account(1000, fiveDigits());
 			Account account2 = new Account(1500, fiveDigits());

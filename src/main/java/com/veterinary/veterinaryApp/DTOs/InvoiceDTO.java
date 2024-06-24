@@ -22,6 +22,7 @@ public class InvoiceDTO {
     private String serviceDescription;
 
     public InvoiceDTO(Invoice invoice) {
+        this.id = invoice.getId();
         this.issuedOn = invoice.getIssuedOn();
         this.amount = invoice.getAppointment().getOffering().getPrice();
         this.status = invoice.getStatus();
