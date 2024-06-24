@@ -1,4 +1,3 @@
-/*
 package com.veterinary.veterinaryApp.controllers;
 
 import com.veterinary.veterinaryApp.DTOs.ClientDTO;
@@ -10,6 +9,7 @@ import com.veterinary.veterinaryApp.models.Account;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.serviceSecurity.JwtUtilService;
 import com.veterinary.veterinaryApp.serviceSecurity.UserDetailsServiceImp;
+import com.veterinary.veterinaryApp.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.veterinary.veterinaryApp.utils.Utils.fiveDigits;
 
 @RestController
+@RequestMapping("/api-veterinary")
 public class AuthController {
 
     @Autowired
@@ -41,7 +39,7 @@ public class AuthController {
     private JwtUtilService jwtUtilService;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
     private AccountRepository accountRepository;
@@ -49,26 +47,25 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login (@RequestBody LoginDTO loginDTO){
         try{
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.email(),loginDTO.password())); // usa un autenticaction provaider que genera un usedetails usando el userdetails que yo le paso
-            final UserDetails userDetails = userDetailsServiceImp.loadUserByUsername(loginDTO.email()); // carga los detalles de usuario
-            final String jwt = jwtUtilService.generateToken(userDetails); //genera el token
-            return ResponseEntity.ok(jwt); // respuesta ok y esperamos que nos devuelva el token
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.email(),loginDTO.password()));
+            final UserDetails userDetails = userDetailsServiceImp.loadUserByUsername(loginDTO.email());
+            final String jwt = jwtUtilService.generateToken(userDetails);
+            return ResponseEntity.ok(jwt);
         }catch (Exception e){
             return new ResponseEntity<>("Email or password invalid", HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping("/current") //obtener ese usuario logeado
-    public ResponseEntity<?> getClient (Authentication authentication){ // ese cliente ya logeado
-        Client client = clientRepository.findByEmail(authentication.getName()); // obtener el nombre de ese ususario ya logeado
+    @GetMapping("/current")
+    public ResponseEntity<?> getCurrentClient (Authentication authentication) {
+        Client client = clientService.getClientByEmail(authentication.getName());
         return ResponseEntity.ok(new ClientDTO(client));
     }
-
 
     @PostMapping("/register")
     public ResponseEntity<?> register (@RequestBody RegisterDTO registerDTO){
 
-        if (clientRepository.findByEmail(registerDTO.email()) != null) {
+        if (clientService.getClientByEmail(registerDTO.email()) != null) {
             return new ResponseEntity<>("Email is already registered", HttpStatus.FORBIDDEN);
         }
 
@@ -104,14 +101,9 @@ public class AuthController {
         Account account = new Account(0.0, number);
 //        account.setClient(client);
 //        client.addAccount(account);
-        clientRepository.save(client);
+        clientService.saveClient(client);
         accountRepository.save(account);
 
         return new ResponseEntity<>("Client created", HttpStatus.CREATED);
     }
-
-
-
-
 }
-*/

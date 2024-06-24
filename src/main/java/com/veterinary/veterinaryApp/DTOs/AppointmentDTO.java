@@ -12,6 +12,7 @@ public class AppointmentDTO {
     private LocalDateTime dateTime;
     private LocalDateTime creationDatetime;
     private String notes;
+    private AppointmentStatus appointmentStatus;
     private String veterinarian;
     private String clientName;
     private String petName;
@@ -23,6 +24,7 @@ public class AppointmentDTO {
         this.id = appointment.getId();
         this.dateTime = appointment.getDateTime();
         this.notes = appointment.getNotes();
+        this.appointmentStatus = appointment.getAppointmentStatus();
         this.creationDatetime = appointment.getCreationDatetime();
         this.veterinarian = appointment.getVeterinarian().getName();
         this.clientName = appointment.getClient().getFirstName() + " " + appointment.getClient().getLastName();
@@ -46,6 +48,10 @@ public class AppointmentDTO {
 
     public String getNotes() {
         return notes;
+    }
+
+    public AppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
     }
 
     public String getVeterinarian() {

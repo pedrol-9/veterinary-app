@@ -34,6 +34,8 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getAccountById(id));
     }
 
+    @GetMapping("/current")
+
     @PostMapping("/create")
     public ResponseEntity<?> createAccount(@RequestBody Account account) {
         accountService.saveAccount(account);

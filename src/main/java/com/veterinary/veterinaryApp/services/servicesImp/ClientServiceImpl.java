@@ -5,6 +5,7 @@ import com.veterinary.veterinaryApp.Repositories.ClientRepository;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,5 +42,11 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void saveClient(Client client) {
         clientRepository.save(client);
+    }
+
+    @Override
+    public Client getCurrentClient(Authentication authentication) {
+      String email = authentication.getName();
+      return getClientByEmail(email);
     }
 }

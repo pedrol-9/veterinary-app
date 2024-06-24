@@ -11,6 +11,8 @@ public class AccountDTO {
 
     private double balance;
 
+    private String accountNumber;
+
     private long clientId;
 
     private String clientName;
@@ -23,6 +25,7 @@ public class AccountDTO {
 
         this.id = account.getId();
         this.balance = account.getBalance();
+        this.accountNumber = account.getNumber();
         this.clientId = account.getClient().getId();
         this.clientName = account.getClient().getFirstName() + " " + account.getClient().getLastName();
         this.chargedInvoices = invoicesAux.stream().map(InvoiceDTO::new).toList();
@@ -35,6 +38,10 @@ public class AccountDTO {
 
     public double getBalance() {
         return balance;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
     public long getClientId() {

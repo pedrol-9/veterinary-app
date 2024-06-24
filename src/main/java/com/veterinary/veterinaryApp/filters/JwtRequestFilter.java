@@ -1,4 +1,3 @@
-/*
 package com.veterinary.veterinaryApp.filters;
 
 import com.veterinary.veterinaryApp.serviceSecurity.JwtUtilService;
@@ -56,4 +55,3 @@ public class JwtRequestFilter extends OncePerRequestFilter { // Lo que permite e
         }
     }
 }
-*/

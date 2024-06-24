@@ -16,31 +16,30 @@ public class ClientDTO {
 
   private String email;
 
-  private long account;
-
-  private String accountNumber;
+  private AccountDTO account;
 
   private int phone;
 
   private boolean admin;
 
-  private List<String> pets;
+  private List<PetDTO> pets;
 
-  private List<LocalDateTime> confirmedAppointments;
+  private List<AppointmentDTO> confirmedAppointments;
 
   public ClientDTO(Client client) {
 
     List<Appointment> appointmentsAux = client.getAppointments().stream().filter(app -> app.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)).toList(); // variable auxiliar para obtener las citas confirmadas y sacar solo un array de fechas
 
+    List<Pet> petsAux = client.getPets();
+
     this.id = client.getId();
     this.clientName = client.getFirstName() + " " + client.getLastName();
     this.email = client.getEmail();
-    this.account = client.getAccount().getId();
-    this.accountNumber = client.getAccount().getNumber();
     this.phone = client.getPhone();
     this.admin = client.isAdmin();
-    this.pets = client.getPets().stream().map(Pet::getPetName).toList();
-    this.confirmedAppointments = appointmentsAux.stream().map(Appointment::getDateTime).toList();
+    this.account = new AccountDTO(client.getAccount());
+    this.pets = petsAux.stream().map(PetDTO::new).toList();
+    this.confirmedAppointments = appointmentsAux.stream().map(AppointmentDTO::new).toList();
 
   }
 
@@ -56,7 +55,7 @@ public class ClientDTO {
     return email;
   }
 
-  public long getAccount() {
+  public AccountDTO getAccount() {
     return account;
   }
 
@@ -68,15 +67,11 @@ public class ClientDTO {
     return admin;
   }
 
-  public List<String> getPets() {
+  public List<PetDTO> getPets() {
     return pets;
   }
 
-  public List<LocalDateTime> getConfirmedAppointments() {
+  public List<AppointmentDTO> getConfirmedAppointments() {
     return confirmedAppointments;
-  }
-
-  public String getAccountNumber() {
-    return accountNumber;
   }
 }
