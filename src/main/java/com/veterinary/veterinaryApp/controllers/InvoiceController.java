@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/veterinary")
+@RequestMapping("/api-veterinary/invoices")
 public class InvoiceController {
 
     @Autowired
     private InvoiceService invoiceService;
 
-    @GetMapping("/invoices")
+    @GetMapping("/")
     public ResponseEntity<?> getAllInvoices() {
-        List<Invoice> invoices = invoiceService.getAllInvoices();
+        List<InvoiceDTO> invoices = invoiceService.getAllInvoices();
 
         //SI NO HAY INVOICES
         if (invoices.isEmpty()) {
@@ -30,7 +30,7 @@ public class InvoiceController {
         return new ResponseEntity<>(invoices, HttpStatus.OK);
     }
 
-    @GetMapping("/invoices/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getInvoiceById(@PathVariable long id) {
         Invoice invoice = invoiceService.getInvoiceById(id);
 

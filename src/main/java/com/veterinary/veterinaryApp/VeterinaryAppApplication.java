@@ -2,10 +2,12 @@ package com.veterinary.veterinaryApp;
 
 import com.veterinary.veterinaryApp.Repositories.*;
 import com.veterinary.veterinaryApp.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,6 +18,9 @@ import static com.veterinary.veterinaryApp.utils.Utils.fiveDigits;
 @SpringBootApplication
 public class VeterinaryAppApplication {
 
+		@Autowired
+		PasswordEncoder passwordEncoder;
+
 	public static void main(String[] args) {
 		SpringApplication.run(VeterinaryAppApplication.class, args);
 	}
@@ -25,19 +30,18 @@ public class VeterinaryAppApplication {
 		return (args) -> {
 
 			// creacion de usuarios
-			Client userAdmin = new Client("Jelena", "Palavecino", "jelena@vetadmin.com", "123", 31334177);
+			Client userAdmin = new Client("Jelena", "Palavecino", "jelena@vetadmin.com", passwordEncoder.encode("123"), 31334177);
 
-			Client lucas = new Client("Lucas", "Madrigal", "lucas@mail.com", "123", 51258927);
+			Client lucas = new Client("Lucas", "Madrigal", "lucas@mail.com", passwordEncoder.encode("123"), 51258927);
 
-			Client pedro = new Client("Pedro", "Sanabria", "pedro@sanabria.com", "123", 51258927);
+			Client pedro = new Client("Pedro", "Sanabria", "pedro@sanabria.com", passwordEncoder.encode("123"), 51258927);
 
-			Client leonel = new Client("Leonel", "Borjas", "leonel@borjas.com", "123", 51258927);
+			Client leonel = new Client("Leonel", "Borjas", "leonel@borjas.com", passwordEncoder.encode("123"), 51258927);
 
 			clientRepository.save(userAdmin);
 			clientRepository.save(lucas);
 			clientRepository.save(pedro);
 			clientRepository.save(leonel);
-
 
 			// creacion de cuentas
 			Account account1 = new Account(1000, fiveDigits());
@@ -80,6 +84,9 @@ public class VeterinaryAppApplication {
 			// creación de Appointment
 			Appointment appointment1 = new Appointment(LocalDateTime.now().plusDays(3), LocalDateTime.now(), "Please get my dog a good shower, I´ll pick him up at noon", AppointmentStatus.CONFIRMED);
 
+			// asignación de Cita a cliente
+			appointment1.setClient(lucas);
+
 			// Creación de Veterinarios
 			Veterinarian vet1 = new Veterinarian("Brayan", "Veterinary Dermatology", "Calle 1 # 2 - 3", 31334177);
 
@@ -109,12 +116,12 @@ public class VeterinaryAppApplication {
 			offeringRepository.save(dogWalk);
 
 			// Creación de Invoice
-			Invoice invoice1 = new Invoice(LocalDateTime.now(), 1000, InvoiceStatus.PENDING);
+			Invoice invoice1 = new Invoice(LocalDateTime.now(), 1000, InvoiceStatus.CHARGED);
 
 			// Asignar invoice a la cita
 			invoice1.setAppointment(appointment1);
 			appointment1.setInvoice(invoice1);
-			invoice1.setAccount(account1);
+			invoice1.setAccount(account2);
 
 			invoiceRepository.save(invoice1);
 

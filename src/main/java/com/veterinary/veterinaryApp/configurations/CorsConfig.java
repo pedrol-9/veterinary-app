@@ -1,4 +1,3 @@
-/*
 package com.veterinary.veterinaryApp.configurations;
 
 import org.springframework.context.annotation.Bean;
@@ -16,14 +15,13 @@ public class CorsConfig { // Cros origin resorcuse sherin restringe las paginas 
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8080"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE")); // setiamos que metodosgit
-        configuration.setAllowedHeaders(List.of("*")); //Lista de todos los headers que nos puedan mandar
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); //Fuente de configuraciones para las rutas
-        source.registerCorsConfiguration("/**", configuration); // que rutas de nuestra app pueden pegarle
-        return source; //retorna esto para que se apliquen estas configuraciones en los  cors
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:8080/"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(List.of("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 
 }
-*/

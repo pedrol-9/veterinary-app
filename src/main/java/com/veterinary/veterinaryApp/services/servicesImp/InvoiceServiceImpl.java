@@ -1,5 +1,6 @@
 package com.veterinary.veterinaryApp.services.servicesImp;
 
+import com.veterinary.veterinaryApp.DTOs.InvoiceDTO;
 import com.veterinary.veterinaryApp.Repositories.InvoiceRepository;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Invoice;
@@ -26,8 +27,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 
     @Override
-    public List<Invoice> getAllInvoices() {
-        return invoiceRepository.findAll();
+    public List<InvoiceDTO> getAllInvoices() {
+        return invoiceRepository.findAll().stream().map(InvoiceDTO::new).toList();
     }
 
     @Override
@@ -39,7 +40,6 @@ public class InvoiceServiceImpl implements InvoiceService {
     public ResponseEntity<?> createInvoice(Client client, List<Long> offeringsIds) {
         //TODO: TENDRIA QUE TENER LA CUENTA DEL CLIENTE POR EL ID
         //List<Account> accounts = accountService.getAccountById(accountId);
-
 
         List<Offering> offerings = offeringService.findAllByIds(offeringsIds);
 

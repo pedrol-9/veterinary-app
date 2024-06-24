@@ -19,15 +19,13 @@ public class InvoiceDTO {
 
     private String billedService;
 
-    private String serviceDescription;
-
     public InvoiceDTO(Invoice invoice) {
+        this.id = invoice.getId();
         this.issuedOn = invoice.getIssuedOn();
         this.amount = invoice.getAppointment().getOffering().getPrice();
         this.status = invoice.getStatus();
         this.destinationAccount = invoice.getAccount().getNumber();
-        this.billedService = invoice.getAppointment().getOffering().getName();
-        this.serviceDescription = invoice.getAppointment().getOffering().getDescription();
+        this.billedService = invoice.getAppointment().getOffering().getName(); // nombre del servicio
     }
 
     // Getters
@@ -43,15 +41,19 @@ public class InvoiceDTO {
         return amount;
     }
 
+    public LocalDateTime getIssuedOn() {
+        return issuedOn;
+    }
+
+    public InvoiceStatus getStatus() {
+        return status;
+    }
+
     public String getDestinationAccount() {
         return destinationAccount;
     }
 
     public String getBilledService() {
         return billedService;
-    }
-
-    public String getServiceDescription() {
-        return serviceDescription;
     }
 }

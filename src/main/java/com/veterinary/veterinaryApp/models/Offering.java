@@ -115,4 +115,5 @@ public class Offering {
         this.appointments.add(appointment);
         appointment.setOffering(this);
     }
+
 }

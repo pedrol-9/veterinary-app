@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OfferingRepository extends JpaRepository<Offering, Long> {
+
+  Offering findById(long id);
+
 }
