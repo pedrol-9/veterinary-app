@@ -9,6 +9,7 @@ import com.veterinary.veterinaryApp.models.Account;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.serviceSecurity.JwtUtilService;
 import com.veterinary.veterinaryApp.serviceSecurity.UserDetailsServiceImp;
+import com.veterinary.veterinaryApp.services.AccountService;
 import com.veterinary.veterinaryApp.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +43,7 @@ public class AuthController {
     private ClientService clientService;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login (@RequestBody LoginDTO loginDTO){
@@ -81,7 +82,6 @@ public class AuthController {
         if (registerDTO.password().isBlank()){
             return new ResponseEntity<>("The password field must not be empty", HttpStatus.FORBIDDEN);
         }
-
         if (registerDTO.phone() == 0){
             return new ResponseEntity<>("The password field must not be empty", HttpStatus.FORBIDDEN);
         }
@@ -96,13 +96,13 @@ public class AuthController {
         String number;
         do {
             number = "N-" + fiveDigits();
-        } while (accountRepository.findByNumber(number) != null);
+        } while (accountService.getAccountByNumber(number) != null);
 
         Account account = new Account(0.0, number);
-//        account.setClient(client);
-//        client.addAccount(account);
+        account.setClient(client);
+        client.setAccount(account);
         clientService.saveClient(client);
-        accountRepository.save(account);
+        accountService.saveAccount(account);
 
         return new ResponseEntity<>("Client created", HttpStatus.CREATED);
     }

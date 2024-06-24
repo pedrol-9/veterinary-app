@@ -33,7 +33,7 @@ public class OfferingController {
 
     }
 
-    @GetMapping("/offerings/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getOfferingById(@PathVariable long id) {
         Offering offering = offeringService.getOfferingById(id);
 
@@ -41,6 +41,6 @@ public class OfferingController {
             return new ResponseEntity<>("No offering with this id was found.", HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(offering, HttpStatus.OK);
+        return new ResponseEntity<>(new OfferingDTO(offering), HttpStatus.OK);
     }
 }

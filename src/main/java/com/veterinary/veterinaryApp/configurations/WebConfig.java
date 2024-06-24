@@ -41,7 +41,7 @@ public class WebConfig {
                         authorize
                                 .requestMatchers("/api-veterinary/login", "/api-veterinary/register", "/h2-console/**").permitAll()
 
-                                .requestMatchers( "/api-veterinary/current", "/api-veterinary/offerings/", "/api-veterinary/invoices/current", "/api-veterinary/pets/current", "/api-veterinary/appointments/current", "/api-veterinary/veterinarians/").hasRole("CLIENT")
+                                .requestMatchers( "/api-veterinary/current", "/api-veterinary/offerings/", "/api-veterinary/offerings/{id}", "/api-veterinary/invoices/current", "/api-veterinary/pets/current", "/api-veterinary/appointments/current", "/api-veterinary/veterinarians/").hasRole("CLIENT")
 
                                 .requestMatchers("/api-veterinary/**" ).hasRole("ADMIN")
                                 .anyRequest().authenticated()

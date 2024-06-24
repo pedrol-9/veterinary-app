@@ -16,11 +16,11 @@ public class ClientDTO {
 
   private String email;
 
-  private AccountDTO account;
-
   private int phone;
 
   private boolean admin;
+
+  private AccountDTO account;
 
   private List<PetDTO> pets;
 
