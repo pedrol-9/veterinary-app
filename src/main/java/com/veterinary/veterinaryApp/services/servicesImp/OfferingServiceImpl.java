@@ -27,7 +27,7 @@ public class OfferingServiceImpl implements OfferingService {
 
     @Override
     public Offering getOfferingById(long id) {
-        return null;
+        return offeringRepository.findById(id);
     }
 
     @Override

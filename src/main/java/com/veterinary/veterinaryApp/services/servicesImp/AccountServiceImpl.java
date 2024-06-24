@@ -28,16 +28,16 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account getAccountById(Long id) {
-        return null;
+        return accountRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Account getAccountDTO(Account account) {
-        return null;
+    public void saveAccount(Account account) {
+        accountRepository.save(account);
     }
 
     @Override
-    public Account saveAccount(Account account) {
-        return null;
+    public Account getAccountByNumber(String accountNumber) {
+        return accountRepository.findByNumber(accountNumber);
     }
 }
