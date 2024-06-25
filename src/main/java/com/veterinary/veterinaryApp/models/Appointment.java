@@ -15,7 +15,7 @@ public class Appointment {
 
     private LocalDateTime creationDatetime;
 
-    private String notes;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus appointmentStatus; // SCHEDULED, CONFIRMED, CLOSED, cancelled;
@@ -44,10 +44,10 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(LocalDateTime dateTime, LocalDateTime creationDatetime, String notes, AppointmentStatus appointmentStatus) {
+    public Appointment(LocalDateTime dateTime, LocalDateTime creationDatetime, String description, AppointmentStatus appointmentStatus) {
         this.dateTime = dateTime;
         this.creationDatetime = creationDatetime;
-        this.notes = notes;
+        this.description = description;
         this.appointmentStatus = appointmentStatus;
     }
 
@@ -75,12 +75,12 @@ public class Appointment {
     this.creationDatetime = creationDatetime;
   }
 
-  public String getNotes() {
-    return notes;
+  public String getDescription() {
+    return description;
   }
 
-  public void setNotes(String notes) {
-    this.notes = notes;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   public Veterinarian getVeterinarian() {

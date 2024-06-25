@@ -4,11 +4,15 @@ import com.veterinary.veterinaryApp.DTOs.VeterinarianDTO;
 import com.veterinary.veterinaryApp.Repositories.VeterinarianRepository;
 import com.veterinary.veterinaryApp.models.Veterinarian;
 import com.veterinary.veterinaryApp.services.VeterinarianService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class VeterinarianServiceImplement implements VeterinarianService {
 
+    @Autowired
     VeterinarianRepository veterinarianRepository;
 
     @Override
@@ -17,7 +21,7 @@ public class VeterinarianServiceImplement implements VeterinarianService {
     }
 
     @Override
-    public Veterinarian findVeterinarianById(Long id) {
+    public Veterinarian getVeterinarianById(Long id) {
         return veterinarianRepository.findById(id).orElse(null);
     }
 
@@ -26,9 +30,14 @@ public class VeterinarianServiceImplement implements VeterinarianService {
         return List.of();
     }
 
-
     @Override
     public void saveVeterinarian(Veterinarian veterinarian) {
         veterinarianRepository.save(veterinarian);
+    }
+
+    @Override
+    public CyclicCounter vetCounter(long start, long end) {
+
+        return null;
     }
 }
