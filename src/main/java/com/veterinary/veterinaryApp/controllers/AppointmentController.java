@@ -1,11 +1,9 @@
 package com.veterinary.veterinaryApp.controllers;
 
 import com.veterinary.veterinaryApp.DTOs.AppointmentDTO;
-import com.veterinary.veterinaryApp.DTOs.VeterinarianDTO;
 import com.veterinary.veterinaryApp.DTOs.requestBodys.NewAppointmentDTO;
 import com.veterinary.veterinaryApp.models.*;
 import com.veterinary.veterinaryApp.services.*;
-import com.veterinary.veterinaryApp.utils.CyclicCounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/api-veterinary/appointments")
@@ -68,28 +67,42 @@ public class AppointmentController {
     // long petId para asociar una mascota a la cita y determinar el precio del servicio segun la mascota
     Long petId = newAppointmentDTO.petId();
     Pet pet = petService.getPetById(petId);
-
     if (pet == null) {
       return ResponseEntity.badRequest().body("Pet not found");
     }
 
-    // animal size para determinar el precio del servicio
-    AnimalSize petSize = pet.getAnimalSize();
-
-    // long offeringId para asociar un servicio a la cita
+    // Obtener servicio/oferta para la cita
     long offeringId = newAppointmentDTO.offeringId();
     Offering offering = offeringService.getOfferingById(offeringId);
-    double baseRate = offering.getPrice();
+    if (offering == null) {
+      return ResponseEntity.badRequest().body("Offering not found");
+    }
 
-    // método que calcula el precio del servicio segun el tamaño de la mascota
+    // Calcular el costo del servicio según el tamaño de la mascota
+    double baseRate = offering.getPrice();
+    AnimalSize petSize = pet.getAnimalSize();
     double amountToCharge = offeringService.calculatePrice(petSize, baseRate);
 
-    CyclicCounter vetCounter = new CyclicCounter(1, 3);
-    long vetId = vetCounter.next();
-    // Obtener el veterinario correspondiente al contador
-    Veterinarian veterinarian = veterinarianService.getVeterinarianById(vetId);
+    // Registro de depuración para asegurarse de que el precio se calcula correctamente
+    System.out.println("Base rate: " + baseRate);
+    System.out.println("Pet size: " + petSize);
+    System.out.println("Amount to charge: " + amountToCharge);
 
-    List<VeterinarianDTO> veterinarians = veterinarianService.getAllVeterinariansDTO();
+    // Obtener el veterinario asignado de manera cíclica
+    // Obtener todos los veterinarios disponibles
+    List<Veterinarian> veterinarians = veterinarianService.getAllVeterinarians();
+    if (veterinarians.isEmpty()) {
+      return ResponseEntity.badRequest().body("No veterinarians available");
+    }
+
+    // Seleccionar un veterinario aleatorio
+    Random random = new Random();
+    int randomIndex = random.nextInt(veterinarians.size());
+    Veterinarian veterinarian = veterinarians.get(randomIndex);
+
+    if (veterinarian == null) {
+      return ResponseEntity.badRequest().body("Veterinarian not found");
+    }
 
     // Crear Invoice para asociarla a esa cita
     Invoice newInvoice = new Invoice(dateTime, amountToCharge, InvoiceStatus.PENDING);
@@ -117,4 +130,13 @@ public class AppointmentController {
 
     return new ResponseEntity<>(newAppointmentObject, HttpStatus.CREATED);
   }
+
+  /*private double calculatePrice(AnimalSize petSize, double baseRate) {
+    return switch (petSize) {
+      case SMALL -> baseRate;
+      case MEDIUM -> baseRate * 1.25;
+      case LARGE -> baseRate * 1.5;
+      default -> baseRate * 1.75;
+    };
+  }*/
 }

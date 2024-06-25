@@ -19,6 +19,7 @@ public class Pet {
 
     private String breed;
 
+    @Enumerated(EnumType.STRING)
     private AnimalSize animalSize;
 
     private String specialTreatment;
@@ -31,11 +32,12 @@ public class Pet {
     private List<Appointment> appointments = new ArrayList<>();
 
     // contructores
-    public Pet(String petName, String petAge, String specie, String breed, String specialTreatment) {
+    public Pet(String petName, String petAge, String specie, String breed, AnimalSize animalSize, String specialTreatment) {
         this.petName = petName;
         this.petAge = petAge;
         this.specie = specie;
         this.breed = breed;
+        this.animalSize = animalSize;
         this.specialTreatment = specialTreatment;
     }
 

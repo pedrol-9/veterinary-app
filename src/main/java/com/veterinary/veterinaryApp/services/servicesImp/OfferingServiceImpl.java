@@ -38,18 +38,11 @@ public class OfferingServiceImpl implements OfferingService {
 
     @Override
     public double calculatePrice(AnimalSize petSize, double baseRate) {
-
-        double amountToCharge = 0.0;
-        if (petSize == AnimalSize.SMALL) {
-            amountToCharge = baseRate;
-        } else if (petSize == AnimalSize.MEDIUM) {
-            amountToCharge = baseRate * 1.25;
-        } else if (petSize == AnimalSize.LARGE) {
-            amountToCharge = baseRate * 1.5;
-        } else if (petSize == AnimalSize.BIGGER) {
-            amountToCharge = baseRate * 1.75;
-        }
-
-        return amountToCharge;
+      return switch (petSize.name()) {
+          case "SMALL" -> baseRate;
+          case "MEDIUM" -> baseRate * 1.25;
+          case "LARGE" -> baseRate * 1.5;
+          default -> baseRate * 1.75;
+        };
     }
 }
