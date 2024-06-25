@@ -1,5 +1,6 @@
 package com.veterinary.veterinaryApp.controllers;
 
+import com.veterinary.veterinaryApp.DTOs.VeterinarianDTO;
 import com.veterinary.veterinaryApp.DTOs.requestBodys.NewVeterinarianDTO;
 import com.veterinary.veterinaryApp.models.Veterinarian;
 import com.veterinary.veterinaryApp.services.VeterinarianService;
@@ -35,6 +36,10 @@ public class VeterinarianController {
 
     if (newVeterinarianDTO.phone().isBlank()) {
       return new ResponseEntity<>("phone must not be empty ", HttpStatus.BAD_REQUEST);
+    }
+
+    if (newVeterinarianDTO.email().isBlank()) {
+      return new ResponseEntity<>("email must not be empty ", HttpStatus.BAD_REQUEST);
     }
 
     Veterinarian newVeterinarian = veterinarianService.createVeterinarian(newVeterinarianDTO);

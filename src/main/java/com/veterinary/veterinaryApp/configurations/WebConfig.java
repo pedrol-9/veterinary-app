@@ -43,7 +43,7 @@ public class WebConfig {
 
                                 .requestMatchers( "/api-veterinary/current", "/api-veterinary/offerings/", "/api-veterinary/offerings/{id}", "/api-veterinary/invoices/current", "/api-veterinary/pets/current", "/api-veterinary/appointments/current", "/api-veterinary/veterinarians/", "/api-veterinary/appointments/new").hasAnyRole("CLIENT", "ADMIN")
 
-                                .requestMatchers("/api-veterinary/**", "/api-veterinarian/veterinarians/new" ).hasRole("ADMIN")
+                                .requestMatchers("/api-veterinary/**", "/api-veterinarian/veterinarians/new", "/api-veterinary/offerings/new" ).hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
 

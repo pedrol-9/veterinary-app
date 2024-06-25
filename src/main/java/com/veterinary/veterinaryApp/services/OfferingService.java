@@ -1,6 +1,7 @@
 package com.veterinary.veterinaryApp.services;
 
 import com.veterinary.veterinaryApp.DTOs.OfferingDTO;
+import com.veterinary.veterinaryApp.DTOs.requestBodys.NewOfferingDTO;
 import com.veterinary.veterinaryApp.models.AnimalSize;
 import com.veterinary.veterinaryApp.models.Offering;
 
