@@ -130,13 +130,4 @@ public class AppointmentController {
 
     return new ResponseEntity<>(newAppointmentObject, HttpStatus.CREATED);
   }
-
-  /*private double calculatePrice(AnimalSize petSize, double baseRate) {
-    return switch (petSize) {
-      case SMALL -> baseRate;
-      case MEDIUM -> baseRate * 1.25;
-      case LARGE -> baseRate * 1.5;
-      default -> baseRate * 1.75;
-    };
-  }*/
 }

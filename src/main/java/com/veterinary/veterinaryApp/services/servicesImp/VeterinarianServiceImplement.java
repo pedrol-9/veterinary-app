@@ -4,7 +4,6 @@ import com.veterinary.veterinaryApp.DTOs.VeterinarianDTO;
 import com.veterinary.veterinaryApp.Repositories.VeterinarianRepository;
 import com.veterinary.veterinaryApp.models.Veterinarian;
 import com.veterinary.veterinaryApp.services.VeterinarianService;
-import com.veterinary.veterinaryApp.utils.CyclicCounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
