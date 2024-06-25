@@ -87,7 +87,6 @@ public class VeterinaryAppApplication {
             petRepository.save(pet6);
 
             // Creación de Servicios
-
             List<String> daysOfService = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
             List<String> hoursOfService = Arrays.asList("09:00-12:00", "13:00-17:00");
 
