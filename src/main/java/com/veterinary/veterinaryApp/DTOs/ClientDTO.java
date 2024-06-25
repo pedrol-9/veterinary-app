@@ -28,7 +28,7 @@ public class ClientDTO {
 
   public ClientDTO(Client client) {
 
-    List<Appointment> appointmentsAux = client.getAppointments().stream().filter(app -> app.getAppointmentStatus().equals(AppointmentStatus.CONFIRMED)).toList(); // variable auxiliar para obtener las citas confirmadas y sacar solo un array de fechas
+    List<Appointment> appointmentsAux = client.getAppointments();
 
     List<Pet> petsAux = client.getPets();
 
