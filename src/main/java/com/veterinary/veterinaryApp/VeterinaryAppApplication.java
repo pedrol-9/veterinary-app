@@ -156,13 +156,13 @@ public class VeterinaryAppApplication {
             appointment1.setOffering(hospitalisation);
 
             // Creación de Veterinarios
-            Veterinarian vet1 = new Veterinarian("Brayan", "Veterinary Dermatology", "Calle 1 # 2 - 3", 31334177);
+            Veterinarian vet1 = new Veterinarian("Brayan", "Veterinary Dermatology", "Calle 1 # 2 - 3", "31334177");
 
-            Veterinarian vet2 = new Veterinarian("Brayan", "Animal Behavior", "Calle 4 # 5 - 6", 31334177);
+            Veterinarian vet2 = new Veterinarian("Brayan", "Animal Behavior", "Calle 4 # 5 - 6", "31334177");
 
-            Veterinarian vet3 = new Veterinarian("Brayan", "Veterinary Anesthesiology and Emergency Medicine", "Calle 7 # 8 - 9", 31334177);
+            Veterinarian vet3 = new Veterinarian("Brayan", "Veterinary Anesthesiology and Emergency Medicine", "Calle 7 # 8 - 9", "31334177");
 
-            Veterinarian vet4 = new Veterinarian("Brayan", "Intern", "Calle 10 # 11 - 12", 31334177);
+            Veterinarian vet4 = new Veterinarian("Brayan", "Intern", "Calle 10 # 11 - 12", "31334177");
 
             // Asignación de Cita a veterinario
             vet1.addAppointment(appointment1);
