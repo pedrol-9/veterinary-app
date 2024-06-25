@@ -2,6 +2,7 @@ package com.veterinary.veterinaryApp.services.servicesImp;
 
 import com.veterinary.veterinaryApp.DTOs.OfferingDTO;
 import com.veterinary.veterinaryApp.Repositories.OfferingRepository;
+import com.veterinary.veterinaryApp.models.AnimalSize;
 import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.services.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,22 @@ public class OfferingServiceImpl implements OfferingService {
     @Override
     public void save(Offering offering) {
         offeringRepository.save(offering);
+    }
+
+    @Override
+    public double calculatePrice(AnimalSize petSize, double baseRate) {
+
+        double amountToCharge = 0.0;
+        if (petSize == AnimalSize.SMALL) {
+            amountToCharge = baseRate;
+        } else if (petSize == AnimalSize.MEDIUM) {
+            amountToCharge = baseRate * 1.25;
+        } else if (petSize == AnimalSize.LARGE) {
+            amountToCharge = baseRate * 1.5;
+        } else if (petSize == AnimalSize.BIGGER) {
+            amountToCharge = baseRate * 1.75;
+        }
+
+        return amountToCharge;
     }
 }

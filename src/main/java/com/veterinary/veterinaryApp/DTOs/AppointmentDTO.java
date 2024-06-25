@@ -1,8 +1,6 @@
 package com.veterinary.veterinaryApp.DTOs;
 
 import com.veterinary.veterinaryApp.models.*;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +21,7 @@ public class AppointmentDTO {
 
         this.id = appointment.getId();
         this.dateTime = appointment.getDateTime();
-        this.notes = appointment.getNotes();
+        this.notes = appointment.getDescription();
         this.appointmentStatus = appointment.getAppointmentStatus();
         this.creationDatetime = appointment.getCreationDatetime();
         this.veterinarian = appointment.getVeterinarian().getName();

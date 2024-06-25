@@ -19,14 +19,17 @@ import java.util.List;
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
 
+    @Autowired
+    private InvoiceRepository invoiceRepository;
+
     @Override
     public List<InvoiceDTO> getAllInvoices() {
-        return List.of();
+        return invoiceRepository.findAll().stream().map(InvoiceDTO::new).toList();
     }
 
     @Override
     public Invoice getInvoiceById(long id) {
-        return null;
+        return invoiceRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,6 +39,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public void saveInvoice(Invoice invoice) {
-
+        invoiceRepository.save(invoice);
     }
 }
