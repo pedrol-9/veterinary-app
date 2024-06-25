@@ -2,6 +2,7 @@ package com.veterinary.veterinaryApp;
 
 import com.veterinary.veterinaryApp.Repositories.*;
 import com.veterinary.veterinaryApp.models.*;
+import com.veterinary.veterinaryApp.services.AvailableSlotsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +33,7 @@ public class VeterinaryAppApplication {
     public CommandLineRunner initDatabase(ClientRepository clientRepository, AccountRepository accountRepository,
                                           PetRepository petRepository, VeterinarianRepository veterinarianRepository,
                                           OfferingRepository offeringRepository, AppointmentRepository appointmentRepository,
-                                          InvoiceRepository invoiceRepository) {
+                                          InvoiceRepository invoiceRepository, AvailableSlotsRepository availableSlotsRepository) {
         return (args) -> {
 
             // creacion de usuarios
@@ -146,6 +148,26 @@ public class VeterinaryAppApplication {
             offeringRepository.save(canineHairdressing);
             offeringRepository.save(hospitalisation);
             offeringRepository.save(deworming);
+            List<String> daysOfServiceSlots = List.of("2023-06-25", "2023-06-26", "2023-06-27");
+            List<String> hoursOfServiceSlots = List.of("09:00", "10:00", "11:00");
+
+            List<AvailableSlots> availableSlotsList = new ArrayList<>();
+
+            for (String day : daysOfServiceSlots) {
+                LocalDate date = LocalDate.parse(day);
+                for (String hour : hoursOfServiceSlots) {
+                    availableSlotsList.add(new AvailableSlots(date, hour, generalEnquiry));
+                    availableSlotsList.add(new AvailableSlots(date, hour, vaccination));
+                    availableSlotsList.add(new AvailableSlots(date, hour, surgery));
+                    availableSlotsList.add(new AvailableSlots(date, hour, canineHairdressing));
+                    availableSlotsList.add(new AvailableSlots(date, hour, hospitalisation));
+                    availableSlotsList.add(new AvailableSlots(date, hour, deworming));
+                }
+            }
+
+            for (AvailableSlots slot : availableSlotsList) {
+                availableSlotsRepository.save(slot);
+            }
 
             // creación de Appointment
             Appointment appointment1 = new Appointment(LocalDateTime.now().plusDays(3), LocalDateTime.now(), "Please get my dog a good shower, I´ll pick him up at noon", AppointmentStatus.CONFIRMED);

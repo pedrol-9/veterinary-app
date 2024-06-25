@@ -35,9 +35,9 @@ public class VeterinarianServiceImplement implements VeterinarianService {
         veterinarianRepository.save(veterinarian);
     }
 
-    @Override
-    public CyclicCounter vetCounter(long start, long end) {
-
-        return null;
-    }
+//    @Override
+//    public CyclicCounter vetCounter(long start, long end) {
+//
+//        return null;
+//    }
 }

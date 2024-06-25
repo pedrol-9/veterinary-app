@@ -11,5 +11,5 @@ public interface VeterinarianService {
     Veterinarian getVeterinarianById(Long id);
     List<VeterinarianDTO> getAllVeterinariansDTO();
     void saveVeterinarian(Veterinarian veterinarian);
-    CyclicCounter vetCounter(long start, long end);
+//    CyclicCounter vetCounter(long start, long end);
 }
