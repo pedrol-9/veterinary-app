@@ -1,6 +1,5 @@
 package com.veterinary.veterinaryApp.DTOs;
 
-import com.veterinary.veterinaryApp.models.AnimalSize;
 import com.veterinary.veterinaryApp.models.Appointment;
 import com.veterinary.veterinaryApp.models.Offering;
 
@@ -14,8 +13,6 @@ public class OfferingDTO {
     private String name;
 
     private String description;
-
-    private AnimalSize animalSize;
 
     private double price;
 
@@ -50,11 +47,7 @@ public class OfferingDTO {
     public double getPrice() {
         return price;
     }
-  
-    public AnimalSize getAnimalSize() {
-        return animalSize;
-    }
-
+    
     /*public List<String> getDaysOfService() {
         return daysOfService;
     }

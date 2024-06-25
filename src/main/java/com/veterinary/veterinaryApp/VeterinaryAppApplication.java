@@ -19,6 +19,7 @@ import static com.veterinary.veterinaryApp.utils.Utils.fiveDigits;
 @SpringBootApplication
 public class VeterinaryAppApplication {
 
+
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -139,12 +140,12 @@ public class VeterinaryAppApplication {
                     hoursOfService
             );
 
-offeringRepository.save(generalEnquiry);
-offeringRepository.save(vaccination);
-offeringRepository.save(surgery);
-offeringRepository.save(canineHairdressing);
-offeringRepository.save(hospitalisation);
-offeringRepository.save(deworming);
+            offeringRepository.save(generalEnquiry);
+            offeringRepository.save(vaccination);
+            offeringRepository.save(surgery);
+            offeringRepository.save(canineHairdressing);
+            offeringRepository.save(hospitalisation);
+            offeringRepository.save(deworming);
 
             // creación de Appointment
             Appointment appointment1 = new Appointment(LocalDateTime.now().plusDays(3), LocalDateTime.now(), "Please get my dog a good shower, I´ll pick him up at noon", AppointmentStatus.CONFIRMED);
@@ -202,4 +203,3 @@ offeringRepository.save(deworming);
 
         };
     }
-}

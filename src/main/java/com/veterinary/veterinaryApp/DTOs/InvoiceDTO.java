@@ -35,16 +35,17 @@ public class InvoiceDTO {
     public InvoiceDTO() {
     }
 
+    // Getters
     public long getId() {
         return id;
     }
 
-    public LocalDateTime getIssuedOn() {
-        return issuedOn;
-    }
-
     public double getAmount() {
         return amount;
+    }
+
+    public LocalDateTime getIssuedOn() {
+        return issuedOn;
     }
 
     public InvoiceStatus getStatus() {

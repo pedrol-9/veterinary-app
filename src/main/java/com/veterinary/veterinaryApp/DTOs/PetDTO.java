@@ -14,7 +14,7 @@ public class PetDTO {
 
     private String petName;
 
-    private int petAge;
+    private String petAge;
 
     private String specie;
 
@@ -47,7 +47,7 @@ public class PetDTO {
         return petName;
     }
 
-    public int getPetAge() {
+    public String getPetAge() {
         return petAge;
     }
 
