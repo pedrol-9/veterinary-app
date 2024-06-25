@@ -65,12 +65,12 @@ public class VeterinaryAppApplication {
             accountRepository.save(account4);
 
             // Creación de Pets
-            Pet pet1 = new Pet("Pulguita", 5, "Perro", "Chihuahua", "healthy dog");
-            Pet pet2 = new Pet("Luna", 2, "Gato", "Persa", "healthy cat");
-            Pet pet3 = new Pet("Pelusa", 3, "Gato", "Siames", "angry cat, need sedation");
-            Pet pet4 = new Pet("Coco", 1, "Perro", "Pastor Aleman", "blind dog");
-            Pet pet5 = new Pet("Tomate", 6, "Perro", "Pastor Aleman", "healthy dog");
-            Pet pet6 = new Pet("Firulais", 15, "Perro", "Golden Retriever", "very old dog");
+            Pet pet1 = new Pet("Pulguita", "5 años", "Perro", "Chihuahua", AnimalSize.SMALL, "healthy dog");
+            Pet pet2 = new Pet("Luna", "2 años", "Gato", "Persa", AnimalSize.BIGGER, "healthy cat");
+            Pet pet3 = new Pet("Pelusa", "3 meses", "Gato", "Siames", AnimalSize.MEDIUM, "angry cat, need sedation");
+            Pet pet4 = new Pet("Coco", "1 año", "Perro", "Pastor Aleman", AnimalSize.SMALL, "blind dog");
+            Pet pet5 = new Pet("Tomate", "6 meses", "Perro", "Pastor Aleman", AnimalSize.LARGE, "healthy dog");
+            Pet pet6 = new Pet("Firulais", "15 años", "Perro", "Golden Retriever", AnimalSize.BIGGER, "very old dog");
 
             userAdmin.addPet(pet1);
             lucas.addPet(pet2);
@@ -152,6 +152,9 @@ public class VeterinaryAppApplication {
 
             // asignación de Cita a cliente
             appointment1.setClient(lucas);
+
+            // asignación de cita a servicio
+            appointment1.setOffering(hospitalisation);
 
             // Creación de Veterinarios
             Veterinarian vet1 = new Veterinarian("Brayan", "Veterinary Dermatology", "Calle 1 # 2 - 3", 31334177);
