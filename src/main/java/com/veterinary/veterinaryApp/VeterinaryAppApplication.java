@@ -184,8 +184,6 @@ public class VeterinaryAppApplication {
 //            offeringRepository.save(hospitalisation);
 //            offeringRepository.save(deworming);
 
-
-
             // creación de Appointment
             Appointment appointment1 = new Appointment(LocalDateTime.now().plusDays(3), LocalDateTime.now(), "Please get my dog a good shower, I´ll pick him up at noon", AppointmentStatus.CONFIRMED);
 
