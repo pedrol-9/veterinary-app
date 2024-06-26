@@ -2,8 +2,11 @@ package com.veterinary.veterinaryApp.DTOs;
 
 import com.veterinary.veterinaryApp.models.Appointment;
 import com.veterinary.veterinaryApp.models.Veterinarian;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,7 +18,13 @@ public class VeterinarianDTO {
 
     private String specialty;
 
-    private List<LocalDateTime> appointments; // lista solamente de fecha y tiempo de las citas
+    private String address;
+
+    private String phone;
+
+    private String email;
+
+    private List<Appointment> appointments = new ArrayList<>();
 
     public VeterinarianDTO() {}
 
@@ -23,7 +32,10 @@ public class VeterinarianDTO {
         this.id = veterinarian.getId();
         this.name = veterinarian.getName();
         this.specialty = veterinarian.getSpecialty();
-        this.appointments = veterinarian.getAppointments().stream().map(Appointment::getDateTime).toList();
+        this.address = veterinarian.getAddress();
+        this.phone = veterinarian.getPhone();
+        this.email = veterinarian.getEmail();
+        this.appointments = veterinarian.getAppointments();
     }
 
     public Long getId() {
@@ -34,11 +46,23 @@ public class VeterinarianDTO {
         return name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public String getSpecialty() {
         return specialty;
     }
 
-    public List<LocalDateTime> getAppointments() {
+    public List<Appointment> getAppointments() {
         return appointments;
     }
 }

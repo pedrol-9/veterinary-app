@@ -9,11 +9,13 @@ import java.util.List;
 
 public interface InvoiceService {
 
-    List<InvoiceDTO> getAllInvoices();
-
+    List<Invoice> getAllInvoices();
+    List<InvoiceDTO> getAllInvoicesDTO();
     Invoice getInvoiceById(long id);
-
-    ResponseEntity<?> createInvoice(Client client, List<Long> serviceIds);
+    List<Invoice> getInvoicesByAppointmentId(long id);
+    List<InvoiceDTO> getInvoicesByAppointmentIdDTO(List<Invoice> invoices);
+    List<Invoice> getInvoicesByClient(Client client);
+    List<InvoiceDTO> getInvoiceByClientDTO(Client client);
 
     void saveInvoice(Invoice invoice);
 }

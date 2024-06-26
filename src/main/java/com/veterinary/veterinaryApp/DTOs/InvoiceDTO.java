@@ -1,7 +1,10 @@
 package com.veterinary.veterinaryApp.DTOs;
 
+import com.veterinary.veterinaryApp.models.Account;
+import com.veterinary.veterinaryApp.models.Appointment;
 import com.veterinary.veterinaryApp.models.Invoice;
 import com.veterinary.veterinaryApp.models.InvoiceStatus;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -15,26 +18,26 @@ public class InvoiceDTO {
 
     private InvoiceStatus status;
 
-    private String destinationAccount;
+    private Account account;
 
-    private String billedService;
+    private Appointment appointment;
+
 
     public InvoiceDTO(Invoice invoice) {
         this.id = invoice.getId();
         this.issuedOn = invoice.getIssuedOn();
-        // this.amount = invoice.getAppointment().getOffering().getPrice();
+        this.amount = invoice.getAmount();
         this.status = invoice.getStatus();
-        this.destinationAccount = invoice.getAccount().getNumber();
-        this.billedService = invoice.getAppointment().getOffering().getName(); // nombre del servicio
+        this.account = invoice.getAccount();
+        this.appointment = invoice.getAppointment();
+    }
+
+    public InvoiceDTO() {
     }
 
     // Getters
     public long getId() {
         return id;
-    }
-
-    public LocalDateTime getDate() {
-        return issuedOn;
     }
 
     public double getAmount() {
@@ -49,11 +52,11 @@ public class InvoiceDTO {
         return status;
     }
 
-    public String getDestinationAccount() {
-        return destinationAccount;
+    public Account getAccount() {
+        return account;
     }
 
-    public String getBilledService() {
-        return billedService;
+    public Appointment getAppointment() {
+        return appointment;
     }
 }

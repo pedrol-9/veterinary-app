@@ -2,19 +2,15 @@ package com.veterinary.veterinaryApp.services.servicesImp;
 
 import com.veterinary.veterinaryApp.DTOs.InvoiceDTO;
 import com.veterinary.veterinaryApp.Repositories.InvoiceRepository;
+import com.veterinary.veterinaryApp.models.Appointment;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Invoice;
-import com.veterinary.veterinaryApp.models.InvoiceStatus;
-import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.services.InvoiceService;
-import com.veterinary.veterinaryApp.services.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -22,13 +18,14 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     private InvoiceRepository invoiceRepository;
 
-    @Autowired
-    private OfferingService offeringService;
-
+    @Override
+    public List<Invoice> getAllInvoices() {
+        return invoiceRepository.findAll();
+    }
 
     @Override
-    public List<InvoiceDTO> getAllInvoices() {
-        return invoiceRepository.findAll().stream().map(InvoiceDTO::new).toList();
+    public List<InvoiceDTO> getAllInvoicesDTO() {
+        return getAllInvoices().stream().map(InvoiceDTO::new).collect(Collectors.toList());
     }
 
     @Override
@@ -37,42 +34,28 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<?> createInvoice(Client client, List<Long> offeringsIds) {
-        //TODO: TENDRIA QUE TENER LA CUENTA DEL CLIENTE POR EL ID
-        //List<Account> accounts = accountService.getAccountById(accountId);
-
-        List<Offering> offerings = offeringService.findAllByIds(offeringsIds);
-
-        if (offerings.isEmpty()) {
-            return new ResponseEntity<>("No offerings found.", HttpStatus.NOT_FOUND);
-        }
-
-        double totalAmount = calculateTotalAmount(offerings);
-
-        //CREA  LA FACTURA
-        Invoice invoice = new Invoice();
-        //invoice.setAccount(account);
-        // invoice.setOfferings(offerings);
-        invoice.setIssuedOn(LocalDateTime.now());
-        invoice.setAmount(totalAmount);
-        invoice.setStatus(InvoiceStatus.PAID); //TODO: SE PUEDE ACTUALIZAR A TRUE CUANDO SE PAGUE
-
-        saveInvoice(invoice);
-        //metodo add para poder añadir la factura al cliente o a la cuenta
-
-        return new ResponseEntity<>(invoice, HttpStatus.OK);
+    public List<Invoice> getInvoicesByAppointmentId(long id) {
+        return getAllInvoices().stream().filter(invoice -> invoice.getAppointment().getId() == id).collect(Collectors.toList());
     }
+
+    @Override
+    public List<InvoiceDTO> getInvoicesByAppointmentIdDTO(List<Invoice> invoices) {
+        return invoices.stream().map(InvoiceDTO::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Invoice> getInvoicesByClient(Client client) {
+        return client.getAppointments().stream().map(Appointment::getInvoice).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<InvoiceDTO> getInvoiceByClientDTO(Client client) {
+        return getInvoicesByClient(client).stream().map(InvoiceDTO::new).collect(Collectors.toList());
+    }
+
 
     @Override
     public void saveInvoice(Invoice invoice) {
         invoiceRepository.save(invoice);
-    }
-
-    //METODO PROPIO
-    private double calculateTotalAmount(List<Offering> offerings) {
-        return offerings
-                .stream()
-                .mapToDouble(Offering ::getPrice)
-                .sum();
     }
 }

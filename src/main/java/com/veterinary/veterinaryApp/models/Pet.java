@@ -19,6 +19,9 @@ public class Pet {
 
     private String breed;
 
+    private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
     private AnimalSize animalSize;
 
     private String specialTreatment;
@@ -31,15 +34,26 @@ public class Pet {
     private List<Appointment> appointments = new ArrayList<>();
 
     // contructores
-    public Pet(String petName, String petAge, String specie, String breed, String specialTreatment) {
+    public Pet() {}
+
+    public Pet(String petName, String petAge, String specie, String breed, AnimalSize animalSize, String specialTreatment, String imageUrl) {
         this.petName = petName;
         this.petAge = petAge;
         this.specie = specie;
         this.breed = breed;
+        this.animalSize = animalSize;
         this.specialTreatment = specialTreatment;
+        this.imageUrl = imageUrl;
     }
 
-    public Pet() {}
+    public Pet(String name, String age, String specie, String breed, AnimalSize animalSize, String specialTreatment) {
+        this.petName = name;
+        this.petAge = age;
+        this.specie = specie;
+        this.breed = breed;
+        this.animalSize = animalSize;
+        this.specialTreatment = specialTreatment;
+    }
 
     // getters y setters
     public Long getId() {
@@ -108,6 +122,14 @@ public class Pet {
 
     public void setSpecialTreatment(String specialTreatment) {
         this.specialTreatment = specialTreatment;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public List<Appointment> getAppointments() {

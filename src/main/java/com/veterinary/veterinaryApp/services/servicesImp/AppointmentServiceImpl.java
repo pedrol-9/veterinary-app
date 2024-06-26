@@ -2,7 +2,7 @@ package com.veterinary.veterinaryApp.services.servicesImp;
 
 import com.veterinary.veterinaryApp.DTOs.AppointmentDTO;
 import com.veterinary.veterinaryApp.Repositories.AppointmentRepository;
-import com.veterinary.veterinaryApp.models.Appointment;
+import com.veterinary.veterinaryApp.models.*;
 import com.veterinary.veterinaryApp.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public void createAppointment(Appointment appointment) {
+    public void saveAppointment(Appointment appointment) {
         appointmentRepository.save(appointment);
+    }
+
+    @Override
+    public void setEntities(Appointment appointment, Client client, Pet pet, Veterinarian veterinarian, Offering offering, Invoice invoice) {
+        appointment.setClient(client);
+        appointment.setPet(pet);
+        appointment.setVeterinarian(veterinarian);
+        appointment.setOffering(offering);
+        appointment.setInvoice(invoice);
     }
 }
