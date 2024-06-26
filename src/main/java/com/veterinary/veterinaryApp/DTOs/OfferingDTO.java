@@ -33,7 +33,7 @@ public class OfferingDTO {
         this.appointments = offering.getAppointments().stream().map(Appointment::getDateTime).toList(); // tengo mis dudas, creeería que hay que pasar los objetos completos de appointments para
         this.availableSlots = offering.getAvailableSlots()
                 .stream()
-                .map(availableSlot -> new AvailableSlotsDTO(availableSlot))
+                .map(AvailableSlotsDTO::new)
                 .collect(Collectors.toSet());
     }
 
