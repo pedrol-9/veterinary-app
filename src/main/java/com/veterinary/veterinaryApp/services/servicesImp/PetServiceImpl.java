@@ -30,9 +30,7 @@ public class PetServiceImpl implements PetService {
 
   @Override
   public Pet createPet(NewPetDTO newPetDTO) {
-    long ownerId = newPetDTO.ownerId();
-
-    Pet newPet = new Pet(
+    return new Pet(
         newPetDTO.name(),
         newPetDTO.age(),
         newPetDTO.specie(),
@@ -41,13 +39,5 @@ public class PetServiceImpl implements PetService {
         newPetDTO.specialTreatment(),
         newPetDTO.imageUrl()
     );
-
-    Client client = clientService.getClientById(ownerId);
-
-    client.addPet(newPet);
-
-    savePet(newPet);
-
-    return newPet;
   }
 }
