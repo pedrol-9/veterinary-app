@@ -8,7 +8,7 @@ import java.util.List;
 public interface AvailableSlotsService {
 
     List<AvailableSlots> getAvailableSlots();
-
+    AvailableSlots getAvailableSlotsById(long id);
     List<AvailableSlots> getAvailableSlotsByDate();
 
     List<AvailableSlots> getAvailableSlotsByOffering(Offering offering);

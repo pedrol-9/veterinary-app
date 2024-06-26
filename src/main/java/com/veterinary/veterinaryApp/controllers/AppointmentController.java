@@ -36,6 +36,9 @@ public class AppointmentController {
   @Autowired
   private InvoiceService invoiceService;
 
+  @Autowired
+  private AvailableSlotsService availableSlotsService;
+
   @GetMapping("/")
   public ResponseEntity<?> getAllAppointments() {
     return ResponseEntity.ok(appointmentService.getAppointmentDTOs());
@@ -57,7 +60,10 @@ public class AppointmentController {
     // fechas para crear el turno
     LocalDateTime dateTime = newAppointmentDTO.dateTime();
     LocalDateTime creationDate = LocalDateTime.now();
+    Long selectedSlot = newAppointmentDTO.slotId();
+    AvailableSlots selectedAvailableSlot = availableSlotsService.getAvailableSlotsById(selectedSlot);
 
+    selectedAvailableSlot.setAvailable(false);
     // Description para crear el turno
     String description = newAppointmentDTO.description();
 
@@ -125,6 +131,8 @@ public class AppointmentController {
     // Guardar el turno en la base de datos
     appointmentService.saveAppointment(newAppointment);
 
+    // Guardar el slot en la base de datos
+    availableSlotsService.saveAvailableSlots(selectedAvailableSlot);
     // Crear el DTO para devolver la respuesta
     AppointmentDTO newAppointmentObject = new AppointmentDTO(newAppointment);
 

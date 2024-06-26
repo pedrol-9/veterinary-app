@@ -21,7 +21,7 @@ public class AccountDTO {
 
     public AccountDTO(Account account) {
 
-        List<Invoice> invoicesAux = account.getInvoices().stream().filter(i -> i.getStatus().name().equals("CHARGED")).toList(); // para que solo aparezcan las facturas cargadas a las cuentas, no las facturas pendientes.
+        List<Invoice> invoicesAux = account.getClient().getAppointments().stream().map(appointment -> appointment.getInvoice()).toList();// para que solo aparezcan las facturas cargadas a las cuentas, no las facturas pendientes.
 
         this.id = account.getId();
         this.balance = account.getBalance();

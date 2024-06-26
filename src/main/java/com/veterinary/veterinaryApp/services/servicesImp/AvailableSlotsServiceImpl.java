@@ -17,6 +17,11 @@ public class AvailableSlotsServiceImpl implements AvailableSlotsService {
     }
 
     @Override
+    public AvailableSlots getAvailableSlotsById(long id) {
+        return availableSlotsRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public List<AvailableSlots> getAvailableSlotsByDate() {
         return List.of();
     }
