@@ -32,11 +32,6 @@ public class VeterinarianServiceImplement implements VeterinarianService {
     }
 
     @Override
-    public void deleteVeterinarian(Long id) {
-        veterinarianRepository.deleteById(id);
-    }
-
-    @Override
     public Veterinarian createVeterinarian(NewVeterinarianDTO newVeterinarianDTO) {
       return new Veterinarian(
                 newVeterinarianDTO.name(),

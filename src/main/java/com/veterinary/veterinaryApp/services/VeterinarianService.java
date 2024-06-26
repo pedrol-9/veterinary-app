@@ -9,9 +9,12 @@ import java.util.List;
 public interface VeterinarianService {
 
     List<Veterinarian> getAllVeterinarians();
+
     Veterinarian getVeterinarianById(Long id);
+
     List<VeterinarianDTO> getAllVeterinariansDTO();
-    void deleteVeterinarian(Long id);
-    Veterinarian createVeterinarian(NewVeterinarianDTO newVeterinarianDTO);
+
     void saveVeterinarian(Veterinarian veterinarian);
+
+    Veterinarian createVeterinarian(NewVeterinarianDTO newVeterinarianDTO);
 }

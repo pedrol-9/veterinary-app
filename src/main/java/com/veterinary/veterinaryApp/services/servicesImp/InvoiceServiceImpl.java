@@ -2,19 +2,15 @@ package com.veterinary.veterinaryApp.services.servicesImp;
 
 import com.veterinary.veterinaryApp.DTOs.InvoiceDTO;
 import com.veterinary.veterinaryApp.Repositories.InvoiceRepository;
+import com.veterinary.veterinaryApp.models.Appointment;
 import com.veterinary.veterinaryApp.models.Client;
 import com.veterinary.veterinaryApp.models.Invoice;
-import com.veterinary.veterinaryApp.models.InvoiceStatus;
-import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.services.InvoiceService;
-import com.veterinary.veterinaryApp.services.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -23,8 +19,13 @@ public class InvoiceServiceImpl implements InvoiceService {
     private InvoiceRepository invoiceRepository;
 
     @Override
-    public List<InvoiceDTO> getAllInvoices() {
-        return invoiceRepository.findAll().stream().map(InvoiceDTO::new).toList();
+    public List<Invoice> getAllInvoices() {
+        return invoiceRepository.findAll();
+    }
+
+    @Override
+    public List<InvoiceDTO> getAllInvoicesDTO() {
+        return getAllInvoices().stream().map(InvoiceDTO::new).collect(Collectors.toList());
     }
 
     @Override
@@ -33,9 +34,25 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public ResponseEntity<?> createInvoice(Client client, List<Long> serviceIds) {
-        return null;
+    public List<Invoice> getInvoicesByAppointmentId(long id) {
+        return getAllInvoices().stream().filter(invoice -> invoice.getAppointment().getId() == id).collect(Collectors.toList());
     }
+
+    @Override
+    public List<InvoiceDTO> getInvoicesByAppointmentIdDTO(List<Invoice> invoices) {
+        return invoices.stream().map(InvoiceDTO::new).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Invoice> getInvoicesByClient(Client client) {
+        return client.getAppointments().stream().map(Appointment::getInvoice).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<InvoiceDTO> getInvoiceByClientDTO(Client client) {
+        return getInvoicesByClient(client).stream().map(InvoiceDTO::new).collect(Collectors.toList());
+    }
+
 
     @Override
     public void saveInvoice(Invoice invoice) {

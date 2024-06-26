@@ -29,6 +29,8 @@ public class Offering {
     @OneToMany(mappedBy = "offering")
     private List<Appointment> appointments = new ArrayList<>(); // contiene los bloques horarios reservados
 
+    @OneToMany(mappedBy = "offering")
+    private List<AvailableSlots> availableSlots = new ArrayList<>(); // contiene los bloques horarios disponibles
     // CONSTRUCTORES
     public Offering() {
     }
@@ -104,4 +106,11 @@ public class Offering {
         appointment.setOffering(this);
     }
 
+    public List<AvailableSlots> getAvailableSlots() {
+        return availableSlots;
+    }
+
+    public void setAvailableSlots(List<AvailableSlots> availableSlots) {
+        this.availableSlots = availableSlots;
+    }
 }
