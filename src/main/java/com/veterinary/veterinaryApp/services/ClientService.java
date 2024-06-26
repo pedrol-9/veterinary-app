@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ClientService {
 
     List<ClientDTO> getAllClients();
-    ClientDTO getClientById(Long id);
+    Client getClientById(Long id);
     // List<ClientDTO> getAllClientsDto();
     Client getClientByEmail(String email);
     void saveClient(Client client);

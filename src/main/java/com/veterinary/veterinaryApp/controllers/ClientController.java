@@ -26,7 +26,13 @@ public class ClientController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getClientById(@PathVariable Long id) {
-        return ResponseEntity.ok(clientService.getClientById(id));
+        Client client = clientService.getClientById(id);
+
+        if (client == null) {
+            return new ResponseEntity<>("No client was found.", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new ClientDTO(client), HttpStatus.OK);
     }
 
     /*@GetMapping("/current")
