@@ -40,7 +40,6 @@ public class ClientDTO {
     this.account = new AccountDTO(client.getAccount());
     this.pets = petsAux.stream().map(PetDTO::new).toList();
     this.confirmedAppointments = appointmentsAux.stream().map(AppointmentDTO::new).toList();
-
   }
 
   public Long getId() {

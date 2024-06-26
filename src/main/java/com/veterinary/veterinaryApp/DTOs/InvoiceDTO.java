@@ -18,9 +18,9 @@ public class InvoiceDTO {
 
     private InvoiceStatus status;
 
-    private Account account;
+    private long account;
 
-    private Appointment appointment;
+    private long appointment;
 
 
     public InvoiceDTO(Invoice invoice) {
@@ -28,8 +28,8 @@ public class InvoiceDTO {
         this.issuedOn = invoice.getIssuedOn();
         this.amount = invoice.getAmount();
         this.status = invoice.getStatus();
-        this.account = invoice.getAccount();
-        this.appointment = invoice.getAppointment();
+        this.account = invoice.getAccount().getId();
+        this.appointment = invoice.getAppointment().getId();
     }
 
     public InvoiceDTO() {
@@ -52,11 +52,11 @@ public class InvoiceDTO {
         return status;
     }
 
-    public Account getAccount() {
+    public long getAccount() {
         return account;
     }
 
-    public Appointment getAppointment() {
+    public long getAppointment() {
         return appointment;
     }
 }
