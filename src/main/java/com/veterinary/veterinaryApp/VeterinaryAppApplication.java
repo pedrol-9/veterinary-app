@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -149,7 +150,7 @@ public class VeterinaryAppApplication {
             offeringRepository.save(hospitalisation);
             offeringRepository.save(deworming);
 
-            List<String> daysOfServiceSlots = List.of("2023-06-25", "2023-06-26", "2023-06-27");
+            List<String> daysOfServiceSlots = generateNextSevenDays();
             List<String> hoursOfServiceSlots = List.of("09:00", "10:00", "11:00");
 
             List<AvailableSlots> availableSlotsList = new ArrayList<>();
@@ -176,15 +177,6 @@ public class VeterinaryAppApplication {
             canineHairdressing.setAvailableSlots(availableSlotsList);
             hospitalisation.setAvailableSlots(availableSlotsList);
             deworming.setAvailableSlots(availableSlotsList);
-//
-//            offeringRepository.save(generalEnquiry);
-//            offeringRepository.save(vaccination);
-//            offeringRepository.save(surgery);
-//            offeringRepository.save(canineHairdressing);
-//            offeringRepository.save(hospitalisation);
-//            offeringRepository.save(deworming);
-
-
 
             // creación de Appointment
             Appointment appointment1 = new Appointment(LocalDateTime.now().plusDays(3), LocalDateTime.now(), "Please get my dog a good shower, I´ll pick him up at noon", AppointmentStatus.CONFIRMED);
@@ -244,5 +236,18 @@ public class VeterinaryAppApplication {
             System.out.println("****************************************************");
 
         };
+    }
+
+    public static List<String> generateNextSevenDays() {
+        List<String> dates = new ArrayList<>();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (int i = 0; i < 7; i++) {
+            LocalDate nextDate = currentDate.plusDays(i);
+            dates.add(nextDate.format(formatter));
+        }
+
+        return dates;
     }
 }
