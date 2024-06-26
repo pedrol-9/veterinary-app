@@ -38,9 +38,9 @@ public class AvailableSlotsDTO {
         return available;
     }
 
-    public Offering getOffering() {
-        return offering;
-    }
+//    public Offering getOffering() {
+//        return offering;
+//    }
 
     public long getId() {
         return id;

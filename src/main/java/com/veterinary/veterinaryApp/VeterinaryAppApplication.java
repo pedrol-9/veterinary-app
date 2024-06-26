@@ -37,7 +37,7 @@ public class VeterinaryAppApplication {
         return (args) -> {
 
             // creacion de usuarios
-            Client userAdmin = new Client("Jelena", "Palavecino", "jelena@vetadmin.com", passwordEncoder.encode("123"), 31334177);
+            Client userAdmin = new Client("Jelena", "Palavecino", "jelena@vetadmin.com", passwordEncoder.encode("abc123"), 31334177);
 
             Client lucas = new Client("Lucas", "Madrigal", "lucas@mail.com", passwordEncoder.encode("123"), 51258927);
 
@@ -142,12 +142,14 @@ public class VeterinaryAppApplication {
                     hoursOfService
             );
 
+
             offeringRepository.save(generalEnquiry);
             offeringRepository.save(vaccination);
             offeringRepository.save(surgery);
             offeringRepository.save(canineHairdressing);
             offeringRepository.save(hospitalisation);
             offeringRepository.save(deworming);
+
             List<String> daysOfServiceSlots = List.of("2023-06-25", "2023-06-26", "2023-06-27");
             List<String> hoursOfServiceSlots = List.of("09:00", "10:00", "11:00");
 
@@ -168,6 +170,22 @@ public class VeterinaryAppApplication {
             for (AvailableSlots slot : availableSlotsList) {
                 availableSlotsRepository.save(slot);
             }
+
+            generalEnquiry.setAvailableSlots(availableSlotsList);
+            vaccination.setAvailableSlots(availableSlotsList);
+            surgery.setAvailableSlots(availableSlotsList);
+            canineHairdressing.setAvailableSlots(availableSlotsList);
+            hospitalisation.setAvailableSlots(availableSlotsList);
+            deworming.setAvailableSlots(availableSlotsList);
+//
+//            offeringRepository.save(generalEnquiry);
+//            offeringRepository.save(vaccination);
+//            offeringRepository.save(surgery);
+//            offeringRepository.save(canineHairdressing);
+//            offeringRepository.save(hospitalisation);
+//            offeringRepository.save(deworming);
+
+
 
             // creación de Appointment
             Appointment appointment1 = new Appointment(LocalDateTime.now().plusDays(3), LocalDateTime.now(), "Please get my dog a good shower, I´ll pick him up at noon", AppointmentStatus.CONFIRMED);

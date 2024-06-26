@@ -25,12 +25,12 @@ public class InvoiceController {
 
     @GetMapping("/")
     public ResponseEntity<?> getAllInvoices(Authentication authentication) {
-        Client client = clientService.getClientByEmail(authentication.getName());
-        String role = authentication.getAuthorities().toString();
-
-        if (client == null && !role.equals("[ROLE_ADMIN]")) {
-            return new ResponseEntity<>("no esta autorizado", HttpStatus.FORBIDDEN);
-        }
+//        Client client = clientService.getClientByEmail(authentication.getName());
+//        String role = authentication.getAuthorities().toString();
+//
+//        if (client == null || !role.equals("ADMIN")) {
+//            return new ResponseEntity<>("no esta autorizado", HttpStatus.FORBIDDEN);
+//        }
 
         List<InvoiceDTO> invoices = invoiceService.getAllInvoicesDTO();
 

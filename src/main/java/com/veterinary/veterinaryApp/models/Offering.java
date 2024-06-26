@@ -106,4 +106,11 @@ public class Offering {
         appointment.setOffering(this);
     }
 
+    public List<AvailableSlots> getAvailableSlots() {
+        return availableSlots;
+    }
+
+    public void setAvailableSlots(List<AvailableSlots> availableSlots) {
+        this.availableSlots = availableSlots;
+    }
 }
