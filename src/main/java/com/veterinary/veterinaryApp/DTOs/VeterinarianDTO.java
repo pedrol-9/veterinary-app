@@ -20,7 +20,9 @@ public class VeterinarianDTO {
 
     private String address;
 
-    private int phone;
+    private String phone;
+
+    private String email;
 
     private List<Appointment> appointments = new ArrayList<>();
 
@@ -32,6 +34,7 @@ public class VeterinarianDTO {
         this.specialty = veterinarian.getSpecialty();
         this.address = veterinarian.getAddress();
         this.phone = veterinarian.getPhone();
+        this.email = veterinarian.getEmail();
         this.appointments = veterinarian.getAppointments();
     }
 
@@ -41,6 +44,18 @@ public class VeterinarianDTO {
 
     public String getName() {
         return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getSpecialty() {

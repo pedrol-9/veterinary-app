@@ -1,6 +1,7 @@
 package com.veterinary.veterinaryApp.services.servicesImp;
 
 import com.veterinary.veterinaryApp.DTOs.VeterinarianDTO;
+import com.veterinary.veterinaryApp.DTOs.requestBodys.NewVeterinarianDTO;
 import com.veterinary.veterinaryApp.Repositories.VeterinarianRepository;
 import com.veterinary.veterinaryApp.models.Veterinarian;
 import com.veterinary.veterinaryApp.services.VeterinarianService;
@@ -31,13 +32,25 @@ public class VeterinarianServiceImplement implements VeterinarianService {
     }
 
     @Override
+    public void deleteVeterinarian(Long id) {
+        veterinarianRepository.deleteById(id);
+    }
+
+    @Override
+    public Veterinarian createVeterinarian(NewVeterinarianDTO newVeterinarianDTO) {
+      return new Veterinarian(
+                newVeterinarianDTO.name(),
+                newVeterinarianDTO.specialty(),
+                newVeterinarianDTO.address(),
+                newVeterinarianDTO.phone(),
+                newVeterinarianDTO.email()
+        );
+    }
+
+    @Override
     public void saveVeterinarian(Veterinarian veterinarian) {
         veterinarianRepository.save(veterinarian);
     }
 
-//    @Override
-//    public CyclicCounter vetCounter(long start, long end) {
-//
-//        return null;
-//    }
+
 }

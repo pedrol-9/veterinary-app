@@ -21,6 +21,8 @@ public class PetDTO {
 
     private String specialTreatment;
 
+    private String imageUrl;
+
     private List<LocalDateTime> appointmentDate; // asumiendo que tiene una sola cita por mascota
 
     private String owner;
@@ -35,6 +37,7 @@ public class PetDTO {
         this.breed = pet.getBreed();
         this.animalSize = pet.getAnimalSize();
         this.specialTreatment = pet.getSpecialTreatment();
+        this.imageUrl = pet.getImageUrl();
         this.appointmentDate =  pet.getAppointments().stream().map(Appointment::getDateTime).toList();
         this.owner = pet.getOwner().getFirstName() + " " + pet.getOwner().getLastName();
     }
@@ -65,6 +68,10 @@ public class PetDTO {
 
     public String getSpecialTreatment() {
         return specialTreatment;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public List<LocalDateTime> getAppointmentDate() {
