@@ -58,12 +58,25 @@ public class AppointmentController {
     }
 
     // fechas para crear el turno
+    System.out.println("Slot id: " + newAppointmentDTO.slotId());
+    System.out.println("Slot id: " + newAppointmentDTO);
+    long slotId = newAppointmentDTO.slotId();
+    AvailableSlots selectedAvailableSlot = availableSlotsService.getAvailableSlotsById(slotId);
+
+    if (selectedAvailableSlot == null) {
+      return ResponseEntity.badRequest().body("Available slot not found");
+    }
+
+    if (!selectedAvailableSlot.getAvailable()) {
+      return ResponseEntity.badRequest().body("Slot not available");
+    }
+
+    availableSlotsService.saveAvailableSlots(selectedAvailableSlot);
+
     LocalDateTime dateTime = newAppointmentDTO.dateTime();
     LocalDateTime creationDate = LocalDateTime.now();
-    Long selectedSlot = newAppointmentDTO.slotId();
-    AvailableSlots selectedAvailableSlot = availableSlotsService.getAvailableSlotsById(selectedSlot);
 
-    selectedAvailableSlot.setAvailable(false);
+//    selectedAvailableSlot.setAvailable(false);
     // Description para crear el turno
     String description = newAppointmentDTO.description();
 
@@ -132,7 +145,6 @@ public class AppointmentController {
     appointmentService.saveAppointment(newAppointment);
 
     // Guardar el slot en la base de datos
-    availableSlotsService.saveAvailableSlots(selectedAvailableSlot);
     // Crear el DTO para devolver la respuesta
     AppointmentDTO newAppointmentObject = new AppointmentDTO(newAppointment);
 
