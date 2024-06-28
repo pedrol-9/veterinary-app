@@ -3,6 +3,7 @@ package com.veterinary.veterinaryApp.DTOs;
 import com.veterinary.veterinaryApp.models.AvailableSlots;
 import com.veterinary.veterinaryApp.models.Offering;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class AvailableSlotsDTO {
     private String availableHours;
     private Boolean available;
     private Offering offering;
+    private DayOfWeek dayOfWeek;
 
     public AvailableSlotsDTO() {
     }
@@ -24,6 +26,8 @@ public class AvailableSlotsDTO {
         this.availableHours = availableSlots.getAvailableHours().toString();
         this.offering = availableSlots.getOffering();
         this.available = availableSlots.getAvailable();
+        this.dayOfWeek = availableSlots.getDate().getDayOfWeek();
+
     }
 
     public LocalDate getDate() {
@@ -38,9 +42,10 @@ public class AvailableSlotsDTO {
         return available;
     }
 
-//    public Offering getOffering() {
-//        return offering;
-//    }
+
+    public DayOfWeek getDay() {
+        return dayOfWeek;
+    }
 
     public long getId() {
         return id;
