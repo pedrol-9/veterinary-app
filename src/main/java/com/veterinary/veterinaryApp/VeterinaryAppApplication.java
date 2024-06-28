@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -243,9 +244,13 @@ public class VeterinaryAppApplication {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        for (int i = 0; i < 7; i++) {
-            LocalDate nextDate = currentDate.plusDays(i);
-            dates.add(nextDate.format(formatter));
+        int addedDays = 0;
+        while (addedDays < 7) {
+            if (!(currentDate.getDayOfWeek() == DayOfWeek.SATURDAY || currentDate.getDayOfWeek() == DayOfWeek.SUNDAY)) {
+                dates.add(currentDate.format(formatter));
+                addedDays++;
+            }
+            currentDate = currentDate.plusDays(1);
         }
 
         return dates;

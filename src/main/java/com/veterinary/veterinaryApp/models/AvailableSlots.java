@@ -2,6 +2,7 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public class AvailableSlots {
     private LocalDate date;
     private String availableHours;
     private Boolean available;
+//    @Transient
+    private DayOfWeek dayOfWeek;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "offering_id")
     private Offering offering;
@@ -26,6 +29,7 @@ public class AvailableSlots {
         this.availableHours = availableHours;
         this.offering = offering;
         this.available = true;
+        this.dayOfWeek = date.getDayOfWeek();
     }
 
     public LocalDate getDate() {
@@ -34,6 +38,7 @@ public class AvailableSlots {
 
     public void setDate(LocalDate date) {
         this.date = date;
+        this.dayOfWeek = date.getDayOfWeek(); // Actualizar el valor de day cuando se cambie date
     }
 
     public String getAvailableHours() {
@@ -58,6 +63,10 @@ public class AvailableSlots {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public DayOfWeek getDay() {
+        return dayOfWeek;
     }
 
     public long getId() {
