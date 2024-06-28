@@ -9,20 +9,23 @@ import java.util.List;
 public class AvailableSlotsDTO {
 
     private long id;
+
     private LocalDate date;
+
     private String availableHours;
+
     private Boolean available;
-    private Offering offering;
+
+     private String offering;
 
     public AvailableSlotsDTO() {
     }
 
     public AvailableSlotsDTO(AvailableSlots availableSlots) {
-
         this.id = availableSlots.getId();
         this.date = availableSlots.getDate();
-        this.availableHours = availableSlots.getAvailableHours().toString();
-        this.offering = availableSlots.getOffering();
+        this.availableHours = availableSlots.getAvailableHours();
+        this.offering = availableSlots.getOffering().getName();
         this.available = availableSlots.getAvailable();
     }
 
@@ -38,9 +41,9 @@ public class AvailableSlotsDTO {
         return available;
     }
 
-//    public Offering getOffering() {
-//        return offering;
-//    }
+    public String getOffering() {
+        return offering;
+    }
 
     public long getId() {
         return id;

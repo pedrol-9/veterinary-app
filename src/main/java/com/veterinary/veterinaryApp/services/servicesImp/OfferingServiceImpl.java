@@ -33,7 +33,7 @@ public class OfferingServiceImpl implements OfferingService {
     }
 
     @Override
-    public void save(Offering offering) {
+    public void saveOffering(Offering offering) {
         offeringRepository.save(offering);
     }
 
@@ -45,5 +45,20 @@ public class OfferingServiceImpl implements OfferingService {
           case "LARGE" -> baseRate * 1.5;
           default -> baseRate * 1.75;
         };
+    }
+
+    @Override
+    public void updatePrice(Offering offering, double newPrice) {
+        offering.setPrice(newPrice);
+        saveOffering(offering);
+    }
+
+    @Override
+    public Offering createOffering(NewOfferingDTO newOffering) {
+        return new Offering(
+                newOffering.name(),
+                newOffering.description(),
+                newOffering.price()
+        );
     }
 }

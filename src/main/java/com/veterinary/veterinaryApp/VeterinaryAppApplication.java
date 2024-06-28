@@ -3,6 +3,7 @@ package com.veterinary.veterinaryApp;
 import com.veterinary.veterinaryApp.Repositories.*;
 import com.veterinary.veterinaryApp.models.*;
 import com.veterinary.veterinaryApp.services.AvailableSlotsService;
+import com.veterinary.veterinaryApp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.veterinary.veterinaryApp.utils.Utils.fiveDigits;
+import static com.veterinary.veterinaryApp.utils.Utils.generateNextSevenDays;
 
 @SpringBootApplication
 public class VeterinaryAppApplication {
@@ -91,7 +93,7 @@ public class VeterinaryAppApplication {
 
             // Creación de Servicios
             List<String> daysOfService = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
-            List<String> hoursOfService = Arrays.asList("09:00-12:00", "13:00-17:00");
+            List<String> hoursOfService = Utils.hoursOfServiceSlots;
 
             // Instancias de Offering
             Offering generalEnquiry = new Offering(
@@ -236,18 +238,5 @@ public class VeterinaryAppApplication {
             System.out.println("****************************************************");
 
         };
-    }
-
-    public static List<String> generateNextSevenDays() {
-        List<String> dates = new ArrayList<>();
-        LocalDate currentDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        for (int i = 0; i < 7; i++) {
-            LocalDate nextDate = currentDate.plusDays(i);
-            dates.add(nextDate.format(formatter));
-        }
-
-        return dates;
     }
 }

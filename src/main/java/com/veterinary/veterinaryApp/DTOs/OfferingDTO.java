@@ -18,12 +18,15 @@ public class OfferingDTO {
 
     private double price;
 
-//    private List<String> daysOfService;
-//
-//    private List<String> hoursOfService;
+    private List<String> daysOfService;
+
+    private List<String> hoursOfService;
 
     private List<LocalDateTime> appointments; // Lista de citas de la oferta
-    private Set<AvailableSlotsDTO> availableSlots;
+
+    // private Set<AvailableSlotsDTO> availableSlots;
+
+
 
     public OfferingDTO(Offering offering) {
         this.id = offering.getId();
@@ -31,10 +34,12 @@ public class OfferingDTO {
         this.description = offering.getDescription();
         this.price = offering.getPrice();
         this.appointments = offering.getAppointments().stream().map(Appointment::getDateTime).toList(); // tengo mis dudas, creeería que hay que pasar los objetos completos de appointments para
-        this.availableSlots = offering.getAvailableSlots()
+        /*this.availableSlots = offering.getAvailableSlots()
                 .stream()
                 .map(AvailableSlotsDTO::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
+        this.daysOfService = offering.getDaysOfService();
+        this.hoursOfService = offering.getHoursOfService();
     }
 
     public long getId() {
@@ -53,19 +58,21 @@ public class OfferingDTO {
         return price;
     }
 
-    /*public List<String> getDaysOfService() {
+    public List<String> getDaysOfService() {
         return daysOfService;
     }
 
     public List<String> getHoursOfService() {
         return hoursOfService;
-    }*/
+    }
 
     public List<LocalDateTime> getAppointments() {
         return appointments;
     }
 
-    public Set<AvailableSlotsDTO> getAvailableSlots() {
+    /*public Set<AvailableSlotsDTO> getAvailableSlots() {
         return availableSlots;
-    }
+    }*/
+
+
 }
