@@ -2,22 +2,20 @@ package com.veterinary.veterinaryApp.models;
 
 import jakarta.persistence.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 public class AvailableSlots {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private LocalDate date;
-
     private String availableHours;
-
     private Boolean available;
-
+//    @Transient
+    private DayOfWeek dayOfWeek;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "offering_id")
     private Offering offering;
@@ -26,6 +24,7 @@ public class AvailableSlots {
     }
 
     public AvailableSlots(LocalDate date, String availableHours, Offering offering) {
+
         this.date = date;
         this.availableHours = availableHours;
         this.offering = offering;
