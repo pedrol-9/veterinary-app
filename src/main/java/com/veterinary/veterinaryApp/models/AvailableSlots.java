@@ -1,5 +1,6 @@
 package com.veterinary.veterinaryApp.models;
 
+import com.veterinary.veterinaryApp.utils.Utils;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -15,6 +16,8 @@ public class AvailableSlots {
     private LocalDate date;
 
     private String availableHours;
+    
+    private List<String> availableHoursList = Utils.hoursOfServiceSlots;
 
     private Boolean available;
 
