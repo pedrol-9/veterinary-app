@@ -24,7 +24,9 @@ public class VeterinarianDTO {
 
     private String email;
 
-    private List<Appointment> appointments = new ArrayList<>();
+    private List<LocalDateTime> appointments = new ArrayList<>();
+    
+    private String image;
 
     public VeterinarianDTO() {}
 
@@ -35,7 +37,8 @@ public class VeterinarianDTO {
         this.address = veterinarian.getAddress();
         this.phone = veterinarian.getPhone();
         this.email = veterinarian.getEmail();
-        this.appointments = veterinarian.getAppointments();
+        this.appointments = veterinarian.getAppointments().stream().map(Appointment::getDateTime).toList();
+        this.image = veterinarian.getImage();
     }
 
     public Long getId() {
@@ -62,7 +65,11 @@ public class VeterinarianDTO {
         return specialty;
     }
 
-    public List<Appointment> getAppointments() {
+    public List<LocalDateTime> getAppointments() {
         return appointments;
+    }
+    
+    public String getImage() {
+        return image;
     }
 }

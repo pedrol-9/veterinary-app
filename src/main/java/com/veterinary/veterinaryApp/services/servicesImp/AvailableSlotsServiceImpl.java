@@ -4,6 +4,7 @@ import com.veterinary.veterinaryApp.Repositories.AvailableSlotsRepository;
 import com.veterinary.veterinaryApp.models.AvailableSlots;
 import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.services.AvailableSlotsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.List;
 @Service
 public class AvailableSlotsServiceImpl implements AvailableSlotsService {
 
-    AvailableSlotsRepository availableSlotsRepository;
+    @Autowired
+    private AvailableSlotsRepository availableSlotsRepository;
 
     @Override
     public List<AvailableSlots> getAvailableSlots() {

@@ -22,4 +22,6 @@ public interface OfferingService {
     void updatePrice(Offering offering, double newPrice);
 
     Offering createOffering(NewOfferingDTO newOffering);
+    
+    void deleteOfferingById(long id);
 }

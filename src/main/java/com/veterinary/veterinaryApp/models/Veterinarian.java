@@ -21,21 +21,24 @@ public class Veterinarian {
     private String phone;
 
     private String email;
+    
+    private String image;
 
     @OneToMany(mappedBy = "veterinarian", cascade = CascadeType.ALL)
     private List<Appointment> appointments = new ArrayList<>();
 
-    public Veterinarian(String name, String specialty, String address, String phone, String email) {
+    public Veterinarian(String name, String specialty, String address, String phone, String email, String image) {
         this.name = name;
         this.specialty = specialty;
         this.address = address;
         this.phone = phone;
         this.email = email;
+        this.image = image;
     }
 
     public Veterinarian() {
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -83,7 +86,15 @@ public class Veterinarian {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
+    public String getImage() {
+        return image;
+    }
+    
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     public List<Appointment> getAppointments() {
         return appointments;
     }
