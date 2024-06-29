@@ -17,6 +17,8 @@ public class Offering {
     private String description;
 
     private double price;
+    
+    private String image;
 
     @ElementCollection
     @Column(name="DaysOfService")
@@ -35,12 +37,20 @@ public class Offering {
     public Offering() {
     }
 
-    public Offering(String name, String description, double price, List<String> daysOfService, List<String> hoursOfService) {
+    public Offering(String name, String description, double price, List<String> daysOfService, List<String> hoursOfService, String image) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.daysOfService = daysOfService;
         this.hoursOfService = hoursOfService;
+        this.image = image;
+    }
+
+    public Offering(String name, String description, double price, String image) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.image = image;
     }
 
     // GETTERS Y SETTERS
@@ -112,5 +122,13 @@ public class Offering {
 
     public void setAvailableSlots(List<AvailableSlots> availableSlots) {
         this.availableSlots = availableSlots;
+    }
+    
+    public String getImage() {
+        return image;
+    }
+    
+    public void setImage(String image) {
+        this.image = image;
     }
 }

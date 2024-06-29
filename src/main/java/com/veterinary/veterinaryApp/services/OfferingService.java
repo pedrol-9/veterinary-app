@@ -15,7 +15,13 @@ public interface OfferingService {
 
     Offering getOfferingById(long id);
 
-    void save(Offering offering);
+    void saveOffering(Offering offering);
 
     double calculatePrice(AnimalSize petSize, double baseRate);
+
+    void updatePrice(Offering offering, double newPrice);
+
+    Offering createOffering(NewOfferingDTO newOffering);
+    
+    void deleteOfferingById(long id);
 }

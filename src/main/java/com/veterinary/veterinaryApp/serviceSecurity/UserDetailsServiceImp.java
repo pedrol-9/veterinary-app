@@ -11,30 +11,30 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
-
-    @Autowired
-    private ClientRepository clientRepository;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        Client client = clientRepository.findByEmail(username);
-
-        if (client == null){
-            throw new UsernameNotFoundException(username);
-        }
-
-        String rol = "";
-        if (client.isAdmin()){
-            rol = "ADMIN";
-        } else {
-            rol = "CLIENT";
-        }
-
-        return User
-                .withUsername(username) //email
-                .password(client.getPassword())
-                .roles(rol)
-                .build();
-    }
+	
+	@Autowired
+	private ClientRepository clientRepository;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		Client client = clientRepository.findByEmail(username);
+		
+		if (client == null){
+			throw new UsernameNotFoundException(username);
+		}
+		
+		String rol = "";
+		if (client.isAdmin()){
+			rol = "ADMIN";
+		} else {
+			rol = "CLIENT";
+		}
+		
+		return User
+						.withUsername(username) //email
+						.password(client.getPassword())
+						.roles(rol)
+						.build();
+	}
 }

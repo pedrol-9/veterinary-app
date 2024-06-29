@@ -1,5 +1,9 @@
 package com.veterinary.veterinaryApp.DTOs.requestBodys;
 
-public record NewOfferingDTO(String name, String description, double price) {
+import jakarta.validation.constraints.NotNull;
+
+import java.math.BigDecimal;
+
+public record NewOfferingDTO(@NotNull String name, @NotNull String description,  double price, String image) {
 
 }
