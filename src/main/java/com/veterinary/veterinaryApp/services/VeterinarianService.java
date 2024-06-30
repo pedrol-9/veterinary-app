@@ -7,14 +7,16 @@ import com.veterinary.veterinaryApp.models.Veterinarian;
 import java.util.List;
 
 public interface VeterinarianService {
-
-    List<Veterinarian> getAllVeterinarians();
-
-    Veterinarian getVeterinarianById(Long id);
-
-    List<VeterinarianDTO> getAllVeterinariansDTO();
-
-    void saveVeterinarian(Veterinarian veterinarian);
-
-    Veterinarian createVeterinarian(NewVeterinarianDTO newVeterinarianDTO);
+	
+	List<Veterinarian> getAllVeterinarians();
+	
+	Veterinarian getVeterinarianById(Long id);
+	
+	List<VeterinarianDTO> getAllVeterinariansDTO();
+	
+	void saveVeterinarian(Veterinarian veterinarian);
+	
+	Veterinarian createVeterinarian(NewVeterinarianDTO newVeterinarianDTO);
+	
+	void deleteVeterinarian(Veterinarian veterinarian);
 }

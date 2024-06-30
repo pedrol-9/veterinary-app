@@ -6,6 +6,7 @@ import com.veterinary.veterinaryApp.Repositories.OfferingRepository;
 import com.veterinary.veterinaryApp.models.AnimalSize;
 import com.veterinary.veterinaryApp.models.Offering;
 import com.veterinary.veterinaryApp.services.OfferingService;
+import com.veterinary.veterinaryApp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,37 +14,67 @@ import java.util.List;
 
 @Service
 public class OfferingServiceImpl implements OfferingService {
-
-    @Autowired
-    private OfferingRepository offeringRepository;
-
-    @Override
-    public List<Offering> getAllOfferings() {
-        return offeringRepository.findAll();
-    }
-
-    @Override
-    public List<OfferingDTO> getAllOfferingsDTO() {
-        return getAllOfferings().stream().map(OfferingDTO::new).toList();
-    }
-
-    @Override
-    public Offering getOfferingById(long id) {
-        return offeringRepository.findById(id);
-    }
-
-    @Override
-    public void save(Offering offering) {
-        offeringRepository.save(offering);
-    }
-
-    @Override
-    public double calculatePrice(AnimalSize petSize, double baseRate) {
-      return switch (petSize.name()) {
-          case "SMALL" -> baseRate;
-          case "MEDIUM" -> baseRate * 1.25;
-          case "LARGE" -> baseRate * 1.5;
-          default -> baseRate * 1.75;
-        };
-    }
+	
+	@Autowired
+	private OfferingRepository offeringRepository;
+	
+	@Override
+	public List<Offering> getAllOfferings() {
+		return offeringRepository.findAll();
+	}
+	
+	@Override
+	public List<OfferingDTO> getAllOfferingsDTO() {
+		return getAllOfferings().stream().map(OfferingDTO::new).toList();
+	}
+	
+	@Override
+	public Offering getOfferingById(long id) {
+		return offeringRepository.findById(id);
+	}
+	
+	@Override
+	public void saveOffering(Offering offering) {
+		offeringRepository.save(offering);
+	}
+	
+	@Override
+	public double calculatePrice(AnimalSize petSize, double baseRate) {
+		return switch (petSize.name()) {
+			case "SMALL" -> baseRate;
+			case "MEDIUM" -> baseRate * 1.25;
+			case "LARGE" -> baseRate * 1.5;
+			default -> baseRate * 1.75;
+		};
+	}
+	
+	@Override
+	public void updatePrice(Offering offering, double newPrice) {
+		offering.setPrice(newPrice);
+		saveOffering(offering);
+	}
+	
+	@Override
+	public Offering createOffering(NewOfferingDTO newOfferingDTO) {
+		
+		Offering newOffering = new Offering(
+						newOfferingDTO.name(),
+						newOfferingDTO.description(),
+						newOfferingDTO.price(),
+						newOfferingDTO.image()
+		);
+		
+		List<String> daysOfService = Utils.generateNextSevenDays();
+		List<String> hoursOfServiceSlots = Utils.hoursOfServiceSlots;
+		newOffering.setDaysOfService(daysOfService);
+		newOffering.setHoursOfService(hoursOfServiceSlots);
+		saveOffering(newOffering);
+		
+		return newOffering;
+	}
+	
+	@Override
+	public void deleteOfferingById(long id) {
+		offeringRepository.deleteById(id);
+	}
 }

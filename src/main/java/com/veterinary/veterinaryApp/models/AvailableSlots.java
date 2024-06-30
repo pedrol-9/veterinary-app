@@ -8,14 +8,19 @@ import java.util.List;
 
 @Entity
 public class AvailableSlots {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    
     private LocalDate date;
+    
     private String availableHours;
+    
     private Boolean available;
 //    @Transient
     private DayOfWeek dayOfWeek;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "offering_id")
     private Offering offering;
@@ -24,7 +29,6 @@ public class AvailableSlots {
     }
 
     public AvailableSlots(LocalDate date, String availableHours, Offering offering) {
-
         this.date = date;
         this.availableHours = availableHours;
         this.offering = offering;
@@ -38,7 +42,6 @@ public class AvailableSlots {
 
     public void setDate(LocalDate date) {
         this.date = date;
-        this.dayOfWeek = date.getDayOfWeek(); // Actualizar el valor de day cuando se cambie date
     }
 
     public String getAvailableHours() {
@@ -65,15 +68,19 @@ public class AvailableSlots {
         this.available = available;
     }
 
-    public DayOfWeek getDay() {
-        return dayOfWeek;
-    }
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+    
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+    
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 }

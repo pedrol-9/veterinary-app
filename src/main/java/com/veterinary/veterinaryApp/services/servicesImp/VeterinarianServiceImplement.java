@@ -12,40 +12,45 @@ import java.util.List;
 
 @Service
 public class VeterinarianServiceImplement implements VeterinarianService {
-
-    @Autowired
-    VeterinarianRepository veterinarianRepository;
-
-    @Override
-    public List<Veterinarian> getAllVeterinarians() {
-        return veterinarianRepository.findAll();
-    }
-
-    @Override
-    public Veterinarian getVeterinarianById(Long id) {
-        return veterinarianRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<VeterinarianDTO> getAllVeterinariansDTO() {
-        return List.of();
-    }
-
-    @Override
-    public Veterinarian createVeterinarian(NewVeterinarianDTO newVeterinarianDTO) {
-      return new Veterinarian(
-                newVeterinarianDTO.name(),
-                newVeterinarianDTO.specialty(),
-                newVeterinarianDTO.address(),
-                newVeterinarianDTO.phone(),
-                newVeterinarianDTO.email()
-        );
-    }
-
-    @Override
-    public void saveVeterinarian(Veterinarian veterinarian) {
-        veterinarianRepository.save(veterinarian);
-    }
-
-
+	
+	@Autowired
+	VeterinarianRepository veterinarianRepository;
+	
+	@Override
+	public List<Veterinarian> getAllVeterinarians() {
+		return veterinarianRepository.findAll();
+	}
+	
+	@Override
+	public Veterinarian getVeterinarianById(Long id) {
+		return veterinarianRepository.findById(id).orElse(null);
+	}
+	
+	@Override
+	public List<VeterinarianDTO> getAllVeterinariansDTO() {
+		return getAllVeterinarians().stream().map(VeterinarianDTO::new).toList();
+	}
+	
+	@Override
+	public Veterinarian createVeterinarian(NewVeterinarianDTO newVeterinarianDTO) {
+		
+		return new Veterinarian(
+						newVeterinarianDTO.name(),
+						newVeterinarianDTO.specialty(),
+						newVeterinarianDTO.address(),
+						newVeterinarianDTO.phone(),
+						newVeterinarianDTO.email(),
+						newVeterinarianDTO.image()
+		);
+	}
+	
+	@Override
+	public void deleteVeterinarian(Veterinarian veterinarian) { veterinarianRepository.delete(veterinarian); }
+	
+	@Override
+	public void saveVeterinarian(Veterinarian veterinarian) {
+		veterinarianRepository.save(veterinarian);
+	}
+	
+	
 }

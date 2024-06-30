@@ -10,10 +10,15 @@ import java.util.List;
 public class AvailableSlotsDTO {
 
     private long id;
+
     private LocalDate date;
+
     private String availableHours;
+
     private Boolean available;
-    private Offering offering;
+	
+	private String offering;
+	
     private DayOfWeek dayOfWeek;
 
     public AvailableSlotsDTO() {
@@ -23,8 +28,8 @@ public class AvailableSlotsDTO {
 
         this.id = availableSlots.getId();
         this.date = availableSlots.getDate();
-        this.availableHours = availableSlots.getAvailableHours().toString();
-        this.offering = availableSlots.getOffering();
+        this.availableHours = availableSlots.getAvailableHours();
+        this.offering = availableSlots.getOffering().getName();
         this.available = availableSlots.getAvailable();
         this.dayOfWeek = availableSlots.getDate().getDayOfWeek();
 
@@ -42,6 +47,9 @@ public class AvailableSlotsDTO {
         return available;
     }
 
+    public String getOffering() {
+        return offering;
+    }
 
     public DayOfWeek getDay() {
         return dayOfWeek;

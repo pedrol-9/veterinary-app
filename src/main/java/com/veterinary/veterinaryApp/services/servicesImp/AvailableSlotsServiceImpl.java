@@ -13,7 +13,7 @@ import java.util.List;
 public class AvailableSlotsServiceImpl implements AvailableSlotsService {
 
     @Autowired
-    AvailableSlotsRepository availableSlotsRepository;
+    private AvailableSlotsRepository availableSlotsRepository;
 
     @Override
     public List<AvailableSlots> getAvailableSlots() {
