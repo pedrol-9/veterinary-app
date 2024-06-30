@@ -68,7 +68,7 @@ public class AppointmentController {
       return ResponseEntity.badRequest().body("Slot not available");
     }
 
-    availableSlotsService.saveAvailableSlots(selectedAvailableSlot);
+    // availableSlotsService.saveAvailableSlots(selectedAvailableSlot);
 
     LocalDateTime dateTime = newAppointmentDTO.dateTime();
     LocalDateTime creationDate = LocalDateTime.now();

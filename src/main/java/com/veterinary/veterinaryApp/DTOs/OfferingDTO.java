@@ -18,6 +18,8 @@ public class OfferingDTO {
 	
 	private double price;
 	
+	private String image;
+	
 	private List<String> daysOfService;
 	
 	private List<String> hoursOfService;
@@ -26,7 +28,6 @@ public class OfferingDTO {
 	
 	private Set<AvailableSlotsDTO> availableSlots;
 	
-	private String image;
 	
 	public OfferingDTO(Offering offering) {
 		this.id = offering.getId();

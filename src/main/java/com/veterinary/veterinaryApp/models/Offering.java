@@ -34,6 +34,7 @@ public class Offering {
     @OneToMany(mappedBy = "offering")
     private List<AvailableSlots> availableSlots = new ArrayList<>(); // contiene los bloques horarios disponibles
     // CONSTRUCTORES
+    
     public Offering() {
     }
 
