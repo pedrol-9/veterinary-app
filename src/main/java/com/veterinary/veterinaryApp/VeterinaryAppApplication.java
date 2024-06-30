@@ -149,7 +149,7 @@ public class VeterinaryAppApplication {
 			offeringRepository.save(deworming);
 			
 			List<String> daysOfServiceSlots = generateNextSevenDays();
-			List<String> hoursOfServiceSlots = List.of("09:00", "10:00", "11:00");
+			List<String> hoursOfServiceSlots = Utils.hoursOfServiceSlots;
 			
 			List<AvailableSlots> availableSlotsList = new ArrayList<>();
 			

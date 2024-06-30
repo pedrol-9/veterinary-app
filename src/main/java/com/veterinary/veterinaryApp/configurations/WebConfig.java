@@ -44,9 +44,9 @@ public class WebConfig {
 										authorize
 														.requestMatchers("/api-veterinary/login", "/api-veterinary/register", "/h2-console/**").permitAll()
 														
-														.requestMatchers( "/api-veterinary/current", "/api-veterinary/appointments/new", "/api-veterinary/pets/new", "/api-veterinary/offerings/", "/api-veterinary/invoices/current", "/api-veterinary/pets/current", "/api-veterinary/appointments/current", "/api-veterinary/veterinarians/" ).hasAnyRole("CLIENT", "ADMIN")
+														.requestMatchers( "/api-veterinary/current", "/api-veterinary/appointments/new", "/api-veterinary/pets/new", "/api-veterinary/offerings/", "/api-veterinary/offerings/{id}", "/api-veterinary/invoices/current", "/api-veterinary/pets/current", "/api-veterinary/appointments/current", "/api-veterinary/veterinarians/" ).hasAnyRole("CLIENT", "ADMIN")
 														
-														.requestMatchers(HttpMethod.GET,"/api-veterinary/**").hasRole("ADMIN")
+														.requestMatchers(HttpMethod.GET,"/api-veterinary/**", "/api-veterinary/offerings/{id}").hasRole("ADMIN")
 														
 														// revisado
 														.requestMatchers(HttpMethod.PUT, "/api-veterinary/**", "/api-veterinary/offerings/update-price").hasRole("ADMIN")
@@ -54,7 +54,7 @@ public class WebConfig {
 														// revisado
 														.requestMatchers(HttpMethod.POST, "/api-veterinary/**","/api-veterinary/offerings/create", "/api-veterinarian/veterinarians/new").hasRole("ADMIN")
 														
-														.requestMatchers(HttpMethod.DELETE,"/api-veterinary/offerings/**", "/api-veterinary/veterinarians/**").hasRole("ADMIN")
+														.requestMatchers(HttpMethod.DELETE,"/api-veterinary/**").hasRole("ADMIN")
 														.anyRequest().authenticated()
 						)
 						
