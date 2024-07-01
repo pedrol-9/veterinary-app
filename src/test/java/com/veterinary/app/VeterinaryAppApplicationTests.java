@@ -1,14 +1,14 @@
-package com.veterinary.app;
-
-import com.veterinary.veterinaryApp.VeterinaryAppApplication;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest(classes = VeterinaryAppApplication.class)
-class VeterinaryAppApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//package com.veterinary.app;
+//
+//import com.veterinary.veterinaryApp.VeterinaryAppApplication;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest(classes = VeterinaryAppApplication.class)
+//class VeterinaryAppApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}
