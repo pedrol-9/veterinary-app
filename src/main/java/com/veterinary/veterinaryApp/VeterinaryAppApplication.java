@@ -71,13 +71,13 @@ public class VeterinaryAppApplication {
             accountRepository.save(account4);
 
             // Creación de Pets
-            Pet pet1 = new Pet("Pulguita", "5 años", "Perro", "Chihuahua", AnimalSize.SMALL, "healthy dog");
-            Pet pet2 = new Pet("Luna", "2 años", "Gato", "Persa", AnimalSize.BIGGER, "healthy cat");
-            Pet pet3 = new Pet("Pelusa", "3 meses", "Gato", "Siames", AnimalSize.MEDIUM, "angry cat, need sedation");
-            Pet pet4 = new Pet("Coco", "1 año", "Perro", "Pastor Aleman", AnimalSize.SMALL, "blind dog");
-            Pet pet5 = new Pet("Tomate", "6 meses", "Perro", "Pastor Aleman", AnimalSize.LARGE, "healthy dog");
-            Pet pet6 = new Pet("Firulais", "15 años", "Perro", "Golden Retriever", AnimalSize.BIGGER, "very old dog");
-
+            Pet pet1 = new Pet("Pulguita", "5 años", "Perro", "Chihuahua", AnimalSize.SMALL, "healthy dog", "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/03/20/64184f2c49b88.r_d.640-427-0.jpeg");
+            Pet pet2 = new Pet("Luna", "2 años", "Gato", "Persa", AnimalSize.BIGGER, "healthy cat", "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Persian20Long20Hair.2.jpg?itok=qzNV_HuV");
+            Pet pet3 = new Pet("Pelusa", "3 meses", "Gato", "Siames", AnimalSize.MEDIUM, "angry cat, need sedation", "https://images.ctfassets.net/denf86kkcx7r/15HC92CcCjQEg7U14aZkVM/914db181ce7e407bc2a0220436a32aa4/un_gato_persa-39");
+            Pet pet4 = new Pet("Coco", "1 año", "Perro", "Pastor Aleman", AnimalSize.SMALL, "blind dog", "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-07German20Shepherd20Dog1.jpg?itok=7Xg-W19h");
+            Pet pet5 = new Pet("Tomate", "6 meses", "Perro", "Pastor Aleman", AnimalSize.LARGE, "healthy dog", "https://www.tiendanimal.es/articulos/wp-content/uploads/2017/11/Como-educar-y-entrenar-a-un-pastor-aleman.jpg");
+            Pet pet6 = new Pet("Firulais", "15 años", "Perro", "Golden Retriever", AnimalSize.BIGGER, "very old dog", "https://www.clarin.com/2020/06/24/VXEcQ3tkG_720x0__1.jpg");
+            
             userAdmin.addPet(pet1);
             lucas.addPet(pet2);
             pedro.addPet(pet3);
