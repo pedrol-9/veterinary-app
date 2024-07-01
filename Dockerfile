@@ -1,6 +1,6 @@
 FROM gradle:8-jdk17-alpine
 
-COPY src/main/java/com/veterinary/veterinaryApp .
+COPY . .
 
 RUN gradle build
 
