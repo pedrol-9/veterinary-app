@@ -97,14 +97,22 @@ public class VeterinaryAppApplication {
             List<String> hoursOfService = Arrays.asList("09:00-12:00", "13:00-17:00");
 
             // Instancias de Offering
-            Offering generalEnquiry = new Offering("General Enquiry", "General questions about pets.", 0.0, daysOfService, hoursOfService, "");
+            Offering generalEnquiry = new Offering(
+                    "General Enquiry",
+                    "General consultation for check-ups and medical examinations of your pets.",
+                    50.00,
+                    daysOfService,
+                    hoursOfService,
+                    "https://img.freepik.com/free-photo/veterinarian-checking-dog-medium-shot_23-2149143871.jpg"
+            );
 
             Offering vaccination = new Offering(
                     "Vaccination",
                     "Complete vaccination to keep your pets protected against diseases.",
                     30.00,
                     daysOfService,
-                    hoursOfService, ""
+                    hoursOfService,
+                    "https://media.istockphoto.com/id/476916383/photo/microchip-implant.jpg?s=612x612&w=0&k=20&c=Y1QxVmAMIFjuNnbyHeyI06tXx7yK1ufxmZrFchwJdSg="
             );
 
             Offering surgery = new Offering(
@@ -112,7 +120,8 @@ public class VeterinaryAppApplication {
                     "Surgeries and surgical procedures with the best care.",
                     200.00,
                     daysOfService,
-                    hoursOfService, ""
+                    hoursOfService,
+                    "https://t4.ftcdn.net/jpg/02/74/11/19/360_F_274111966_T8GKpkMq7RpgY2z1Iju1bVrFvdg5rp2A.jpg"
             );
 
             Offering canineHairdressing = new Offering(
@@ -120,15 +129,8 @@ public class VeterinaryAppApplication {
                     "Grooming service to keep your pet clean and healthy.",
                     40.00,
                     daysOfService,
-                    hoursOfService, ""
-            );
-
-            Offering hospitalisation = new Offering(
-                    "Hospitalisation",
-                    "Care and monitoring of pets requiring hospitalisation.",
-                    150.00,
-                    daysOfService,
-                    hoursOfService, ""
+                    hoursOfService,
+                    "https://www.shutterstock.com/image-photo/happy-redhaired-ginger-woman-blowing-260nw-1513781225.jpg"
             );
 
             Offering deworming = new Offering(
@@ -136,15 +138,14 @@ public class VeterinaryAppApplication {
                     "Deworming service to eliminate internal and external parasites, keeping your pet healthy.",
                     25.00,
                     daysOfService,
-                    hoursOfService, ""
+                    hoursOfService,
+                    "https://st4.depositphotos.com/1144191/21299/i/450/depositphotos_212992002-stock-photo-reluctant-labrador-puppy-dog-getting.jpg"
             );
-
 
             offeringRepository.save(generalEnquiry);
             offeringRepository.save(vaccination);
             offeringRepository.save(surgery);
             offeringRepository.save(canineHairdressing);
-            offeringRepository.save(hospitalisation);
             offeringRepository.save(deworming);
 
             List<String> daysOfServiceSlots = generateNextSevenDays();
@@ -159,7 +160,6 @@ public class VeterinaryAppApplication {
                     availableSlotsList.add(new AvailableSlots(date, hour, vaccination));
                     availableSlotsList.add(new AvailableSlots(date, hour, surgery));
                     availableSlotsList.add(new AvailableSlots(date, hour, canineHairdressing));
-                    availableSlotsList.add(new AvailableSlots(date, hour, hospitalisation));
                     availableSlotsList.add(new AvailableSlots(date, hour, deworming));
                 }
             }
@@ -172,7 +172,6 @@ public class VeterinaryAppApplication {
             vaccination.setAvailableSlots(availableSlotsList);
             surgery.setAvailableSlots(availableSlotsList);
             canineHairdressing.setAvailableSlots(availableSlotsList);
-            hospitalisation.setAvailableSlots(availableSlotsList);
             deworming.setAvailableSlots(availableSlotsList);
 
             // creación de Appointment
@@ -182,33 +181,16 @@ public class VeterinaryAppApplication {
             appointment1.setClient(lucas);
 
             // asignación de cita a servicio
-            appointment1.setOffering(hospitalisation);
+            appointment1.setOffering(generalEnquiry);
 
             // Creación de Veterinarios
-            Veterinarian vet1 = new Veterinarian("Brayan",
-                    "Veterinary Dermatology",
-                    "Calle 1 # 2 - 3",
-                    "31334177",
-                    "derma@tology.com",
-                    "");
+            Veterinarian vet1 = new Veterinarian("Brayan Ortiz", "Veterinary Dermatology", "Calle 1 # 2 - 3", "31334177", "derma@tology.com", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNtxj8PUZH81_htfbowSspa_NzEy_P-4fylQ&s");
 
-            Veterinarian vet2 = new Veterinarian("Brayan",
-                    "Animal Behavior",
-                    "Calle 4 # 5 - 6",
-                    "31334177",
-                    "behavior@tology.com", "");
+            Veterinarian vet2 = new Veterinarian("Jason Ordoñez", "Animal Behavior", "Calle 4 # 5 - 6", "31334177", "behavior@tology.com", "https://img.freepik.com/foto-gratis/apuesto-joven-medico-clinica-veterinaria-apuntando-dedo-arriba-sonriendo-impresionado-pie-cerca-lindo-perro-pug-negro-fondo-blanco_1258-75927.jpg");
 
-            Veterinarian vet3 = new Veterinarian("Brayan",
-                    "Veterinary Anesthesiology and Emergency Medicine",
-                    "Calle 7 # 8 - 9",
-                    "31334177",
-                    "anesthesio@logy.com", "");
+            Veterinarian vet3 = new Veterinarian("Orlando Carrascal", "Veterinary Anesthesiology and Emergency Medicine", "Calle 7 # 8 - 9", "31334177", "anesthesio@logy.com", "https://img.freepik.com/fotos-premium/joven-medico-veterinario-masculino-confiado-uniforme-sentado-lugar-trabajo_236854-46856.jpg");
 
-            Veterinarian vet4 = new Veterinarian("Brayan",
-                    "Intern",
-                    "Calle 10 # 11 - 12",
-                    "31334177",
-                    "intern@tology.com", "");
+            Veterinarian vet4 = new Veterinarian("Marcela Osorio", "Intern", "Calle 10 # 11 - 12", "31334177", "intern@tology.com", "https://img.freepik.com/fotos-premium/mujer-veterinaria-uniforme-clinica-abrazando-perro-amor_255667-38056.jpg");
 
             // Asignación de Cita a veterinario
             vet1.addAppointment(appointment1);
